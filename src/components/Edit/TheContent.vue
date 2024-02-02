@@ -1,0 +1,27 @@
+<script setup>
+import { computed } from 'vue'
+import parseSheet from '@/scripts/parse-sheet'
+
+const content = defineModel('content')
+const preview = defineModel('preview')
+
+const clean = computed(() => {
+  return parseSheet(content.value)
+})
+</script>
+
+<template>
+  <textarea
+    v-if="!preview"
+    v-model="content"
+    spellcheck="false"
+    maxlength="5000"
+    class="w-full grow resize-none overflow-auto whitespace-nowrap bg-transparent px-3 pb-4 font-['Roboto_Mono'] font-normal leading-[1.375] outline-none"
+  ></textarea>
+
+  <div
+    v-else
+    v-html="clean"
+    class="sheet-preview w-full grow overflow-auto whitespace-nowrap px-3 pb-4 font-['Roboto_Mono'] font-normal"
+  ></div>
+</template>

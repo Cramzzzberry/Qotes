@@ -1,35 +1,83 @@
-@import './base.css';
+@import 'material-icons/iconfont/material-icons.css';
+@import 'transitions.css';
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Outfit';
+  font-weight: 100 200 300 400 500 600 700 800 900;
+  src: url('fonts/Outfit-VariableFont_wght.ttf') format('truetype');
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+@font-face {
+  font-family: 'Roboto Mono';
+  font-weight: 100 200 300 400 500 600 700 800;
+  src: url('fonts/RobotoMono-VariableFont_wght.ttf') format('truetype');
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+@layer base {
+  h1 {
+    @apply text-4xl font-bold leading-none;
+  }
+
+  h2 {
+    @apply text-3xl font-semibold leading-none;
+  }
+
+  h3 {
+    @apply text-2xl font-medium leading-none;
+  }
+
+  html {
+    @apply bg-gray-50 font-['Outfit'] font-light text-emerald-950;
+  }
+
+  button {
+    @apply cursor-pointer;
+  }
+
+  hr {
+    @apply my-2 border border-stone-700;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* selection  */
+  ::selection {
+    @apply bg-emerald-400/25;
   }
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
+@layer utilities {
+  .sheet-preview {
+    @apply leading-[1.375];
   }
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+  .sheet-preview > hr {
+    @apply my-5 border border-stone-400;
+  }
+
+  .sheet-preview span > .chord {
+    @apply -top-[1.5rem];
+  }
+
+  .sheet-preview .chord {
+    @apply relative font-medium text-gray-950;
+  }
+
+  .sheet-preview .chord::before {
+    @apply absolute bottom-0 left-[-0.24rem] right-[-0.24rem] top-0 z-[-1] rounded-[4px] bg-gray-950/15 content-null;
+  }
+
+  .sheet-preview > .lyrics {
+    @apply font-normal;
+  }
+
+  .sheet-preview > .song-section {
+    @apply font-medium text-emerald-500;
   }
 }
