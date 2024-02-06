@@ -90,12 +90,14 @@ async function submit() {
               label="Title"
               type="text"
               class="w-full"
+              required
             />
             <AppFormTextbox
               v-model="createSheet.artist"
               label="Artist"
               type="text"
               class="w-full"
+              required
             />
             <AppFormSelect v-model="createSheet.selectedKey" label="Key" :options="keys" wide />
             <div class="flex flex-row gap-1">

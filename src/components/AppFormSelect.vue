@@ -23,7 +23,10 @@ const states = {
 </script>
 
 <template>
-  <label class="group relative flex cursor-pointer flex-col justify-center gap-1">
+  <label
+    :class="[states[props.state], props.wide ? 'w-full' : 'w-fit']"
+    class="group relative flex cursor-pointer flex-col justify-center gap-1"
+  >
     <span
       v-if="props.label"
       :class="props.state === 'error' ? 'text-red-400' : 'text-gray-500'"
