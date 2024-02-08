@@ -1,9 +1,14 @@
 <script setup>
+//TODO: Store the lineups on a localStorage and update the localStorage accordingly
 import { useGroupPreviewStore } from '@/store'
-import { ref, computed } from 'vue'
+import axios from 'axios'
+import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import draggable from 'vuedraggable'
+import parseSheet from '@/scripts/parse-sheet'
 
-const drag = ref(false)
+const router = useRouter()
+
 const transitionOptions = {
   animation: 150,
   group: 'description',
@@ -11,19 +16,43 @@ const transitionOptions = {
   ghostClass: 'opacity-0'
 }
 
-const songList = ['Song 1', 'Song 2', 'Song 3', 'Song 4', 'Song 5', 'Song 6', 'Song 7', 'Song 8']
-const orderedList = ref(
-  songList.map((name, index) => {
-    return {
-      name,
-      order: index + 1
+const songNumbers = ref([])
+const orderedList = ref([])
+const selectedSong = ref('Song 1')
+const isLoading = ref(true)
+const editSheetArrangement = ref(false)
+
+onMounted(async () => {
+  await axios({
+    method: 'get',
+    url: `${import.meta.env.VITE_API_DOMAIN}/sheets/lineups`,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('qotes_token')}`,
+      userID: localStorage.getItem('qotes_userID')
     }
   })
-)
+    .then((res) => {
+      //This is displayed on the dropdown
+      songNumbers.value = res.data.map((e, index) => `Song ${index + 1}`)
 
-const selectedSong = ref('Song 1')
-const editSheetArrangement = ref(false)
-const isLoading = ref(false)
+      //This will be used to get the specific lineup
+      //This is also used for ordering lineups
+      orderedList.value = res.data.map((song, index) => {
+        return {
+          song,
+          order: index + 1
+        }
+      })
+    })
+    .catch((err) => {
+      if (err.response.status == 401) {
+        router.push({ name: 'entry' })
+      } else {
+        console.log(err)
+      }
+    })
+    .finally(() => (isLoading.value = false))
+})
 
 function close() {
   editSheetArrangement.value = false
@@ -42,7 +71,7 @@ function close() {
         <div v-if="isLoading" class="flex h-9 w-full items-center justify-center">
           <AppLoader />
         </div>
-        <AppFormSelect v-if="!editSheetArrangement" v-model="selectedSong" :options="songList" />
+        <AppFormSelect v-if="!editSheetArrangement" v-model="selectedSong" :options="songNumbers" />
         <p v-else class="flex h-[34px] items-center font-normal">Edit Order</p>
       </div>
       <AppButtonGhostIcon @click="close()" icon="close" />
@@ -52,9 +81,10 @@ function close() {
       <AppLoader />
     </div>
 
-    <template v-else>
+    <Transition v-else name="fade-down" mode="out-in">
       <div
         v-if="!editSheetArrangement"
+        v-html="parseSheet(orderedList[songNumbers.indexOf(selectedSong)].song.content)"
         class="sheet-preview w-full overflow-auto whitespace-nowrap px-3 font-['Roboto_Mono']"
       ></div>
 
@@ -62,8 +92,6 @@ function close() {
         v-else
         v-model="orderedList"
         v-bind="transitionOptions"
-        @start="drag = true"
-        @end="drag = false"
         tag="ul"
         handle=".handle"
         item-key="order"
@@ -72,10 +100,10 @@ function close() {
         <template #item="{ element }">
           <li class="flex flex-row gap-4 rounded-lg border border-gray-200 bg-gray-50 p-4">
             <span class="material-icons-round handle cursor-move"> drag_handle </span>
-            {{ element.name }}
+            {{ element.song.songTitle }}
           </li>
         </template>
       </draggable>
-    </template>
+    </Transition>
   </div>
 </template>
