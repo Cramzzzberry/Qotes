@@ -7,6 +7,7 @@ import { useGroupPreviewStore } from '@/store'
 
 const search = ref('')
 const filter = ref('All Keys')
+const lineup = ref(false)
 </script>
 
 <template>
@@ -15,9 +16,9 @@ const filter = ref('All Keys')
       <TabHeader v-model:search="search" v-model:filter="filter" heading="Lineup" />
 
       <div
-        class="mx-2 mb-2 rounded-2xl bg-gradient-to-t from-amber-400 to-amber-300 px-12 py-6 text-center font-normal text-amber-950 shadow-md"
+        class="mx-2 mb-2 rounded-2xl bg-gradient-to-t from-amber-400 to-amber-300 px-12 py-6 text-center font-normal text-amber-950 shadow-md lg:mx-16"
       >
-        <p>Where you pin all sheets that's considered as a part of the current lineup</p>
+        <p>Where you pin all sheets that's considered as part of the current lineup</p>
       </div>
 
       <!-- sheet list -->
@@ -26,7 +27,11 @@ const filter = ref('All Keys')
 
     <TabFooter>
       <template #left-button>
-        <AppButtonGhostIcon @click="useGroupPreviewStore.open()" icon="visibility" />
+        <AppButtonGhostIcon
+          @click="useGroupPreviewStore.open()"
+          icon="visibility"
+          :disabled="lineup.length === 0"
+        />
       </template>
     </TabFooter>
   </div>

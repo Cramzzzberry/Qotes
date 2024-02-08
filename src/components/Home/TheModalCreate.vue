@@ -76,7 +76,7 @@ async function submit() {
       <!-- panel -->
       <div
         :class="modal.toggle ? 'scale-100 opacity-100' : 'scale-95 opacity-0'"
-        class="max-h-[calc(100svh-32px)] w-full space-y-2 overflow-hidden rounded-3xl bg-gray-50 p-3 drop-shadow-xl transition-all"
+        class="max-h-[calc(100svh-32px)] w-full max-w-[720px] space-y-2 overflow-hidden rounded-3xl bg-gray-50 p-3 drop-shadow-xl transition-all"
       >
         <header class="flex flex-row items-center justify-between p-1">
           <p class="text-xl font-medium leading-none">Create Sheet</p>
@@ -85,20 +85,22 @@ async function submit() {
 
         <form @submit.prevent="submit()" class="h-full overflow-y-auto">
           <div class="mb-1 space-y-1">
-            <AppFormTextbox
-              v-model="createSheet.songTitle"
-              label="Title"
-              type="text"
-              class="w-full"
-              required
-            />
-            <AppFormTextbox
-              v-model="createSheet.artist"
-              label="Artist"
-              type="text"
-              class="w-full"
-              required
-            />
+            <div class="flex flex-col gap-1 lg:flex-row lg:gap-2">
+              <AppFormTextbox
+                v-model="createSheet.songTitle"
+                label="Title"
+                type="text"
+                class="w-full"
+                required
+              />
+              <AppFormTextbox
+                v-model="createSheet.artist"
+                label="Artist"
+                type="text"
+                class="w-full"
+                required
+              />
+            </div>
             <AppFormSelect v-model="createSheet.selectedKey" label="Key" :options="keys" wide />
             <div class="flex flex-row gap-1">
               <label

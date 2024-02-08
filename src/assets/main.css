@@ -31,7 +31,7 @@
   }
 
   html {
-    @apply bg-gray-50 font-['Outfit'] font-light text-emerald-950;
+    @apply bg-gray-50 font-['Outfit'] font-light text-emerald-950 lg:text-lg;
   }
 
   button {
@@ -48,7 +48,7 @@
 
   /* selection  */
   ::selection {
-    @apply bg-emerald-400/25;
+    @apply bg-blue-400/50;
   }
 }
 

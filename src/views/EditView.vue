@@ -56,7 +56,9 @@ watch(
   }
 )
 
+const isSaving = ref(false)
 async function saveSheet() {
+  isSaving.value = true
   await axios({
     method: 'put',
     url: `${import.meta.env.VITE_API_DOMAIN}/sheets/${route.params.id}`,
@@ -79,7 +81,7 @@ async function saveSheet() {
         toastStore.addToast(err.response.data, 3000)
       }
     })
-    .finally(() => (isLoading.value = false))
+    .finally(() => (isSaving.value = false))
 }
 </script>
 
@@ -98,11 +100,11 @@ async function saveSheet() {
     <TheContent v-model:content="sheet.content" v-model:preview="preview" />
 
     <!-- the footer -->
-    <div class="w-full shrink-0 border-t border-t-gray-200 px-4 py-3">
+    <div class="w-full shrink-0 border-t border-t-gray-200 px-4 py-3 lg:px-16">
       <div class="flex flex-row items-center justify-end">
         <div class="invisible h-6 w-6">Create</div>
         <p class="grow text-center text-sm font-normal">{{ contentLength }} of 5000</p>
-        <AppButtonGhostIcon @click="saveSheet()" icon="save" />
+        <AppButtonGhostIcon @click="saveSheet()" icon="save" :is-loading="isSaving" />
       </div>
     </div>
   </div>

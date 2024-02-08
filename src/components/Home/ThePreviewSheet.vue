@@ -17,7 +17,7 @@ const sheet = ref({
 const isLoading = ref(false)
 
 watch(
-  () => usePreviewStore.state,
+  () => usePreviewStore.sheetID,
   () => {
     if (usePreviewStore.state) {
       isLoading.value = true
@@ -45,32 +45,37 @@ const clean = computed(() => {
 function goEdit() {
   usePreviewStore.close()
   router.push({ name: 'edit', params: { id: usePreviewStore.sheetID } })
+  usePreviewStore.sheetID = ''
 }
 </script>
 
 <template>
-  <div class="flex h-full flex-col">
-    <header class="flex shrink-0 flex-row items-center bg-gray-50 px-4 pb-2 pt-4">
-      <AppButtonGhostIcon @click="goEdit()" icon="edit_note" />
-      <div class="flex grow flex-col items-center leading-none">
+  <div class="h-full overflow-y-auto">
+    <header class="sticky top-0 z-10 flex flex-row items-center bg-gray-50 px-4 pb-2 pt-4">
+      <div class="flex basis-1/3 justify-start">
+        <AppButtonGhostIcon @click="goEdit()" icon="edit_note" />
+      </div>
+      <div class="flex min-w-0 grow flex-col text-center leading-none">
         <div v-if="isLoading" class="flex h-9 w-full items-center justify-center">
           <AppLoader />
         </div>
         <template v-else>
-          <p class="font-normal">{{ sheet.songTitle }}</p>
-          <p class="text-sm font-light">{{ sheet.artist }}</p>
+          <p class="truncate font-normal">{{ sheet.songTitle }}</p>
+          <p class="truncate text-sm font-light">{{ sheet.artist }}</p>
         </template>
       </div>
-      <AppButtonGhostIcon @click="usePreviewStore.close()" icon="close" />
+      <div class="flex basis-1/3 justify-end">
+        <AppButtonGhostIcon @click="usePreviewStore.close()" icon="close" />
+      </div>
     </header>
 
-    <div v-if="isLoading" class="flex grow items-center justify-center">
+    <div v-if="isLoading" class="flex h-full items-center justify-center">
       <AppLoader />
     </div>
     <div
       v-else
       v-html="clean"
-      class="sheet-preview w-full overflow-auto whitespace-nowrap px-3 font-['Roboto_Mono']"
+      class="sheet-preview w-full overflow-auto whitespace-nowrap px-3 py-2 font-['Roboto_Mono']"
     ></div>
   </div>
 </template>

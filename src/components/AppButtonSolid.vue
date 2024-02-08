@@ -31,9 +31,9 @@ const states = {
 }
 
 const btnSizes = {
-  sm: 'h-[30px] max-h-[30px] gap-1 px-2 py-1 text-sm',
-  base: 'h-[42px] max-h-[42px] gap-2 px-4 py-2 text-base',
-  lg: 'h-[54px] max-h-[54px] gap-3 px-6 py-3 text-xl'
+  sm: ' gap-1 px-2 py-1 text-sm',
+  base: ' gap-2 px-4 py-2 text-base',
+  lg: ' gap-3 px-6 py-3 text-xl'
 }
 
 const iconSizes = {

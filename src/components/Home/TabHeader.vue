@@ -46,7 +46,7 @@ async function deleteSheets() {
 </script>
 
 <template>
-  <header class="sticky top-0 z-10 bg-gray-50/80 pb-2 backdrop-blur-xl">
+  <header class="sticky top-0 z-10 bg-gray-50/80 pb-2 backdrop-blur-xl lg:px-14">
     <div class="shrink-0 place-self-start px-2 pb-2 pt-10">
       <AppButtonGhostIcon @click="useDrawerStore.open()" icon="menu" />
     </div>

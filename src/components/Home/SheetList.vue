@@ -35,11 +35,12 @@ const checkboxColors = {
   important: 'accent-amber-400'
 }
 
+const toastStore = inject('toastStore')
 const selectionStore = inject('selectionStore')
 const router = useRouter()
-
 const list = ref([])
 const isLoading = ref(false)
+
 const search = debounce(() => {
   const onFetch = async () => {
     await axios({
@@ -61,7 +62,7 @@ const search = debounce(() => {
         if (err.response.status == 401) {
           router.push({ name: 'entry' })
         } else {
-          console.log(err)
+          toastStore.addToast(err.response.data, 3000)
         }
       })
       .finally(() => (isLoading.value = false))
@@ -83,13 +84,17 @@ onMounted(() => {
 
 function preview(id) {
   usePreviewStore.open()
-  usePreviewStore.sheetID = id
+
+  //did this to prevent refetch
+  if (id !== usePreviewStore.sheetID) {
+    usePreviewStore.sheetID = id
+  }
 }
 </script>
 
 <template>
-  <section v-if="!isLoading && list.length > 0" class="px-2 pb-2">
-    <ul class="grid grid-flow-row gap-2">
+  <section v-if="!isLoading && list.length > 0" class="px-2 pb-2 lg:px-16">
+    <ul class="grid grid-flow-row gap-2 md:grid-cols-2 xl:grid-cols-3">
       <li
         v-for="sheet in list"
         :key="sheet.id"
@@ -100,7 +105,7 @@ function preview(id) {
         <button
           @click="preview(sheet.id)"
           :class="listActiveColors[props.category]"
-          class="flex grow flex-row items-center text-start"
+          class="flex min-w-0 grow flex-row items-center text-start"
         >
           <span
             :class="keyColors[props.category]"
@@ -108,9 +113,9 @@ function preview(id) {
           >
             {{ sheet.songKey }}
           </span>
-          <div class="flex grow flex-col justify-center p-2 leading-none">
-            <p>{{ sheet.songTitle }}</p>
-            <p class="text-sm font-extralight">{{ sheet.artist }}</p>
+          <div class="flex min-w-0 grow flex-col justify-center p-2 leading-none">
+            <p class="truncate">{{ sheet.songTitle }}</p>
+            <p class="truncate text-sm font-extralight">{{ sheet.artist }}</p>
             <div class="flex flex-row items-center gap-1 text-[0.75rem] font-light">
               <span
                 v-if="sheet.important"
@@ -129,7 +134,7 @@ function preview(id) {
         </button>
 
         <!-- multiple select checkbox -->
-        <label class="flex h-full w-10 cursor-pointer items-center justify-center">
+        <label class="flex h-full w-10 shrink-0 cursor-pointer items-center justify-center">
           <input
             v-model="selectionStore.items.value"
             :value="`${sheet.id}---${sheet.important}---${sheet.lineup}`"

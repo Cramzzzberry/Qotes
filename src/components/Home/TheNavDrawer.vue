@@ -1,9 +1,10 @@
 <script setup>
 import { useRouter } from 'vue-router'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, inject } from 'vue'
 import { useHomeTabStore, useDrawerStore } from '@/store'
 import axios from 'axios'
 
+const toastStore = inject('toastStore')
 const router = useRouter()
 
 const fullName = ref(null)
@@ -62,7 +63,7 @@ function goToSettings() {
     <!-- panel -->
     <div
       :class="useDrawerStore.state ? 'translate-x-0' : '-translate-x-full'"
-      class="absolute left-0 top-0 h-full w-5/6 overflow-hidden rounded-r-3xl bg-gray-50 p-2 drop-shadow-xl transition-transform duration-500"
+      class="absolute left-0 top-0 h-full w-5/6 max-w-[420px] overflow-hidden rounded-r-3xl bg-gray-50 p-2 drop-shadow-xl transition-transform duration-500"
     >
       <nav class="flex h-full w-full flex-col justify-between font-normal text-gray-950/40">
         <div class="grid auto-rows-auto gap-1 pt-12">
@@ -74,8 +75,8 @@ function goToSettings() {
             <div
               class="relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-3 transition-colors group-hover:bg-gray-950/10"
             >
-              <span class="material-icons-round"> view_stream </span>
-              <p>All</p>
+              <span class="material-icons-round"> push_pin </span>
+              <p>Lineup</p>
             </div>
           </button>
           <button
@@ -86,8 +87,8 @@ function goToSettings() {
             <div
               class="relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-3 transition-colors group-hover:bg-gray-950/10"
             >
-              <span class="material-icons-round"> push_pin </span>
-              <p>Lineup</p>
+              <span class="material-icons-round"> emoji_objects </span>
+              <p>Important</p>
             </div>
           </button>
           <button
@@ -98,8 +99,8 @@ function goToSettings() {
             <div
               class="relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-3 transition-colors group-hover:bg-gray-950/10"
             >
-              <span class="material-icons-round"> emoji_objects </span>
-              <p>Important</p>
+              <span class="material-icons-round"> view_stream </span>
+              <p>All</p>
             </div>
           </button>
         </div>

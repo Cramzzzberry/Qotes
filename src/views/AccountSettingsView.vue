@@ -37,7 +37,9 @@ onMounted(async () => {
     })
 })
 
+const isLoggingOut = ref(false)
 async function logout() {
+  isLoggingOut.value = true
   await axios({
     method: 'delete',
     url: `${import.meta.env.VITE_API_DOMAIN}/user`,
@@ -54,6 +56,7 @@ async function logout() {
       }
     })
     .finally(() => {
+      isLoggingOut.value = false
       Object.keys(localStorage).forEach(function (key) {
         if (/^qotes_/.test(key)) {
           localStorage.removeItem(key)
@@ -66,8 +69,8 @@ async function logout() {
 
 <template>
   <div class="flex h-full flex-col">
-    <div class="grow overflow-y-auto">
-      <header class="sticky top-0 bg-gray-50/80 pb-2 backdrop-blur-xl">
+    <div class="w-full grow overflow-y-auto">
+      <header class="sticky top-0 bg-gray-50/80 pb-2 backdrop-blur-xl lg:px-14">
         <div class="place-self-start px-2 pb-2 pt-10">
           <AppButtonGhostIcon @click="$router.go(-1)" icon="arrow_back" />
         </div>
@@ -77,7 +80,7 @@ async function logout() {
         </div>
       </header>
 
-      <div class="flex flex-col gap-1 px-2 pb-4">
+      <div class="flex flex-col gap-1 px-2 pb-4 lg:px-16">
         <SectionDetails
           v-model:email="currentAcc.email"
           v-model:first-name="currentAcc.firstName"
@@ -91,8 +94,10 @@ async function logout() {
       </div>
     </div>
 
-    <div class="shrink-0 p-2">
-      <AppButtonSolid @click="logout()" state="warning" wide> Logout </AppButtonSolid>
+    <div class="w-full shrink-0 p-2 lg:px-16">
+      <AppButtonSolid @click="logout()" state="warning" :is-loading="isLoggingOut" wide>
+        Logout
+      </AppButtonSolid>
     </div>
   </div>
 </template>

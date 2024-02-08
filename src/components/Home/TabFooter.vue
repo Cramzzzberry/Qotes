@@ -121,7 +121,7 @@ async function unpinToLineup() {
 </script>
 
 <template>
-  <div class="w-full shrink-0 border-t border-t-gray-200 px-4 py-3">
+  <div class="w-full shrink-0 border-t border-t-gray-200 px-4 py-3 lg:px-16">
     <Transition name="fade-up" mode="out-in">
       <div v-if="!selectionStore.isToggled.value" class="flex flex-row items-center">
         <slot name="left-button">
@@ -131,9 +131,12 @@ async function unpinToLineup() {
         <TheModalCreate />
       </div>
 
-      <div v-else class="grid h-[26px] grid-cols-2 items-center gap-2 font-normal">
+      <div
+        v-else
+        class="grid h-[26px] grid-cols-2 items-center gap-2 font-normal lg:flex lg:flex-row lg:justify-end lg:gap-16"
+      >
         <template v-if="selectionStore.hasItems.value">
-          <div class="text-left">
+          <div class="text-left lg:text-center">
             <AppButtonText
               @click="addAsImportant()"
               v-if="!selectionStore.organizedItems.value.hasImportants"
@@ -148,7 +151,7 @@ async function unpinToLineup() {
             </AppButtonText>
           </div>
 
-          <div class="text-right">
+          <div class="text-right lg:text-center">
             <AppButtonText
               @click="pinToLineup()"
               v-if="!selectionStore.organizedItems.value.hasLineups"

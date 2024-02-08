@@ -8,7 +8,7 @@ import TabAll from '@/components/Home/Tabs/TabAll.vue'
 import TabLineup from '@/components/Home/Tabs/TabLineup.vue'
 import TabImportant from '@/components/Home/Tabs/TabImportant.vue'
 
-const tabs = [TabAll, TabLineup, TabImportant]
+const tabs = [TabLineup, TabImportant, TabAll]
 </script>
 
 <template>

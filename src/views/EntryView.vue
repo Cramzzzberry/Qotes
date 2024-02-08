@@ -118,7 +118,11 @@ async function signUp() {
 <template>
   <div class="flex h-svh w-full items-center justify-center p-4">
     <transition name="fade-scale" mode="out-in">
-      <form v-if="isLogin" @submit.prevent="login()" class="flex w-full flex-col gap-2">
+      <form
+        v-if="isLogin"
+        @submit.prevent="login()"
+        class="flex w-full max-w-[640px] flex-col gap-2"
+      >
         <h2>Login to your account</h2>
         <AppFormTextbox
           v-model="loginForm.email"
@@ -148,7 +152,7 @@ async function signUp() {
         </p>
       </form>
 
-      <form v-else @submit.prevent="signUp()" class="flex w-full flex-col gap-2">
+      <form v-else @submit.prevent="signUp()" class="flex w-full max-w-[640px] flex-col gap-2">
         <h2>Create your account</h2>
         <AppFormTextbox
           v-model="signupForm.firstName"
@@ -189,7 +193,7 @@ async function signUp() {
           class="w-full"
           autocomplete="new-password"
         />
-        <AppButtonSolid :is-login="signupForm.loading" type="submit" wide>
+        <AppButtonSolid :is-loading="signupForm.loading" type="submit" wide>
           Create Account
         </AppButtonSolid>
 
