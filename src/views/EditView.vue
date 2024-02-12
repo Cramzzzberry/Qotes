@@ -15,7 +15,7 @@ const preview = ref(false)
 const sheet = ref({
   songTitle: '',
   artist: '',
-  key: 'C',
+  key: '',
   content: ''
 })
 
@@ -38,6 +38,13 @@ onMounted(async () => {
       sheet.value.artist = res.data.artist
       sheet.value.content = res.data.content
       sheet.value.key = res.data.songKey
+
+      watch(
+        () => sheet.value.key,
+        (newKey, oldKey) => {
+          sheet.value.content = changeKey(sheet.value.content, newKey, oldKey)
+        }
+      )
     })
     .catch((err) => {
       if (err.response.status == 401) {
@@ -48,13 +55,6 @@ onMounted(async () => {
     })
     .finally(() => (isLoading.value = false))
 })
-
-watch(
-  () => sheet.value.key,
-  (newKey, oldKey) => {
-    sheet.value.content = changeKey(sheet.value.content, newKey, oldKey)
-  }
-)
 
 const isSaving = ref(false)
 async function saveSheet() {
