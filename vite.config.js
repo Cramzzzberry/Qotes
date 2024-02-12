@@ -12,7 +12,7 @@ export default defineConfig({
     VitePWA({
       manifest: {
         name: 'Qotes',
-        short_name: 'Qptes',
+        short_name: 'Qotes',
         start_url: '/qotes/',
         display: 'standalone',
         background_color: '#f9fafb',
