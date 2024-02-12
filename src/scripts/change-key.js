@@ -20,7 +20,7 @@ const allKeys = [
 ]
 
 function checkKey(chord) {
-  return `${chord}(?=(m|maj|aug|dim|sus|add)?(M)?([0-9])?(?!(\\w|#)))`
+  return `(?<=\\s|^)${chord}(?=(m|maj|aug|dim|sus|add)?(M)?([0-9])?(?!(\\w|#)))`
 }
 
 function tranposeKey(key, keyDiff, newKey, prevKey) {
