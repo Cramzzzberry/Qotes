@@ -134,7 +134,7 @@ function close() {
             v-model="selectedSong"
             :options="songNumbers"
           />
-          <p v-else class="flex h-[34px] items-center font-normal">Edit Order</p>
+          <p v-else class="flex h-[34px] items-center font-normal lg:h-[38px]">Edit Order</p>
         </div>
         <AppButtonGhostIcon @click="close()" icon="close" />
       </header>
@@ -143,7 +143,7 @@ function close() {
         <div
           v-if="!editSheetArrangement"
           v-html="clean"
-          class="sheet-preview w-full overflow-auto whitespace-nowrap px-3 py-2 font-['Roboto_Mono']"
+          class="sheet-preview w-full overflow-auto whitespace-nowrap px-3 py-2 font-['Roboto_Mono'] lg:px-6"
         ></div>
         <draggable
           v-else
@@ -167,7 +167,9 @@ function close() {
       </Transition>
     </template>
 
-    <div v-else class="flex h-full items-center justify-center">Create a sheet to preview</div>
+    <div v-else class="flex h-full items-center justify-center">
+      Create or Pin a sheet on lineup to preview
+    </div>
   </div>
 </template>
 

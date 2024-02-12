@@ -75,7 +75,7 @@ function goEdit() {
     <div
       v-else
       v-html="clean"
-      class="sheet-preview w-full overflow-auto whitespace-nowrap px-3 py-2 font-['Roboto_Mono']"
+      class="sheet-preview w-full overflow-auto whitespace-nowrap px-3 py-2 font-['Roboto_Mono'] lg:px-6"
     ></div>
   </div>
 </template>

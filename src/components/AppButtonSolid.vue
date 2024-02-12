@@ -31,9 +31,9 @@ const states = {
 }
 
 const btnSizes = {
-  sm: ' gap-1 px-2 py-1 text-sm',
-  base: ' gap-2 px-4 py-2 text-base',
-  lg: ' gap-3 px-6 py-3 text-xl'
+  sm: ' gap-1 h-[30px] px-2 text-sm',
+  base: ' gap-2 h-[42px] px-4 text-base',
+  lg: ' gap-3 h-[54px] px-6 text-xl'
 }
 
 const iconSizes = {
@@ -53,7 +53,7 @@ const loaderSizes = {
   <button
     :disabled="props.isLoading"
     :class="[states[props.state], btnSizes[props.size], props.wide ? 'w-full justify-center' : '']"
-    class="inline-grid select-none auto-cols-[max-content_auto_max-content] grid-flow-col items-center rounded-xl border text-start font-medium outline-none disabled:opacity-50"
+    class="inline-grid select-none auto-cols-[max-content_auto_max-content] grid-flow-col items-center rounded-xl border text-start font-medium leading-none outline-none disabled:opacity-50"
   >
     <AppLoader v-if="props.isLoading" :size="loaderSizes[props.size]" />
     <template v-else>

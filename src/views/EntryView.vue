@@ -159,12 +159,14 @@ async function signUp() {
           label="First Name"
           type="text"
           class="w-full"
+          required
         />
         <AppFormTextbox
           v-model="signupForm.lastName"
           label="Last Name"
           type="text"
           class="w-full"
+          required
         />
         <AppFormTextbox
           v-model="signupForm.email"
@@ -174,6 +176,7 @@ async function signUp() {
           type="email"
           class="w-full"
           autocomplete="username"
+          required
         />
         <AppFormTextbox
           v-model="signupForm.password"
@@ -183,6 +186,7 @@ async function signUp() {
           type="password"
           class="w-full"
           autocomplete="new-password"
+          required
         />
         <AppFormTextbox
           v-model="signupForm.confirmPassword"
@@ -192,6 +196,7 @@ async function signUp() {
           type="password"
           class="w-full"
           autocomplete="new-password"
+          required
         />
         <AppButtonSolid :is-loading="signupForm.loading" type="submit" wide>
           Create Account

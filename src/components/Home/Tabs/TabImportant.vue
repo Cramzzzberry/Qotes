@@ -16,7 +16,7 @@ const filter = ref('All Keys')
       <div
         class="mx-2 mb-2 rounded-2xl bg-gradient-to-t from-purple-400 to-purple-300 px-12 py-6 text-center font-normal text-purple-950 shadow-md lg:mx-16"
       >
-        <p>Sheets that are being used weekly</p>
+        <p>Sheets that are used weekly</p>
       </div>
 
       <!-- sheet list -->

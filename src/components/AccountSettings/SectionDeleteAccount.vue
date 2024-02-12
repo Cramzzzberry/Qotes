@@ -44,7 +44,7 @@ async function deleteAccount() {
   >
   <p class="flex flex-row items-center justify-center gap-2 text-gray-500">
     <span class="material-icons-round"> warning </span>
-    This will delete all your related data, except the sheets you created
+    This will delete all your related data except the sheets you created
   </p>
 
   <AppDialog

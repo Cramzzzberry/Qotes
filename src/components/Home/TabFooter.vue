@@ -127,7 +127,7 @@ async function unpinToLineup() {
         <slot name="left-button">
           <div class="invisible h-6 w-6">Create</div>
         </slot>
-        <p class="grow text-center text-sm font-normal">25 Sheets</p>
+        <p class="grow text-center text-sm font-normal">Qotes</p>
         <TheModalCreate />
       </div>
 

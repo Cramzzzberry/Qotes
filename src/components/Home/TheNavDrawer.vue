@@ -1,7 +1,7 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { ref, onMounted, inject } from 'vue'
-import { useHomeTabStore, useDrawerStore } from '@/store'
+import { useHomeTabStore, useDrawerStore, usePreviewStore } from '@/store'
 import axios from 'axios'
 
 const toastStore = inject('toastStore')
@@ -39,6 +39,7 @@ function changeTab(index) {
 function goToSettings() {
   useDrawerStore.close()
   router.push({ name: 'account settings' })
+  usePreviewStore.sheetID = ''
 }
 </script>
 
@@ -65,15 +66,16 @@ function goToSettings() {
       :class="useDrawerStore.state ? 'translate-x-0' : '-translate-x-full'"
       class="absolute left-0 top-0 h-full w-5/6 max-w-[420px] overflow-hidden rounded-r-3xl bg-gray-50 p-2 drop-shadow-xl transition-transform duration-500"
     >
-      <nav class="flex h-full w-full flex-col justify-between font-normal text-gray-950/40">
+      <nav class="flex h-full w-full flex-col justify-between font-normal text-gray-400/75">
         <div class="grid auto-rows-auto gap-1 pt-12">
+          <span class="px-2 text-sm text-gray-500"> Categories </span>
           <button
             @click="changeTab(0)"
             :class="useHomeTabStore.index === 0 ? 'text-emerald-500' : ''"
             class="group transition-colors"
           >
             <div
-              class="relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-3 transition-colors group-hover:bg-gray-950/10"
+              class="relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-3 transition-colors group-hover:bg-gray-400/20 group-active:bg-gray-500/20"
             >
               <span class="material-icons-round"> push_pin </span>
               <p>Lineup</p>
@@ -85,7 +87,7 @@ function goToSettings() {
             class="group transition-colors"
           >
             <div
-              class="relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-3 transition-colors group-hover:bg-gray-950/10"
+              class="relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-3 transition-colors group-hover:bg-gray-400/20 group-active:bg-gray-500/20"
             >
               <span class="material-icons-round"> emoji_objects </span>
               <p>Important</p>
@@ -97,7 +99,7 @@ function goToSettings() {
             class="group transition-colors"
           >
             <div
-              class="relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-3 transition-colors group-hover:bg-gray-950/10"
+              class="relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-3 transition-colors group-hover:bg-gray-400/20 group-active:bg-gray-500/20"
             >
               <span class="material-icons-round"> view_stream </span>
               <p>All</p>
@@ -107,7 +109,7 @@ function goToSettings() {
 
         <button @click="goToSettings()" class="group transition-colors">
           <div
-            class="relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-3 transition-colors group-hover:bg-gray-950/10"
+            class="relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-3 transition-colors group-hover:bg-gray-400/20 group-active:bg-gray-500/20"
           >
             <span class="material-icons-round"> settings </span>
             <p v-if="!isLoading">{{ fullName }}</p>

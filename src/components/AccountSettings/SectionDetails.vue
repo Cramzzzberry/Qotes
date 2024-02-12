@@ -44,6 +44,24 @@ async function updateDetails() {
 </script>
 
 <template>
+  <div class="flex flex-col gap-1 md:flex-row md:gap-2">
+    <AppFormTextbox
+      v-model="firstName"
+      state="info"
+      label="First Name"
+      type="text"
+      wide
+      class="md:basis-1/2"
+    />
+    <AppFormTextbox
+      v-model="lastName"
+      state="info"
+      label="Last Name"
+      type="text"
+      wide
+      class="md:basis-1/2"
+    />
+  </div>
   <AppFormTextbox
     v-model="email"
     state="info"
@@ -51,8 +69,6 @@ async function updateDetails() {
     placeholder="Your new email"
     type="email"
   />
-  <AppFormTextbox v-model="firstName" state="info" label="First Name" type="text" />
-  <AppFormTextbox v-model="lastName" state="info" label="Last Name" type="text" />
   <AppButtonSolid
     @click="toggle = true"
     state="info"

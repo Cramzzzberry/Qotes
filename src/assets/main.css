@@ -31,7 +31,7 @@
   }
 
   html {
-    @apply bg-gray-50 font-['Outfit'] font-light text-emerald-950 lg:text-lg;
+    @apply bg-gray-50 font-['Outfit'] font-light text-emerald-950;
   }
 
   button {

@@ -1,7 +1,7 @@
 <script setup>
 import { inject, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useRefreshStore } from '@/store'
+import { useRefreshStore, useHomeTabStore } from '@/store'
 import axios from 'axios'
 
 const toastStore = inject('toastStore')
@@ -23,8 +23,8 @@ const createSheet = ref({
   songTitle: '',
   artist: '',
   selectedKey: 'C',
-  lineup: false,
-  important: false
+  lineup: useHomeTabStore.index === 0 ? true : false,
+  important: useHomeTabStore.index === 1 ? true : false
 })
 
 async function submit() {
@@ -44,7 +44,16 @@ async function submit() {
       important: createSheet.value.important
     }
   })
-    .then(() => toastStore.addToast('Sheet created', 3000))
+    .then(() => {
+      toastStore.addToast('Sheet created', 3000)
+      createSheet.value = {
+        songTitle: '',
+        artist: '',
+        selectedKey: 'C',
+        lineup: useHomeTabStore.index === 0 ? true : false,
+        important: useHomeTabStore.index === 1 ? true : false
+      }
+    })
     .catch((err) => {
       if (err.response.status == 401) {
         router.push({ name: 'entry' })
@@ -85,7 +94,7 @@ async function submit() {
 
         <form @submit.prevent="submit()" class="h-full overflow-y-auto">
           <div class="mb-1 space-y-1">
-            <div class="flex flex-col gap-1 lg:flex-row lg:gap-2">
+            <div class="flex flex-col gap-1 md:flex-row md:gap-2">
               <AppFormTextbox
                 v-model="createSheet.songTitle"
                 label="Title"
