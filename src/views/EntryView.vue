@@ -100,7 +100,7 @@ async function signUp() {
           signupForm.value.error.email.toggle = true
           signupForm.value.error.passwords.toggle = false
           signupForm.value.error.email.message = err.response.data
-          signupForm.value.error.passswords.message = null
+          signupForm.value.error.passwords.message = null
         } else {
           toastStore.addToast(err.response.data, 3000)
         }
