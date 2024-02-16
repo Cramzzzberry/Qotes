@@ -35,56 +35,43 @@ const getLineups = debounce(() => {
       }
     })
       .then((res) => {
-        // if (res.data.length > 0) {
-        //   if (localStorage.getItem('qotes_lineup') !== JSON.stringify(res.data)) {
-        //     //This is displayed on the dropdown
-        //     songNumbers.value = res.data.map((e, index) => `Song ${index + 1}`)
+        if (res.data.length > 0) {
+          //This is displayed on the dropdown
+          songNumbers.value = res.data.map((e, index) => `Song ${index + 1}`)
 
-        //     //This will be used to get the specific lineup
-        //     //This is also used for ordering lineups
-        //     orderedList.value = res.data.map((song, index) => {
-        //       return {
-        //         song,
-        //         order: index + 1
-        //       }
-        //     })
+          if (localStorage.getItem('qotes_lineup') !== JSON.stringify(res.data)) {
+            //This will be used to get the specific lineup
+            //This is also used for ordering lineups
+            orderedList.value = res.data.map((song, index) => {
+              return {
+                song,
+                order: index + 1
+              }
+            })
 
-        //     localStorage.setItem('qotes_lineup', JSON.stringify(res.data))
-        //     setClean()
-        //     saveOrder()
-        //   } else {
-        //     let list = JSON.parse(localStorage.getItem('qotes_ordered_lineup'))
+            saveOrder()
+            localStorage.setItem('qotes_lineup', JSON.stringify(res.data))
+          } else {
+            let list = JSON.parse(localStorage.getItem('qotes_ordered_lineup'))
 
-        //     songNumbers.value = list.map((e, index) => `Song ${index + 1}`)
-        //     orderedList.value = list
+            songNumbers.value = list.map((e, index) => `Song ${index + 1}`)
+            orderedList.value = list.map((sheet) => {
+              res.data.forEach((e) => {
+                if (e.id === sheet.song.id) {
+                  sheet.song.content = e.content
+                }
+              })
+              return sheet
+            })
+          }
 
-        //     setClean()
-        //   }
-        // } else {
-        //   orderedList.value = []
-        //   clean.value = null
-        //   localStorage.removeItem('qotes_ordered_lineup')
-        //   localStorage.removeItem('qotes_lineup')
-        // }
-
-        //This is displayed on the dropdown
-        songNumbers.value = res.data.map((e, index) => `Song ${index + 1}`)
-
-        if (localStorage.getItem('qotes_lineup') !== JSON.stringify(res.data)) {
-          //This will be used to get the specific lineup
-          //This is also used for ordering lineups
-          orderedList.value = res.data.map((song, index) => {
-            return {
-              song,
-              order: index + 1
-            }
-          })
-
-          saveOrder()
-          localStorage.setItem('qotes_lineup', JSON.stringify(res.data))
+          setClean()
+        } else {
+          orderedList.value = []
+          clean.value = null
+          localStorage.removeItem('qotes_ordered_lineup')
+          localStorage.removeItem('qotes_lineup')
         }
-
-        setClean()
       })
       .catch((err) => {
         if (err.response.status == 401) {
