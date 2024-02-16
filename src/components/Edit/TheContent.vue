@@ -16,7 +16,7 @@ const clean = computed(() => {
     v-model="content"
     spellcheck="false"
     maxlength="5000"
-    class="w-full grow resize-none overflow-auto whitespace-nowrap bg-transparent px-3 pb-4 font-['Roboto_Mono'] font-normal leading-[1.375] outline-none lg:px-16"
+    class="w-full grow resize-none overflow-auto whitespace-nowrap bg-transparent px-3 pb-4 font-['Roboto_Mono'] text-lg font-normal leading-[1.5] outline-none lg:px-16"
   ></textarea>
 
   <div
