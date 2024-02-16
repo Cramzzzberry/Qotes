@@ -70,18 +70,21 @@ const getLineups = debounce(() => {
         //This is displayed on the dropdown
         songNumbers.value = res.data.map((e, index) => `Song ${index + 1}`)
 
-        //This will be used to get the specific lineup
-        //This is also used for ordering lineups
-        orderedList.value = res.data.map((song, index) => {
-          return {
-            song,
-            order: index + 1
-          }
-        })
+        if (localStorage.getItem('qotes_lineup') !== JSON.stringify(res.data)) {
+          //This will be used to get the specific lineup
+          //This is also used for ordering lineups
+          orderedList.value = res.data.map((song, index) => {
+            return {
+              song,
+              order: index + 1
+            }
+          })
 
-        localStorage.setItem('qotes_lineup', JSON.stringify(res.data))
+          saveOrder()
+          localStorage.setItem('qotes_lineup', JSON.stringify(res.data))
+        }
+
         setClean()
-        saveOrder()
       })
       .catch((err) => {
         if (err.response.status == 401) {
