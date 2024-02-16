@@ -141,13 +141,13 @@ async function unpinToLineup() {
               @click="addAsImportant()"
               v-if="!selectionStore.organizedItems.value.hasImportants"
             >
-              Add as Important
+              Mark as Important
             </AppButtonText>
             <AppButtonText
               @click="makeUnmportant()"
               v-if="!selectionStore.organizedItems.value.noImportants"
             >
-              Make unimportant
+              Mark as Unimportant
             </AppButtonText>
           </div>
 
@@ -162,7 +162,7 @@ async function unpinToLineup() {
               @click="unpinToLineup()"
               v-if="!selectionStore.organizedItems.value.noLineups"
             >
-              Unpin to Lineup
+              Unpin from Lineup
             </AppButtonText>
           </div>
         </template>

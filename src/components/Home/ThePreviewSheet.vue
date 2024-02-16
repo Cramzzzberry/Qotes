@@ -17,7 +17,7 @@ const sheet = ref({
 const isLoading = ref(false)
 
 watch(
-  () => usePreviewStore.sheetID,
+  () => usePreviewStore.state,
   () => {
     if (usePreviewStore.state) {
       isLoading.value = true

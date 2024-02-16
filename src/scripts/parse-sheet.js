@@ -45,7 +45,10 @@ export default function parseSheet(input) {
 }
 
 function isChord(str) {
-  return /(?<=\s|^)([A-G])([#b]?)(m|maj|aug|dim|sus|add)?(M)?([0-9])?(?!(\w|#))$/.test(str)
+  return /(?<=\s|^)([A-G])([#b]?)(?=((m|maj|aug|dim|sus|add)?(M)?([0-9])?(?!(\w|#))$)|((\/[A-G])([#b]?)(?!(\w|#))$))/.test(
+    str
+  )
+  // return /(?<=\s|^)([A-G])([#b]?)((m|maj|aug|dim|sus|add)?(M)?([0-9])?(?!(\w|#))$)/.test(str)
 }
 
 function isHr(str) {
