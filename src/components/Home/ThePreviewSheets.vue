@@ -21,7 +21,7 @@ const songNumbers = ref([])
 const orderedList = ref([])
 const selectedSong = ref('Song 1')
 const isLoading = ref(false)
-const editSheetArrangement = ref(false)
+const editSheetArrangement = ref(true)
 const clean = ref(null)
 
 const getLineups = debounce(() => {
@@ -35,37 +35,53 @@ const getLineups = debounce(() => {
       }
     })
       .then((res) => {
-        if (res.data.length > 0) {
-          if (localStorage.getItem('qotes_lineup') !== JSON.stringify(res.data)) {
-            //This is displayed on the dropdown
-            songNumbers.value = res.data.map((e, index) => `Song ${index + 1}`)
+        // if (res.data.length > 0) {
+        //   if (localStorage.getItem('qotes_lineup') !== JSON.stringify(res.data)) {
+        //     //This is displayed on the dropdown
+        //     songNumbers.value = res.data.map((e, index) => `Song ${index + 1}`)
 
-            //This will be used to get the specific lineup
-            //This is also used for ordering lineups
-            orderedList.value = res.data.map((song, index) => {
-              return {
-                song,
-                order: index + 1
-              }
-            })
+        //     //This will be used to get the specific lineup
+        //     //This is also used for ordering lineups
+        //     orderedList.value = res.data.map((song, index) => {
+        //       return {
+        //         song,
+        //         order: index + 1
+        //       }
+        //     })
 
-            localStorage.setItem('qotes_lineup', JSON.stringify(res.data))
-            setClean()
-            saveOrder()
-          } else {
-            let list = JSON.parse(localStorage.getItem('qotes_ordered_lineup'))
+        //     localStorage.setItem('qotes_lineup', JSON.stringify(res.data))
+        //     setClean()
+        //     saveOrder()
+        //   } else {
+        //     let list = JSON.parse(localStorage.getItem('qotes_ordered_lineup'))
 
-            songNumbers.value = list.map((e, index) => `Song ${index + 1}`)
-            orderedList.value = list
+        //     songNumbers.value = list.map((e, index) => `Song ${index + 1}`)
+        //     orderedList.value = list
 
-            setClean()
+        //     setClean()
+        //   }
+        // } else {
+        //   orderedList.value = []
+        //   clean.value = null
+        //   localStorage.removeItem('qotes_ordered_lineup')
+        //   localStorage.removeItem('qotes_lineup')
+        // }
+
+        //This is displayed on the dropdown
+        songNumbers.value = res.data.map((e, index) => `Song ${index + 1}`)
+
+        //This will be used to get the specific lineup
+        //This is also used for ordering lineups
+        orderedList.value = res.data.map((song, index) => {
+          return {
+            song,
+            order: index + 1
           }
-        } else {
-          orderedList.value = []
-          clean.value = null
-          localStorage.removeItem('qotes_ordered_lineup')
-          localStorage.removeItem('qotes_lineup')
-        }
+        })
+
+        localStorage.setItem('qotes_lineup', JSON.stringify(res.data))
+        setClean()
+        saveOrder()
       })
       .catch((err) => {
         if (err.response.status == 401) {
@@ -92,6 +108,19 @@ onMounted(() => {
   )
 
   watch(
+    () => useGroupPreviewStore.state,
+    () => {
+      if (useGroupPreviewStore.state) {
+        isLoading.value = true
+        getLineups()
+      }
+
+      editSheetArrangement.value = true
+    },
+    { immediate: true }
+  )
+
+  watch(
     () => selectedSong.value,
     () => {
       setClean()
@@ -108,11 +137,6 @@ function setClean() {
   clean.value = parseSheet(
     orderedList.value[songNumbers.value.indexOf(selectedSong.value)].song.content
   )
-}
-
-function close() {
-  editSheetArrangement.value = false
-  useGroupPreviewStore.close()
 }
 </script>
 
@@ -136,7 +160,7 @@ function close() {
           />
           <p v-else class="flex h-[34px] items-center font-normal lg:h-[38px]">Edit Order</p>
         </div>
-        <AppButtonGhostIcon @click="close()" icon="close" />
+        <AppButtonGhostIcon @click="useGroupPreviewStore.close()" icon="close" />
       </header>
 
       <Transition name="fade-down" mode="out-in">
