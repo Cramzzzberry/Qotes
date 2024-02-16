@@ -22,6 +22,7 @@ const loginForm = ref({
     }
   }
 })
+
 async function login() {
   loginForm.value.loading = true
   await axios({
@@ -77,6 +78,7 @@ const signupForm = ref({
     }
   }
 })
+
 async function signUp() {
   signupForm.value.loading = true
   if (signupForm.value.password === signupForm.value.confirmPassword) {
