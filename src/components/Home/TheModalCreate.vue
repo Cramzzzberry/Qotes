@@ -115,13 +115,21 @@ async function submit() {
               <label
                 class="flex cursor-pointer flex-row items-center gap-2 rounded-xl px-3 py-2 hover:bg-gray-400/20 active:bg-gray-500/20"
               >
-                <input v-model="createSheet.lineup" type="checkbox" />
+                <input
+                  v-model="createSheet.lineup"
+                  type="checkbox"
+                  class="cursor-pointer accent-gray-200"
+                />
                 <p class="pointer-events-none pb-[2px]">Lineup</p>
               </label>
               <label
                 class="flex cursor-pointer flex-row items-center gap-2 rounded-xl px-3 py-2 hover:bg-gray-400/20 active:bg-gray-500/20"
               >
-                <input v-model="createSheet.important" type="checkbox" />
+                <input
+                  v-model="createSheet.important"
+                  type="checkbox"
+                  class="cursor-pointer accent-gray-200"
+                />
                 <p class="pointer-events-none pb-[2px]">Important</p>
               </label>
             </div>

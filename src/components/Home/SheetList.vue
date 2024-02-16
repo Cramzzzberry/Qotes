@@ -99,7 +99,7 @@ function preview(id) {
         v-for="sheet in list"
         :key="sheet.id"
         :class="listColors[props.category]"
-        class="flex max-h-20 flex-row overflow-hidden rounded-2xl border border-transparent drop-shadow-xl transition-colors duration-75"
+        class="flex max-h-20 flex-row overflow-hidden rounded-2xl border border-transparent transition-colors duration-75"
       >
         <!-- main button -->
         <button
