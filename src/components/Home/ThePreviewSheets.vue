@@ -34,11 +34,12 @@ const getLineups = debounce(() => {
         userID: localStorage.getItem('qotes_userID')
       }
     })
-      .then((res) => {
+      .then((res) => { 
         if (res.data.length > 0) {
           //This is displayed on the dropdown
           songNumbers.value = res.data.map((e, index) => `Song ${index + 1}`)
 
+          // Get the updated lineup and store the order as the fetched one
           if (localStorage.getItem('qotes_lineup') !== JSON.stringify(res.data)) {
             //This will be used to get the specific lineup
             //This is also used for ordering lineups
@@ -52,6 +53,7 @@ const getLineups = debounce(() => {
             saveOrder()
             localStorage.setItem('qotes_lineup', JSON.stringify(res.data))
           } else {
+            //Get the order from the stored version
             let list = JSON.parse(localStorage.getItem('qotes_ordered_lineup'))
 
             songNumbers.value = list.map((e, index) => `Song ${index + 1}`)
@@ -67,6 +69,8 @@ const getLineups = debounce(() => {
 
           setClean()
         } else {
+          // Clean the stored version if there's no lineup
+          // This is necessary because the ui components depends on the stored version
           orderedList.value = []
           clean.value = null
           localStorage.removeItem('qotes_ordered_lineup')
