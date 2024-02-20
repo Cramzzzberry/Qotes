@@ -145,20 +145,21 @@ function setClean() {
 
     <template v-else-if="clean">
       <header
-        class="sticky max-h-[60px] top-0 z-10 flex flex-row items-center bg-gray-50 px-4 pb-2 pt-4"
+        class="sticky h-[60px] max-h-[60px] top-0 z-10 flex flex-row items-center bg-gray-50 px-4 pb-2 pt-4"
       >
         <AppButtonGhostIcon
           @click="editSheetArrangement = !editSheetArrangement"
           :icon="!editSheetArrangement ? 'format_list_numbered' : 'arrow_back'"
         />
-        <div class="flex grow flex-col items-center leading-none">
+        <div class="min-w-0 flex grow flex-col items-center leading-none">
           <!-- <AppFormSelect
             v-if="!editSheetArrangement"
             v-model="selectedSong"
             :options="songNumbers"
           /> -->
-          <div v-if="!editSheetArrangement">
-            {{ selectedSong + 1 }}
+          <div v-if="!editSheetArrangement" class="text-center">
+            <p class="truncate">{{ orderedList[selectedSong].song.songTitle }}</p>
+            <p class="text-sm truncate">Song {{ selectedSong + 1 }}</p>
           </div>
           <p v-else class="flex h-[34px] items-center font-normal lg:h-[38px]">Edit Order</p>
         </div>
