@@ -139,7 +139,7 @@ function setClean() {
     <div v-if="isLoading" class="flex h-full items-center justify-center">
       <AppLoader />
     </div>
-    <!-- Try push -->
+
     <template v-else-if="clean">
       <header class="sticky top-0 z-10 flex flex-row items-center bg-gray-50 px-4 pb-2 pt-4">
         <AppButtonGhostIcon
