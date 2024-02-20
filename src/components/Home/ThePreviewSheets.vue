@@ -19,7 +19,7 @@ const transitionOptions = {
 
 const songNumbers = ref([])
 const orderedList = ref([])
-const selectedSong = ref('Song 1')
+const selectedSong = ref(0)
 const isLoading = ref(false)
 const editSheetArrangement = ref(true)
 const clean = ref(null)
@@ -36,9 +36,6 @@ const getLineups = debounce(() => {
     })
       .then((res) => {
         if (res.data.length > 0) {
-          //This is displayed on the dropdown
-          songNumbers.value = res.data.map((e, index) => `Song ${index + 1}`)
-
           // Get the updated lineup and store the order as the fetched one
           if (localStorage.getItem('qotes_lineup') !== JSON.stringify(res.data)) {
             //This will be used to get the specific lineup
@@ -122,40 +119,63 @@ onMounted(() => {
   )
 })
 
+function navBetweenSheets(direction) {
+  if (direction === 'left' && selectedSong.value > 0) {
+    selectedSong.value--
+  } else if (direction === 'right' && selectedSong.value < orderedList.value.length - 1) {
+    selectedSong.value++
+  }
+}
+
 function saveOrder() {
   localStorage.setItem('qotes_ordered_lineup', JSON.stringify(orderedList.value))
   setClean()
 }
 
 function setClean() {
-  clean.value = parseSheet(
-    orderedList.value[songNumbers.value.indexOf(selectedSong.value)].song.content
-  )
+  clean.value = parseSheet(orderedList.value[selectedSong.value].song.content)
 }
 </script>
 
 <template>
-  <div class="h-full overflow-y-auto">
+  <div class="relative h-full overflow-y-auto">
     <div v-if="isLoading" class="flex h-full items-center justify-center">
       <AppLoader />
     </div>
 
     <template v-else-if="clean">
-      <header class="sticky top-0 z-10 flex flex-row items-center bg-gray-50 px-4 pb-2 pt-4">
+      <header
+        class="sticky max-h-[60px] top-0 z-10 flex flex-row items-center bg-gray-50 px-4 pb-2 pt-4"
+      >
         <AppButtonGhostIcon
           @click="editSheetArrangement = !editSheetArrangement"
           :icon="!editSheetArrangement ? 'format_list_numbered' : 'arrow_back'"
         />
         <div class="flex grow flex-col items-center leading-none">
-          <AppFormSelect
+          <!-- <AppFormSelect
             v-if="!editSheetArrangement"
             v-model="selectedSong"
             :options="songNumbers"
-          />
+          /> -->
+          <div v-if="!editSheetArrangement">
+            {{ selectedSong + 1 }}
+          </div>
           <p v-else class="flex h-[34px] items-center font-normal lg:h-[38px]">Edit Order</p>
         </div>
         <AppButtonGhostIcon @click="useGroupPreviewStore.close()" icon="close" />
       </header>
+
+      <!-- Sheet navigation regions -->
+      <button
+        v-if="!editSheetArrangement"
+        @click="navBetweenSheets('left')"
+        class="absolute bottom-0 left-0 z-10 h-[calc(100%-60px)] w-1/6"
+      ></button>
+      <button
+        v-if="!editSheetArrangement"
+        @click="navBetweenSheets('right')"
+        class="absolute bottom-0 right-0 z-10 h-[calc(100%-60px)] w-1/6"
+      ></button>
 
       <Transition name="fade-down" mode="out-in">
         <div
