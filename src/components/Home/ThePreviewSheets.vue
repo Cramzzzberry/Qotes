@@ -1,5 +1,4 @@
 <script setup>
-//TODO: Store the lineups on a localStorage and update the localStorage accordingly
 import { useGroupPreviewStore, useRefreshStore } from '@/store'
 import axios from 'axios'
 import { onMounted, ref, watch } from 'vue'
