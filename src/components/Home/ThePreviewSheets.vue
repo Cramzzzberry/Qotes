@@ -34,7 +34,7 @@ const getLineups = debounce(() => {
         userID: localStorage.getItem('qotes_userID')
       }
     })
-      .then((res) => { 
+      .then((res) => {
         if (res.data.length > 0) {
           //This is displayed on the dropdown
           songNumbers.value = res.data.map((e, index) => `Song ${index + 1}`)
@@ -139,7 +139,7 @@ function setClean() {
     <div v-if="isLoading" class="flex h-full items-center justify-center">
       <AppLoader />
     </div>
-
+    <!-- Try push -->
     <template v-else-if="clean">
       <header class="sticky top-0 z-10 flex flex-row items-center bg-gray-50 px-4 pb-2 pt-4">
         <AppButtonGhostIcon
