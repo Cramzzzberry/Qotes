@@ -31,7 +31,7 @@
   }
 
   html {
-    @apply bg-gray-50 font-['Outfit'] font-light text-emerald-950;
+    @apply bg-doublemint-50 font-['Outfit'] font-light text-emerald-950;
   }
 
   button {

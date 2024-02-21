@@ -9,6 +9,7 @@ const router = useRouter()
 
 const fullName = ref(null)
 const isLoading = ref(true)
+
 onMounted(async () => {
   await axios({
     method: 'get',
@@ -45,7 +46,7 @@ function goToSettings() {
 
 <template>
   <!-- main content -->
-  <div class="h-svh overflow-hidden bg-gray-50">
+  <div class="h-svh overflow-hidden bg-doublemint-50">
     <slot />
   </div>
 
@@ -64,14 +65,14 @@ function goToSettings() {
     <!-- panel -->
     <div
       :class="useDrawerStore.state ? 'translate-x-0' : '-translate-x-full'"
-      class="absolute left-0 top-0 h-full w-5/6 max-w-[420px] overflow-hidden rounded-r-3xl bg-gray-50 p-2 drop-shadow-xl transition-transform duration-500"
+      class="absolute left-0 top-0 h-full w-5/6 max-w-[420px] overflow-hidden rounded-r-3xl bg-doublemint-50 p-2 transition-transform duration-500"
     >
       <nav class="flex h-full w-full flex-col justify-between font-normal text-gray-400/75">
         <div class="grid auto-rows-auto gap-1 pt-12">
           <span class="px-2 text-sm text-gray-500"> Categories </span>
           <button
             @click="changeTab(0)"
-            :class="useHomeTabStore.index === 0 ? 'text-emerald-500' : ''"
+            :class="useHomeTabStore.index === 0 ? 'text-deadgreen-400' : ''"
             class="group transition-colors"
           >
             <div
@@ -83,7 +84,7 @@ function goToSettings() {
           </button>
           <button
             @click="changeTab(1)"
-            :class="useHomeTabStore.index === 1 ? 'text-emerald-500' : ''"
+            :class="useHomeTabStore.index === 1 ? 'text-deadgreen-400' : ''"
             class="group transition-colors"
           >
             <div
@@ -95,7 +96,7 @@ function goToSettings() {
           </button>
           <button
             @click="changeTab(2)"
-            :class="useHomeTabStore.index === 2 ? 'text-emerald-500' : ''"
+            :class="useHomeTabStore.index === 2 ? 'text-deadgreen-400' : ''"
             class="group transition-colors"
           >
             <div
