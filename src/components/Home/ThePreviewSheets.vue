@@ -190,3 +190,4 @@ function setClean() {
 .ghost {
   @apply border-gray-200 bg-gray-200 text-gray-200;
 }
+</style>
