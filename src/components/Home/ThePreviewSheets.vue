@@ -151,18 +151,16 @@ function setClean() {
           @click="editSheetArrangement = !editSheetArrangement"
           :icon="!editSheetArrangement ? 'format_list_numbered' : 'arrow_back'"
         />
+
+        <!-- The Center of the header -->
         <div class="min-w-0 flex grow flex-col items-center leading-none">
-          <!-- <AppFormSelect
-            v-if="!editSheetArrangement"
-            v-model="selectedSong"
-            :options="songNumbers"
-          /> -->
           <div v-if="!editSheetArrangement" class="text-center">
             <p class="truncate">{{ orderedList[selectedSong].song.songTitle }}</p>
             <p class="text-sm truncate">Song {{ selectedSong + 1 }}</p>
           </div>
           <p v-else class="flex h-[34px] items-center font-normal lg:h-[38px]">Edit Order</p>
         </div>
+
         <AppButtonGhostIcon @click="useGroupPreviewStore.close()" icon="close" />
       </header>
 
