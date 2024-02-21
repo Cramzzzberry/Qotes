@@ -22,6 +22,7 @@ const loginForm = ref({
     }
   }
 })
+
 async function login() {
   loginForm.value.loading = true
   await axios({
@@ -77,6 +78,7 @@ const signupForm = ref({
     }
   }
 })
+
 async function signUp() {
   signupForm.value.loading = true
   if (signupForm.value.password === signupForm.value.confirmPassword) {
@@ -100,7 +102,7 @@ async function signUp() {
           signupForm.value.error.email.toggle = true
           signupForm.value.error.passwords.toggle = false
           signupForm.value.error.email.message = err.response.data
-          signupForm.value.error.passswords.message = null
+          signupForm.value.error.passwords.message = null
         } else {
           toastStore.addToast(err.response.data, 3000)
         }
