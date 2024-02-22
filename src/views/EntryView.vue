@@ -37,7 +37,7 @@ async function login() {
       localStorage.setItem('qotes_userID', res.data.userID)
       localStorage.setItem('qotes_token', res.data.token)
       router.push({ name: 'home' })
-      toastStore.addToast('successfully logged in', 3000)
+      toastStore.addToast('Successfully logged in', 3000)
     })
     .catch((err) => {
       if (
