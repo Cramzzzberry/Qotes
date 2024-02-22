@@ -69,7 +69,7 @@ function goEdit() {
       </div>
     </header>
 
-    <div v-if="isLoading" class="flex h-full items-center justify-center">
+    <div v-if="isLoading" class="flex h-[calc(100%-60px)] items-center justify-center">
       <AppLoader />
     </div>
     <div

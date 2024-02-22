@@ -118,3 +118,5 @@ export const useToastStore = (maxItems = 2) => {
 
   return { addToast, getItems }
 }
+
+export const useScrollStore = ref(null)

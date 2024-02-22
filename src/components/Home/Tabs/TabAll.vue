@@ -3,6 +3,7 @@ import TabHeader from '../TabHeader.vue'
 import TabFooter from '../TabFooter.vue'
 import SheetList from '../SheetList.vue'
 import { ref } from 'vue'
+import { useScrollStore } from '@/store'
 
 const search = ref('')
 const filter = ref('All Keys')
@@ -10,11 +11,11 @@ const filter = ref('All Keys')
 
 <template>
   <div class="flex h-full flex-col">
-    <div class="flex grow flex-col overflow-y-scroll">
+    <div class="flex grow flex-col overflow-y-scroll" ref="useScrollStore">
       <TabHeader v-model:search="search" v-model:filter="filter" heading="All Sheets" />
 
       <div
-        class="mx-2 mb-2 rounded-2xl bg-doublemint-200 border-4 border-inlay-100 px-12 py-6 text-center font-normal text-deadgreen-700 lg:mx-16"
+        class="mx-2 mb-2 rounded-2xl bg-deadgreen-400 border-4 border-inlay-100 px-12 py-6 text-center font-normal text-inlay-50 lg:mx-16"
       >
         <p>All created sheets are here</p>
       </div>

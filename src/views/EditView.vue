@@ -9,9 +9,7 @@ import axios from 'axios'
 const toastStore = inject('toastStore')
 const route = useRoute()
 const router = useRouter()
-
 const preview = ref(false)
-
 const sheet = ref({
   songTitle: '',
   artist: '',

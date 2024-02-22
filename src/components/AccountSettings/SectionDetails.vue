@@ -51,7 +51,6 @@ async function updateDetails() {
   <AppFormTextbox v-model="email" label="Email" placeholder="Your new email" type="email" />
   <AppButtonSolid
     @click="toggle = true"
-    state="info"
     :is-loading="isLoading"
     :disabled="!isTextboxFilled || isLoading"
     wide
@@ -64,7 +63,7 @@ async function updateDetails() {
     @confirm="updateDetails()"
     title="Update Details"
     description="Do you want to update your details?"
-    confirm-state="info"
+    confirm-state="default"
     cancel-state="default"
   />
 </template>

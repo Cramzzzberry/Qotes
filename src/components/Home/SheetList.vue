@@ -4,6 +4,7 @@ import { onMounted, ref, watch, inject } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
 import { debounce } from '@/scripts/debounce'
+import { useScrollStore } from '@/store'
 
 const props = defineProps({
   category: String,
@@ -16,6 +17,9 @@ const selectionStore = inject('selectionStore')
 const router = useRouter()
 const list = ref([])
 const isLoading = ref(false)
+const cursor = ref(null)
+const showMoreLoading = ref(true)
+const showMoreLoadRef = ref(null)
 
 const search = debounce(() => {
   const onFetch = async () => {
@@ -28,11 +32,21 @@ const search = debounce(() => {
       },
       params: {
         search: props.search,
-        key: props.sheetKey
+        key: props.sheetKey,
+        lastId: cursor.value
       }
     })
       .then((res) => {
-        list.value = res.data
+        list.value.push(...res.data)
+        cursor.value = res.data[res.data.length - 1].id
+
+        if (res.data.length > 0) {
+          cursor.value = res.data[res.data.length - 1].id
+        }
+
+        if (res.data.length < 39) {
+          showMoreLoading.value = false
+        }
       })
       .catch((err) => {
         if (err.response.status == 401) {
@@ -52,10 +66,27 @@ onMounted(() => {
     () => [props.search, props.sheetKey, useRefreshStore.toggle],
     () => {
       isLoading.value = true
+      cursor.value = null
       search()
     },
     { immediate: true }
   )
+
+  //Scroll checking
+  let ticking = false
+  useScrollStore.value.addEventListener('scroll', () => {
+    let vpHeight = window.innerHeight
+    let showMoreLoadingRectY =
+      showMoreLoadRef.value.getBoundingClientRect().top + showMoreLoadRef.value.offsetHeight / 2
+    let isVisible = showMoreLoadingRectY < vpHeight
+    if (isVisible && !ticking) {
+      window.requestAnimationFrame(async () => {
+        search()
+        ticking = false
+      })
+      ticking = true
+    }
+  })
 })
 
 function preview(id) {
@@ -82,7 +113,7 @@ function preview(id) {
           class="flex min-w-0 grow flex-row items-center active:bg-inlay-300/30 text-start"
         >
           <span
-            class="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-deadgreen-400 text-white text-3xl font-medium leading-none"
+            class="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-doublemint-200 text-deadgreen-600 text-3xl font-['Varela_Round'] font-bold"
           >
             {{ sheet.songKey }}
           </span>
@@ -112,11 +143,19 @@ function preview(id) {
             v-model="selectionStore.items.value"
             :value="`${sheet.id}---${sheet.important}---${sheet.lineup}`"
             type="checkbox"
-            class="relative cursor-pointer rounded-full accent-doublemint-300 before:absolute before:-bottom-5 before:-left-5 before:-right-5 before:-top-5 before:rounded-full before:content-null hover:enabled:before:bg-deadgreen-400/15 active:enabled:before:bg-deadgreen-400/25 disabled:cursor-not-allowed disabled:opacity-50"
+            class="relative cursor-pointer rounded-full accent-inlay-500 before:absolute before:-bottom-5 before:-left-5 before:-right-5 before:-top-5 before:rounded-full before:content-null hover:enabled:before:bg-deadgreen-400/15 active:enabled:before:bg-deadgreen-400/25 disabled:cursor-not-allowed disabled:opacity-50"
           />
         </label>
       </li>
     </ul>
+
+    <div
+      v-if="showMoreLoading"
+      class="flex w-full py-4 items-center justify-center"
+      ref="showMoreLoadRef"
+    >
+      <AppLoader />
+    </div>
   </section>
 
   <div

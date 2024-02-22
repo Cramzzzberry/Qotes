@@ -95,9 +95,7 @@ async function logout() {
     </div>
 
     <div class="w-full shrink-0 p-2 lg:px-16">
-      <AppButtonSolid @click="logout()" state="warning" :is-loading="isLoggingOut" wide>
-        Logout
-      </AppButtonSolid>
+      <AppButtonSolid @click="logout()" :is-loading="isLoggingOut" wide> Logout </AppButtonSolid>
     </div>
   </div>
 </template>

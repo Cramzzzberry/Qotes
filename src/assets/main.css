@@ -12,6 +12,12 @@
 }
 
 @font-face {
+  font-family: 'Varela Round';
+  font-weight: 100 200 300 400 500 600 700 800 900;
+  src: url('fonts/VarelaRound-Regular.ttf') format('truetype');
+}
+
+@font-face {
   font-family: 'Roboto Mono';
   font-weight: 100 200 300 400 500 600 700 800;
   src: url('fonts/RobotoMono-VariableFont_wght.ttf') format('truetype');

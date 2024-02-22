@@ -22,7 +22,7 @@ const model = defineModel()
             ? 'translate-y-0 md:translate-x-0 md:translate-y-0'
             : 'translate-y-full md:translate-x-full md:translate-y-0'
         "
-        class="absolute left-0 top-16 h-[calc(100%-4rem)] w-full overflow-hidden rounded-t-3xl bg-doublemint-50 transition-transform duration-500 md:left-auto md:right-0 md:top-0 md:h-full md:max-w-[720px] md:rounded-l-3xl md:rounded-tr-none"
+        class="absolute top-0 left-0 h-full w-full overflow-hidden bg-doublemint-50 transition-transform duration-500 md:left-auto md:right-0 md:h-full md:max-w-[720px] md:rounded-l-3xl md:rounded-tr-none"
       >
         <slot />
       </div>
