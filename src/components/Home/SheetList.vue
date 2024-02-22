@@ -82,7 +82,7 @@ function preview(id) {
           class="flex min-w-0 grow flex-row items-center active:bg-inlay-300/30 text-start"
         >
           <span
-            class="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-doublemint-300 text-deadgreen-800 text-3xl font-medium leading-none"
+            class="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-deadgreen-400 text-white text-3xl font-medium leading-none"
           >
             {{ sheet.songKey }}
           </span>
@@ -112,7 +112,7 @@ function preview(id) {
             v-model="selectionStore.items.value"
             :value="`${sheet.id}---${sheet.important}---${sheet.lineup}`"
             type="checkbox"
-            class="relative cursor-pointer rounded-full accent-doublemint-300 before:absolute before:-bottom-5 before:-left-5 before:-right-5 before:-top-5 before:rounded-full before:content-null hover:enabled:before:bg-gray-400/20 active:enabled:before:bg-gray-500/20 disabled:cursor-not-allowed disabled:opacity-50"
+            class="relative cursor-pointer rounded-full accent-doublemint-300 before:absolute before:-bottom-5 before:-left-5 before:-right-5 before:-top-5 before:rounded-full before:content-null hover:enabled:before:bg-deadgreen-400/15 active:enabled:before:bg-deadgreen-400/25 disabled:cursor-not-allowed disabled:opacity-50"
           />
         </label>
       </li>

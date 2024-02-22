@@ -85,7 +85,7 @@ async function submit() {
       <!-- panel -->
       <div
         :class="modal.toggle ? 'scale-100 opacity-100' : 'scale-95 opacity-0'"
-        class="max-h-[calc(100svh-32px)] w-full max-w-[720px] space-y-2 overflow-hidden rounded-3xl bg-gray-50 p-3 drop-shadow-xl transition-all"
+        class="max-h-[calc(100svh-32px)] w-full max-w-[720px] space-y-2 overflow-hidden rounded-3xl bg-doublemint-50 p-3 transition-all"
       >
         <header class="flex flex-row items-center justify-between p-1">
           <p class="text-xl font-medium leading-none">Create Sheet</p>
@@ -113,22 +113,22 @@ async function submit() {
             <AppFormSelect v-model="createSheet.selectedKey" label="Key" :options="keys" wide />
             <div class="flex flex-row gap-1">
               <label
-                class="flex cursor-pointer flex-row items-center gap-2 rounded-xl px-3 py-2 hover:bg-gray-400/20 active:bg-gray-500/20"
+                class="flex cursor-pointer flex-row items-center gap-2 rounded-xl px-3 py-2 hover:bg-deadgreen-400/15 active:bg-deadgreen-400/25"
               >
                 <input
                   v-model="createSheet.lineup"
                   type="checkbox"
-                  class="cursor-pointer accent-gray-200"
+                  class="cursor-pointer accent-doublemint-200"
                 />
                 <p class="pointer-events-none pb-[2px]">Lineup</p>
               </label>
               <label
-                class="flex cursor-pointer flex-row items-center gap-2 rounded-xl px-3 py-2 hover:bg-gray-400/20 active:bg-gray-500/20"
+                class="flex cursor-pointer flex-row items-center gap-2 rounded-xl px-3 py-2 hover:bg-deadgreen-400/15 active:bg-deadgreen-400/25"
               >
                 <input
                   v-model="createSheet.important"
                   type="checkbox"
-                  class="cursor-pointer accent-gray-200"
+                  class="cursor-pointer accent-doublemint-200"
                 />
                 <p class="pointer-events-none pb-[2px]">Important</p>
               </label>

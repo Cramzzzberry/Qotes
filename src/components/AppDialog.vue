@@ -38,7 +38,7 @@ const props = defineProps({
       <!-- panel -->
       <div
         :class="toggle ? 'scale-100 opacity-100' : 'scale-95 opacity-0'"
-        class="max-h-[calc(100svh-32px)] w-full space-y-2 overflow-hidden rounded-3xl bg-gray-50 px-4 pb-3 pt-5 drop-shadow-xl transition-all"
+        class="max-h-[calc(100svh-32px)] w-full max-w-[620px] space-y-2 overflow-hidden rounded-3xl bg-doublemint-50 px-4 pb-3 pt-5 transition-all"
       >
         <header class="flex flex-row items-center justify-between">
           <p class="text-xl font-medium leading-none">{{ props.title }}</p>

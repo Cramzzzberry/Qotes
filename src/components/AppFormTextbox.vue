@@ -2,7 +2,7 @@
 const model = defineModel()
 const props = defineProps({
   state: {
-    default: 'success',
+    default: 'default',
     type: String
   },
   label: String,
@@ -10,6 +10,8 @@ const props = defineProps({
 })
 
 const states = {
+  default:
+    'text-deadgreen-700 border-deadgreen-200 hover:border-deadgreen-300 focus:border-deadgreen-700',
   info: 'text-blue-950 border-gray-300 hover:border-gray-400 focus:border-blue-400',
   warning: 'text-amber-950 border-gray-300 hover:border-gray-400 focus:border-amber-400',
   success: 'text-emerald-950 border-gray-300 hover:border-gray-400 focus:border-emerald-400',

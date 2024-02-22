@@ -37,7 +37,7 @@ async function login() {
       localStorage.setItem('qotes_userID', res.data.userID)
       localStorage.setItem('qotes_token', res.data.token)
       router.push({ name: 'home' })
-      toastStore.addToast('Successfully logged in', 3000)
+      toastStore.addToast('defaultfully logged in', 3000)
     })
     .catch((err) => {
       if (
@@ -128,7 +128,7 @@ async function signUp() {
         <h2>Login to your account</h2>
         <AppFormTextbox
           v-model="loginForm.email"
-          :state="loginForm.error.email.toggle ? 'error' : 'success'"
+          :state="loginForm.error.email.toggle ? 'error' : 'default'"
           label="Email"
           :sub-label="loginForm.error.email.message"
           type="email"
@@ -138,7 +138,7 @@ async function signUp() {
         />
         <AppFormTextbox
           v-model="loginForm.password"
-          :state="loginForm.error.password.toggle ? 'error' : 'success'"
+          :state="loginForm.error.password.toggle ? 'error' : 'default'"
           label="Password"
           :sub-label="loginForm.error.password.message"
           type="password"
@@ -172,7 +172,7 @@ async function signUp() {
         />
         <AppFormTextbox
           v-model="signupForm.email"
-          :state="signupForm.error.email.toggle ? 'error' : 'success'"
+          :state="signupForm.error.email.toggle ? 'error' : 'default'"
           label="Email"
           :sub-label="signupForm.error.email.message"
           type="email"
@@ -182,7 +182,7 @@ async function signUp() {
         />
         <AppFormTextbox
           v-model="signupForm.password"
-          :state="signupForm.error.passwords.toggle ? 'error' : 'success'"
+          :state="signupForm.error.passwords.toggle ? 'error' : 'default'"
           label="Password"
           :sub-label="signupForm.error.passwords.message"
           type="password"
@@ -192,7 +192,7 @@ async function signUp() {
         />
         <AppFormTextbox
           v-model="signupForm.confirmPassword"
-          :state="signupForm.error.passwords.toggle ? 'error' : 'success'"
+          :state="signupForm.error.passwords.toggle ? 'error' : 'default'"
           label="Confirm Password"
           :sub-label="signupForm.error.passwords.message"
           type="password"
