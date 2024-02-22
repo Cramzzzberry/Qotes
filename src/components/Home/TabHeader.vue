@@ -46,7 +46,7 @@ async function deleteSheets() {
 </script>
 
 <template>
-  <header class="sticky top-0 z-10 bg-gray-50/80 pb-2 backdrop-blur-xl lg:px-14">
+  <header class="sticky top-0 z-10 bg-doublemint-50 pb-2 lg:px-14">
     <div class="shrink-0 place-self-start px-2 pb-2 pt-10">
       <AppButtonGhostIcon @click="useDrawerStore.open()" icon="menu" />
     </div>
@@ -74,7 +74,7 @@ async function deleteSheets() {
 
       <div class="flex flex-row items-center gap-1 px-2">
         <label
-          class="group flex w-full select-none flex-row items-center gap-1 rounded-lg bg-gray-500/10 pl-2 pr-3 shadow-sm transition-colors focus-within:bg-gray-500/20"
+          class="group flex w-full select-none flex-row items-center gap-1 rounded-lg bg-gray-500/10 pl-2 pr-3 transition-colors focus-within:bg-gray-500/20"
         >
           <span
             class="material-icons-round text-lg text-gray-500 transition-colors group-focus-within:text-gray-950"

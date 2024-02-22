@@ -4,6 +4,7 @@ import { onMounted, ref, watch, inject } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
 import { debounce } from '@/scripts/debounce'
+import { useScrollStore } from '@/store'
 
 const props = defineProps({
   category: String,
@@ -11,35 +12,14 @@ const props = defineProps({
   sheetKey: String
 })
 
-const listColors = {
-  all: 'bg-emerald-300/10 hover:bg-emerald-300/25 hover:border-emerald-300',
-  lineup: 'bg-blue-300/10 hover:bg-blue-300/25 hover:border-blue-300',
-  important: 'bg-amber-300/10 hover:bg-amber-300/25 hover:border-amber-300'
-}
-
-const listActiveColors = {
-  all: 'active:bg-emerald-300/15',
-  lineup: 'active:bg-blue-300/15',
-  important: 'active:bg-amber-300/15'
-}
-
-const keyColors = {
-  all: 'bg-emerald-400 text-emerald-800',
-  lineup: 'bg-blue-400 text-blue-950',
-  important: 'bg-amber-300 text-amber-800'
-}
-
-const checkboxColors = {
-  all: 'accent-emerald-400',
-  lineup: 'accent-blue-400',
-  important: 'accent-amber-400'
-}
-
 const toastStore = inject('toastStore')
 const selectionStore = inject('selectionStore')
 const router = useRouter()
 const list = ref([])
 const isLoading = ref(false)
+const cursor = ref(null)
+const showMoreLoading = ref(true)
+const showMoreLoadRef = ref(null)
 
 const search = debounce(() => {
   const onFetch = async () => {
@@ -52,11 +32,21 @@ const search = debounce(() => {
       },
       params: {
         search: props.search,
-        key: props.sheetKey
+        key: props.sheetKey,
+        lastId: cursor.value
       }
     })
       .then((res) => {
-        list.value = res.data
+        list.value.push(...res.data)
+        cursor.value = res.data[res.data.length - 1].id
+
+        if (res.data.length > 0) {
+          cursor.value = res.data[res.data.length - 1].id
+        }
+
+        if (res.data.length < 39) {
+          showMoreLoading.value = false
+        }
       })
       .catch((err) => {
         if (err.response.status == 401) {
@@ -76,10 +66,27 @@ onMounted(() => {
     () => [props.search, props.sheetKey, useRefreshStore.toggle],
     () => {
       isLoading.value = true
+      cursor.value = null
       search()
     },
     { immediate: true }
   )
+
+  //Scroll checking
+  let ticking = false
+  useScrollStore.value.addEventListener('scroll', () => {
+    let vpHeight = window.innerHeight
+    let showMoreLoadingRectY =
+      showMoreLoadRef.value.getBoundingClientRect().top + showMoreLoadRef.value.offsetHeight / 2
+    let isVisible = showMoreLoadingRectY < vpHeight
+    if (isVisible && !ticking) {
+      window.requestAnimationFrame(async () => {
+        search()
+        ticking = false
+      })
+      ticking = true
+    }
+  })
 })
 
 function preview(id) {
@@ -98,18 +105,15 @@ function preview(id) {
       <li
         v-for="sheet in list"
         :key="sheet.id"
-        :class="listColors[props.category]"
-        class="flex max-h-20 flex-row overflow-hidden rounded-2xl border border-transparent transition-colors duration-75"
+        class="flex max-h-20 flex-row overflow-hidden rounded-2xl bg-inlay-300/10 hover:bg-inlay-300/25 border border-transparent transition-colors duration-75"
       >
         <!-- main button -->
         <button
           @click="preview(sheet.id)"
-          :class="listActiveColors[props.category]"
-          class="flex min-w-0 grow flex-row items-center text-start"
+          class="flex min-w-0 grow flex-row items-center active:bg-inlay-300/30 text-start"
         >
           <span
-            :class="keyColors[props.category]"
-            class="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl text-3xl font-medium leading-none"
+            class="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-doublemint-200 text-deadgreen-600 text-3xl font-['Varela_Round'] font-bold"
           >
             {{ sheet.songKey }}
           </span>
@@ -139,12 +143,19 @@ function preview(id) {
             v-model="selectionStore.items.value"
             :value="`${sheet.id}---${sheet.important}---${sheet.lineup}`"
             type="checkbox"
-            :class="checkboxColors[props.category]"
-            class="relative cursor-pointer rounded-full before:absolute before:-bottom-5 before:-left-5 before:-right-5 before:-top-5 before:rounded-full before:content-null hover:enabled:before:bg-gray-400/20 active:enabled:before:bg-gray-500/20 disabled:cursor-not-allowed disabled:opacity-50"
+            class="relative cursor-pointer rounded-full accent-inlay-500 before:absolute before:-bottom-5 before:-left-5 before:-right-5 before:-top-5 before:rounded-full before:content-null hover:enabled:before:bg-deadgreen-400/15 active:enabled:before:bg-deadgreen-400/25 disabled:cursor-not-allowed disabled:opacity-50"
           />
         </label>
       </li>
     </ul>
+
+    <div
+      v-if="showMoreLoading"
+      class="flex w-full py-4 items-center justify-center"
+      ref="showMoreLoadRef"
+    >
+      <AppLoader />
+    </div>
   </section>
 
   <div

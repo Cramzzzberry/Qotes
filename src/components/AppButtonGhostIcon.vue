@@ -16,7 +16,7 @@ const props = defineProps({
 })
 
 const states = {
-  default: 'text-emerald-950',
+  default: 'text-deadgreen-700',
   info: 'text-blue-400',
   warning: 'text-amber-400',
   success: 'text-emerald-400',
@@ -46,7 +46,7 @@ const loaderSizes = {
   <button
     :disabled="props.isLoading"
     :class="[states[props.state], btnSizes[props.size]]"
-    class="relative flex select-none items-center justify-center rounded-full border border-transparent bg-transparent outline-none before:absolute before:rounded-full before:content-null hover:enabled:before:bg-gray-400/20 active:enabled:before:bg-gray-500/20 disabled:cursor-not-allowed disabled:opacity-50"
+    class="relative flex select-none items-center justify-center rounded-full border border-transparent bg-transparent outline-none before:absolute before:rounded-full before:content-null hover:enabled:before:bg-deadgreen-400/15 active:enabled:before:bg-deadgreen-400/25 disabled:cursor-not-allowed disabled:opacity-50"
   >
     <AppLoader v-if="props.isLoading" :size="loaderSizes[props.size]" />
     <span v-else :class="iconSizes[props.size]" class="material-icons-round">

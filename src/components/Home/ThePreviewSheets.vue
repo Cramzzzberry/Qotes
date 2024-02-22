@@ -145,11 +145,11 @@ function setClean() {
 
     <template v-else-if="clean">
       <header
-        class="sticky h-[60px] max-h-[60px] top-0 z-10 flex flex-row items-center bg-gray-50 px-4 pb-2 pt-4"
+        class="sticky h-[60px] max-h-[60px] top-0 z-10 flex flex-row items-center bg-doublemint-50 px-4 pb-2 pt-4"
       >
         <AppButtonGhostIcon
           @click="editSheetArrangement = !editSheetArrangement"
-          :icon="!editSheetArrangement ? 'format_list_numbered' : 'arrow_back'"
+          :icon="!editSheetArrangement ? 'arrow_back' : 'format_list_numbered'"
         />
 
         <!-- The Center of the header -->
@@ -194,7 +194,7 @@ function setClean() {
         >
           <template #item="{ element }">
             <li
-              class="flex flex-row items-center gap-4 rounded-lg border border-gray-200 bg-gray-50 p-4"
+              class="flex flex-row items-center gap-4 rounded-lg border border-inlay-200 bg-inlay-50 p-4"
             >
               <span class="material-icons-round handle cursor-move"> drag_handle </span>
               {{ element.song.songTitle }}
@@ -212,6 +212,6 @@ function setClean() {
 
 <style scoped>
 .ghost {
-  @apply border-gray-200 bg-gray-200 text-gray-200;
+  @apply border-doublemint-100 bg-doublemint-100 text-doublemint-100;
 }
 </style>

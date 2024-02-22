@@ -8,13 +8,14 @@ const props = defineProps({
     default: null
   },
   state: {
-    default: 'success',
+    default: 'default',
     type: String
   },
   wide: Boolean
 })
 
 const states = {
+  default: 'text-deadgreen-700 border-deadgreen-200 focus:border-deadgreen-700',
   info: 'text-blue-950 border-gray-300 focus:border-blue-400',
   warning: 'text-amber-950 border-gray-300 focus:border-amber-400',
   success: 'text-emerald-950 border-gray-300 focus:border-emerald-400',
@@ -38,9 +39,9 @@ const states = {
       v-model="model"
       v-bind="$attrs"
       :class="[states[props.state], props.wide ? 'w-full' : 'w-fit']"
-      class="cursor-pointer rounded-xl border border-gray-300 bg-transparent py-2 pl-4 pr-8 shadow-sm outline-none transition-colors hover:border-gray-400"
+      class="cursor-pointer rounded-xl border border-deadgreen-200 bg-transparent py-2 pl-4 pr-8 shadow-sm outline-none transition-colors hover:border-deadgreen-300"
     >
-      <option v-for="option in props.options" :key="option" class="bg-gray-50">
+      <option v-for="option in props.options" :key="option" class="bg-doublemint-50">
         {{ option }}
       </option>
     </select>

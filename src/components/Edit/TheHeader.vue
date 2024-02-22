@@ -8,7 +8,7 @@ const keys = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'Bb', 'B']
 </script>
 
 <template>
-  <header class="shrink-0 bg-gray-50 pb-2 lg:px-14">
+  <header class="shrink-0 bg-doublemint-50 pb-2 lg:px-14">
     <div class="shrink-0 place-self-start px-2 pb-2 pt-10">
       <AppButtonGhostIcon @click="$router.go(-1)" icon="arrow_back" />
     </div>
@@ -18,12 +18,12 @@ const keys = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'Bb', 'B']
         <input
           v-model="songTitle"
           type="text"
-          class="w-full truncate bg-transparent text-3xl font-medium leading-none outline-1 outline-offset-2 outline-gray-400"
+          class="w-full truncate bg-transparent text-3xl font-medium leading-none outline-1 outline-offset-2 outline-deadgreen-400"
         />
         <input
           v-model="artist"
           type="text"
-          class="w-full truncate bg-transparent text-xl font-normal leading-none outline-1 outline-offset-2 outline-gray-400"
+          class="w-full truncate bg-transparent text-xl font-normal leading-none outline-1 outline-offset-2 outline-deadgreen-400"
         />
       </div>
 

@@ -70,7 +70,7 @@ async function logout() {
 <template>
   <div class="flex h-full flex-col">
     <div class="w-full grow overflow-y-auto">
-      <header class="sticky top-0 bg-gray-50/80 pb-2 backdrop-blur-xl lg:px-14">
+      <header class="sticky top-0 bg-doublemint-50 pb-2 lg:px-14">
         <div class="place-self-start px-2 pb-2 pt-10">
           <AppButtonGhostIcon @click="$router.go(-1)" icon="arrow_back" />
         </div>
@@ -95,9 +95,7 @@ async function logout() {
     </div>
 
     <div class="w-full shrink-0 p-2 lg:px-16">
-      <AppButtonSolid @click="logout()" state="warning" :is-loading="isLoggingOut" wide>
-        Logout
-      </AppButtonSolid>
+      <AppButtonSolid @click="logout()" :is-loading="isLoggingOut" wide> Logout </AppButtonSolid>
     </div>
   </div>
 </template>

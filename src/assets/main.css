@@ -12,6 +12,12 @@
 }
 
 @font-face {
+  font-family: 'Varela Round';
+  font-weight: 100 200 300 400 500 600 700 800 900;
+  src: url('fonts/VarelaRound-Regular.ttf') format('truetype');
+}
+
+@font-face {
   font-family: 'Roboto Mono';
   font-weight: 100 200 300 400 500 600 700 800;
   src: url('fonts/RobotoMono-VariableFont_wght.ttf') format('truetype');
@@ -31,7 +37,7 @@
   }
 
   html {
-    @apply bg-gray-50 font-['Outfit'] font-light text-emerald-950;
+    @apply bg-doublemint-50 font-['Outfit'] font-light text-deadgreen-700;
   }
 
   button {
@@ -66,11 +72,11 @@
   }
 
   .sheet-preview .chord {
-    @apply relative font-medium text-gray-950;
+    @apply relative font-medium text-deadgreen-950;
   }
 
   .sheet-preview .chord::before {
-    @apply absolute bottom-0 left-[-0.24rem] right-[-0.24rem] top-0 z-[-1] rounded-[4px] bg-gray-950/15 content-null;
+    @apply absolute bottom-0 left-[-0.24rem] right-[-0.24rem] top-0 z-[-1] rounded-[4px] bg-deadgreen-200 content-null;
   }
 
   .sheet-preview > .lyrics {
@@ -78,6 +84,6 @@
   }
 
   .sheet-preview > .song-section {
-    @apply font-medium text-emerald-500;
+    @apply font-medium text-inlay-500;
   }
 }

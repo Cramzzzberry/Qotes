@@ -17,7 +17,7 @@ const items = computed(() => {
       <li
         v-for="item in items"
         :key="item.id"
-        class="w-[calc(100%-16px)] max-w-[540px] truncate rounded-xl bg-gray-950/90 p-4 text-gray-50 shadow-md backdrop-blur-xl"
+        class="w-[calc(100%-16px)] max-w-[540px] truncate rounded-xl bg-deadgreen-950/90 p-4 text-gray-50 shadow-md backdrop-blur-xl"
       >
         {{ item.message }}
       </li>

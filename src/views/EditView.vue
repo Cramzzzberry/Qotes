@@ -9,9 +9,7 @@ import axios from 'axios'
 const toastStore = inject('toastStore')
 const route = useRoute()
 const router = useRouter()
-
 const preview = ref(false)
-
 const sheet = ref({
   songTitle: '',
   artist: '',
@@ -100,7 +98,7 @@ async function saveSheet() {
     <TheContent v-model:content="sheet.content" v-model:preview="preview" />
 
     <!-- the footer -->
-    <div class="w-full shrink-0 border-t border-t-gray-200 px-4 py-3 lg:px-16">
+    <div class="w-full shrink-0 bg-doublemint-100 px-4 py-3 lg:px-16">
       <div class="flex flex-row items-center justify-end">
         <div class="invisible h-6 w-6">Create</div>
         <p class="grow text-center text-sm font-normal">{{ contentLength }} of 5000</p>
