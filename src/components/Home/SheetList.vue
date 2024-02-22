@@ -38,7 +38,6 @@ const search = debounce(() => {
     })
       .then((res) => {
         list.value.push(...res.data)
-        cursor.value = res.data[res.data.length - 1].id
 
         if (res.data.length > 0) {
           cursor.value = res.data[res.data.length - 1].id
@@ -65,6 +64,7 @@ onMounted(() => {
   watch(
     () => [props.search, props.sheetKey, useRefreshStore.toggle],
     () => {
+      list.value = []
       isLoading.value = true
       cursor.value = null
       search()
