@@ -39,7 +39,7 @@ const states = {
       v-model="model"
       v-bind="$attrs"
       :class="[states[props.state], props.wide ? 'w-full' : 'w-fit']"
-      class="cursor-pointer rounded-xl border border-gray-300 bg-transparent py-2 pl-4 pr-8 shadow-sm outline-none transition-colors hover:border-deadgreen-300"
+      class="cursor-pointer rounded-xl border border-deadgreen-200 bg-transparent py-2 pl-4 pr-8 shadow-sm outline-none transition-colors hover:border-deadgreen-300"
     >
       <option v-for="option in props.options" :key="option" class="bg-doublemint-50">
         {{ option }}

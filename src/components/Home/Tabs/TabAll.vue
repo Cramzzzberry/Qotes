@@ -15,7 +15,7 @@ const filter = ref('All Keys')
       <TabHeader v-model:search="search" v-model:filter="filter" heading="All Sheets" />
 
       <div
-        class="mx-2 mb-2 rounded-2xl bg-deadgreen-400 border-4 border-inlay-100 px-12 py-6 text-center font-normal text-inlay-50 lg:mx-16"
+        class="mx-2 mb-2 rounded-2xl bg-deadgreen-400 px-12 py-6 text-center font-normal text-inlay-50 lg:mx-16"
       >
         <p>All created sheets are here</p>
       </div>
