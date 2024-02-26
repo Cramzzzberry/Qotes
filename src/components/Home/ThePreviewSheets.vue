@@ -160,7 +160,9 @@ function setClean() {
             <p class="truncate">{{ orderedList[selectedSong].song.songTitle }}</p>
             <p class="text-sm truncate">Song {{ selectedSong + 1 }}</p>
           </template>
-          <p v-else class="flex h-[34px] items-center font-normal lg:h-[38px]">Edit Order</p>
+          <div v-else class="flex justify-center items-center">
+            <p class="flex h-[34px] items-center font-normal lg:h-[38px]">Edit Order</p>
+          </div>
         </div>
 
         <div class="flex basis-1/3 justify-end">
