@@ -147,21 +147,25 @@ function setClean() {
       <header
         class="sticky h-[60px] max-h-[60px] top-0 z-10 flex flex-row items-center bg-doublemint-50 px-4 pb-2 pt-4"
       >
-        <AppButtonGhostIcon
-          @click="editSheetArrangement = !editSheetArrangement"
-          :icon="!editSheetArrangement ? 'arrow_back' : 'format_list_numbered'"
-        />
+        <div class="flex basis-1/3 justify-start">
+          <AppButtonGhostIcon
+            @click="editSheetArrangement = !editSheetArrangement"
+            :icon="!editSheetArrangement ? 'arrow_back' : 'format_list_numbered'"
+          />
+        </div>
 
         <!-- The Center of the header -->
-        <div class="min-w-0 flex grow flex-col items-center leading-none">
-          <div v-if="!editSheetArrangement" class="text-center">
+        <div class="min-w-0 flex grow flex-col text-center leading-none">
+          <template v-if="!editSheetArrangement">
             <p class="truncate">{{ orderedList[selectedSong].song.songTitle }}</p>
             <p class="text-sm truncate">Song {{ selectedSong + 1 }}</p>
-          </div>
+          </template>
           <p v-else class="flex h-[34px] items-center font-normal lg:h-[38px]">Edit Order</p>
         </div>
 
-        <AppButtonGhostIcon @click="useGroupPreviewStore.close()" icon="close" />
+        <div class="flex basis-1/3 justify-end">
+          <AppButtonGhostIcon @click="useGroupPreviewStore.close()" icon="close" />
+        </div>
       </header>
 
       <!-- Sheet navigation regions -->
