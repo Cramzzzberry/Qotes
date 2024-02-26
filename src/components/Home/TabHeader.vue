@@ -15,9 +15,11 @@ const props = defineProps({
 })
 
 const router = useRouter()
+const toggle = ref(false)
 const isLoading = ref(false)
 async function deleteSheets() {
   isLoading.value = true
+  toggle.value = false
   await axios({
     method: 'delete',
     url: `${import.meta.env.VITE_API_DOMAIN}/sheets`,
@@ -63,7 +65,7 @@ async function deleteSheets() {
           </div>
 
           <AppButtonGhostIcon
-            @click="deleteSheets()"
+            @click="toggle = true"
             state="error"
             icon="delete"
             :is-loading="isLoading"
@@ -92,5 +94,14 @@ async function deleteSheets() {
         <SelectKeys v-model="filter" />
       </div>
     </div>
+
+    <AppDialog
+      v-model:toggle="toggle"
+      @confirm="deleteSheets()"
+      title="Delete Sheets"
+      :description="`Do you want to delete ${selectionStore.getLength.value} ${selectionStore.getLength.value > 1 ? 'sheets' : 'sheet'}?`"
+      confirm-state="error"
+      cancel-state="default"
+    />
   </header>
 </template>
