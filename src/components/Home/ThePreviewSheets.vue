@@ -194,7 +194,7 @@ function setClean() {
           tag="ul"
           handle=".handle"
           item-key="order"
-          class="space-y-2 overflow-y-auto px-3"
+          class="space-y-2 overflow-y-auto px-3 pb-3"
         >
           <template #item="{ element }">
             <li
