@@ -3,11 +3,12 @@ import { useRouter } from 'vue-router'
 import axios from 'axios'
 import TheModalCreate from './TheModalCreate.vue'
 import { useRefreshStore } from '@/store'
-import { inject } from 'vue'
+import { ref, inject } from 'vue'
 
 const toastStore = inject('toastStore')
 const selectionStore = inject('selectionStore')
 const router = useRouter()
+const isLoading = ref(false)
 
 function refreshSheets() {
   useRefreshStore.refresh()
@@ -16,6 +17,7 @@ function refreshSheets() {
 }
 
 async function addAsImportant() {
+  isLoading.value = true
   await axios({
     method: 'put',
     url: `${import.meta.env.VITE_API_DOMAIN}/sheets`,
@@ -38,10 +40,14 @@ async function addAsImportant() {
         toastStore.addToast(err.response.data, 3000)
       }
     })
-    .finally(() => refreshSheets())
+    .finally(() => {
+      isLoading.value = false
+      refreshSheets()
+    })
 }
 
 async function makeUnmportant() {
+  isLoading.value = true
   await axios({
     method: 'put',
     url: `${import.meta.env.VITE_API_DOMAIN}/sheets`,
@@ -64,10 +70,14 @@ async function makeUnmportant() {
         toastStore.addToast(err.response.data, 3000)
       }
     })
-    .finally(() => refreshSheets())
+    .finally(() => {
+      isLoading.value = false
+      refreshSheets()
+    })
 }
 
 async function pinToLineup() {
+  isLoading.value = true
   await axios({
     method: 'put',
     url: `${import.meta.env.VITE_API_DOMAIN}/sheets`,
@@ -90,10 +100,14 @@ async function pinToLineup() {
         toastStore.addToast(err.response.data, 3000)
       }
     })
-    .finally(() => refreshSheets())
+    .finally(() => {
+      isLoading.value = false
+      refreshSheets()
+    })
 }
 
 async function unpinToLineup() {
+  isLoading.value = true
   await axios({
     method: 'put',
     url: `${import.meta.env.VITE_API_DOMAIN}/sheets`,
@@ -116,7 +130,10 @@ async function unpinToLineup() {
         toastStore.addToast(err.response.data, 3000)
       }
     })
-    .finally(() => refreshSheets())
+    .finally(() => {
+      isLoading.value = false
+      refreshSheets()
+    })
 }
 </script>
 
@@ -139,12 +156,14 @@ async function unpinToLineup() {
           <div class="text-left lg:text-center">
             <AppButtonText
               @click="addAsImportant()"
+              :disabled="isLoading"
               v-if="!selectionStore.organizedItems.value.hasImportants"
             >
               Mark as Important
             </AppButtonText>
             <AppButtonText
               @click="makeUnmportant()"
+              :disabled="isLoading"
               v-if="!selectionStore.organizedItems.value.noImportants"
             >
               Mark as Unimportant
@@ -154,12 +173,14 @@ async function unpinToLineup() {
           <div class="text-right lg:text-center">
             <AppButtonText
               @click="pinToLineup()"
+              :disabled="isLoading"
               v-if="!selectionStore.organizedItems.value.hasLineups"
             >
               Pin to Lineup
             </AppButtonText>
             <AppButtonText
               @click="unpinToLineup()"
+              :disabled="isLoading"
               v-if="!selectionStore.organizedItems.value.noLineups"
             >
               Unpin from Lineup
