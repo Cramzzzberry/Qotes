@@ -1,16 +1,16 @@
 <script setup>
-import axios from 'axios'
-import { ref, inject } from 'vue'
-import { useRouter } from 'vue-router'
+import axios from 'axios';
+import { ref, inject } from 'vue';
+import { useRouter } from 'vue-router';
 
-const toastStore = inject('toastStore')
-const router = useRouter()
-const toggle = ref(false)
-const isLoading = ref(false)
+const toastStore = inject('toastStore');
+const router = useRouter();
+const toggle = ref(false);
+const isLoading = ref(false);
 
 async function deleteAccount() {
-  isLoading.value = true
-  toggle.value = false
+  isLoading.value = true;
+  toggle.value = false;
   await axios({
     method: 'delete',
     url: `${import.meta.env.VITE_API_DOMAIN}/user/${localStorage.getItem('qotes_userID')}`,
@@ -21,20 +21,20 @@ async function deleteAccount() {
     .then(() => {
       Object.keys(localStorage).forEach(function (key) {
         if (/^qotes_/.test(key)) {
-          localStorage.removeItem(key)
+          localStorage.removeItem(key);
         }
-      })
-      router.push({ name: 'entry' })
-      toastStore.addToast('Account Deleted', 3000)
+      });
+      router.push({ name: 'entry' });
+      toastStore.addToast('Account Deleted', 3000);
     })
     .catch((err) => {
       if (err.response.status == 401) {
-        router.push({ name: 'entry' })
+        router.push({ name: 'entry' });
       } else {
-        toastStore.addToast(err.response.data, 3000)
+        toastStore.addToast(err.response.data, 3000);
       }
     })
-    .finally(() => (isLoading.value = false))
+    .finally(() => (isLoading.value = false));
 }
 </script>
 

@@ -1,13 +1,13 @@
 <script setup>
-import TabHeader from '../TabHeader.vue'
-import TabFooter from '../TabFooter.vue'
-import SheetList from '../SheetList.vue'
-import { ref } from 'vue'
-import { useGroupPreviewStore, useScrollStore } from '@/store'
+import TabHeader from '../TabHeader.vue';
+import TabFooter from '../TabFooter.vue';
+import SheetList from '../SheetList.vue';
+import { ref } from 'vue';
+import { useGroupPreviewStore, useScrollStore } from '@/store';
 
-const search = ref('')
-const filter = ref('All Keys')
-const lineup = ref(false)
+const search = ref('');
+const filter = ref('All Keys');
+const lineup = ref(false);
 </script>
 
 <template>

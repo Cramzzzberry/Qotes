@@ -1,18 +1,18 @@
 <script setup>
-import SectionDetails from '@/components/AccountSettings/SectionDetails.vue'
-import { ref, onMounted, inject } from 'vue'
-import { useRouter } from 'vue-router'
-import axios from 'axios'
-import SectionDeleteAccount from '@/components/AccountSettings/SectionDeleteAccount.vue'
+import SectionDetails from '@/components/AccountSettings/SectionDetails.vue';
+import { ref, onMounted, inject } from 'vue';
+import { useRouter } from 'vue-router';
+import axios from 'axios';
+import SectionDeleteAccount from '@/components/AccountSettings/SectionDeleteAccount.vue';
 
-const toastStore = inject('toastStore')
-const router = useRouter()
+const toastStore = inject('toastStore');
+const router = useRouter();
 
 const currentAcc = ref({
   email: '',
   firstName: '',
   lastName: ''
-})
+});
 
 onMounted(async () => {
   await axios({
@@ -24,22 +24,22 @@ onMounted(async () => {
     }
   })
     .then((res) => {
-      currentAcc.value.email = res.data.email
-      currentAcc.value.firstName = res.data.firstName
-      currentAcc.value.lastName = res.data.lastName
+      currentAcc.value.email = res.data.email;
+      currentAcc.value.firstName = res.data.firstName;
+      currentAcc.value.lastName = res.data.lastName;
     })
     .catch((err) => {
       if (err.response.status == 401) {
-        router.push({ name: 'entry' })
+        router.push({ name: 'entry' });
       } else {
-        toastStore.addToast(err.response.data, 3000)
+        toastStore.addToast(err.response.data, 3000);
       }
-    })
-})
+    });
+});
 
-const isLoggingOut = ref(false)
+const isLoggingOut = ref(false);
 async function logout() {
-  isLoggingOut.value = true
+  isLoggingOut.value = true;
   await axios({
     method: 'delete',
     url: `${import.meta.env.VITE_API_DOMAIN}/user`,
@@ -50,20 +50,20 @@ async function logout() {
     .then(() => toastStore.addToast('Successfully logged out', 3000))
     .catch((err) => {
       if (err.response.status == 401) {
-        router.push({ name: 'entry' })
+        router.push({ name: 'entry' });
       } else {
-        toastStore.addToast(err.response.data, 3000)
+        toastStore.addToast(err.response.data, 3000);
       }
     })
     .finally(() => {
-      isLoggingOut.value = false
+      isLoggingOut.value = false;
       Object.keys(localStorage).forEach(function (key) {
         if (/^qotes_/.test(key)) {
-          localStorage.removeItem(key)
+          localStorage.removeItem(key);
         }
-      })
-      router.push({ name: 'entry' })
-    })
+      });
+      router.push({ name: 'entry' });
+    });
 }
 </script>
 

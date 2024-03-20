@@ -1,10 +1,10 @@
 <script setup>
-import { computed, inject } from 'vue'
+import { computed, inject } from 'vue';
 
-const toastStore = inject('toastStore')
+const toastStore = inject('toastStore');
 const items = computed(() => {
-  return toastStore.getItems()
-})
+  return toastStore.getItems();
+});
 </script>
 
 <template>

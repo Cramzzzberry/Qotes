@@ -1,34 +1,34 @@
 <script setup>
-import { inject, ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useRefreshStore, useHomeTabStore } from '@/store'
-import axios from 'axios'
+import { inject, ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { useRefreshStore, useHomeTabStore } from '@/store';
+import axios from 'axios';
 
-const toastStore = inject('toastStore')
-const router = useRouter()
+const toastStore = inject('toastStore');
+const router = useRouter();
 
 const modal = ref({
   toggle: false,
   open() {
-    this.toggle = true
+    this.toggle = true;
   },
   close() {
-    this.toggle = false
+    this.toggle = false;
   }
-})
+});
 
-const keys = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'Bb', 'B']
-const isLoading = ref(false)
+const keys = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'Bb', 'B'];
+const isLoading = ref(false);
 const createSheet = ref({
   songTitle: '',
   artist: '',
   selectedKey: 'C',
   lineup: useHomeTabStore.index === 0 ? true : false,
   important: useHomeTabStore.index === 1 ? true : false
-})
+});
 
 async function submit() {
-  isLoading.value = true
+  isLoading.value = true;
   await axios({
     method: 'post',
     url: `${import.meta.env.VITE_API_DOMAIN}/sheets`,
@@ -45,26 +45,26 @@ async function submit() {
     }
   })
     .then(() => {
-      toastStore.addToast('Sheet created', 3000)
+      toastStore.addToast('Sheet created', 3000);
       createSheet.value = {
         songTitle: '',
         artist: '',
         selectedKey: 'C',
         lineup: useHomeTabStore.index === 0 ? true : false,
         important: useHomeTabStore.index === 1 ? true : false
-      }
+      };
     })
     .catch((err) => {
       if (err.response.status == 401) {
-        router.push({ name: 'entry' })
+        router.push({ name: 'entry' });
       } else {
-        toastStore.addToast(err.response.data, 3000)
+        toastStore.addToast(err.response.data, 3000);
       }
     })
     .finally(() => {
-      isLoading.value = false
-      useRefreshStore.refresh()
-    })
+      isLoading.value = false;
+      useRefreshStore.refresh();
+    });
 }
 </script>
 

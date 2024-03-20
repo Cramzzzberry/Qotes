@@ -1,14 +1,14 @@
 <script setup>
-import { useRouter } from 'vue-router'
-import { ref, onMounted, inject } from 'vue'
-import { useHomeTabStore, useDrawerStore, usePreviewStore } from '@/store'
-import axios from 'axios'
+import { useRouter } from 'vue-router';
+import { ref, onMounted, inject } from 'vue';
+import { useHomeTabStore, useDrawerStore, usePreviewStore } from '@/store';
+import axios from 'axios';
 
-const toastStore = inject('toastStore')
-const router = useRouter()
+const toastStore = inject('toastStore');
+const router = useRouter();
 
-const fullName = ref(null)
-const isLoading = ref(true)
+const fullName = ref(null);
+const isLoading = ref(true);
 
 onMounted(async () => {
   await axios({
@@ -20,27 +20,27 @@ onMounted(async () => {
     }
   })
     .then((res) => {
-      fullName.value = `${res.data.firstName} ${res.data.lastName}`
+      fullName.value = `${res.data.firstName} ${res.data.lastName}`;
     })
     .catch((err) => {
       if (err.response.status == 401) {
-        router.push({ name: 'entry' })
+        router.push({ name: 'entry' });
       } else {
-        toastStore.addToast(err.response.data, 3000)
+        toastStore.addToast(err.response.data, 3000);
       }
     })
-    .finally(() => (isLoading.value = false))
-})
+    .finally(() => (isLoading.value = false));
+});
 
 function changeTab(index) {
-  useHomeTabStore.setIndex(index)
-  useDrawerStore.close()
+  useHomeTabStore.setIndex(index);
+  useDrawerStore.close();
 }
 
 function goToSettings() {
-  useDrawerStore.close()
-  router.push({ name: 'account settings' })
-  usePreviewStore.sheetID = ''
+  useDrawerStore.close();
+  router.push({ name: 'account settings' });
+  usePreviewStore.sheetID = '';
 }
 </script>
 

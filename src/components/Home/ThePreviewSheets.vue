@@ -1,28 +1,27 @@
 <script setup>
-//TODO: Store the lineups on a localStorage and update the localStorage accordingly
-import { useGroupPreviewStore, useRefreshStore } from '@/store'
-import axios from 'axios'
-import { onMounted, ref, watch } from 'vue'
-import { useRouter } from 'vue-router'
-import draggable from 'vuedraggable'
-import parseSheet from '@/scripts/parse-sheet'
-import { debounce } from '@/scripts/debounce'
+import { useGroupPreviewStore, useRefreshStore } from '@/store';
+import axios from 'axios';
+import { onMounted, ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
+import draggable from 'vuedraggable';
+import parseSheet from '@/scripts/parse-sheet';
+import { debounce } from '@/scripts/debounce';
 
-const router = useRouter()
+const router = useRouter();
 
 const transitionOptions = {
   animation: 150,
   group: 'description',
   disabled: false,
   ghostClass: 'ghost'
-}
+};
 
-const songNumbers = ref([])
-const orderedList = ref([])
-const selectedSong = ref(0)
-const isLoading = ref(false)
-const editSheetArrangement = ref(true)
-const clean = ref(null)
+const songNumbers = ref([]);
+const orderedList = ref([]);
+const selectedSong = ref(0);
+const isLoading = ref(false);
+const editSheetArrangement = ref(true);
+const clean = ref(null);
 
 const getLineups = debounce(() => {
   const onFetch = async () => {
@@ -44,96 +43,96 @@ const getLineups = debounce(() => {
               return {
                 song,
                 order: index + 1
-              }
-            })
+              };
+            });
 
-            saveOrder()
-            localStorage.setItem('qotes_lineup', JSON.stringify(res.data))
+            saveOrder();
+            localStorage.setItem('qotes_lineup', JSON.stringify(res.data));
           } else {
             //Get the order from the stored version
-            let list = JSON.parse(localStorage.getItem('qotes_ordered_lineup'))
+            let list = JSON.parse(localStorage.getItem('qotes_ordered_lineup'));
 
-            songNumbers.value = list.map((e, index) => `Song ${index + 1}`)
+            songNumbers.value = list.map((e, index) => `Song ${index + 1}`);
             orderedList.value = list.map((sheet) => {
               res.data.forEach((e) => {
                 if (e.id === sheet.song.id) {
-                  sheet.song.content = e.content
+                  sheet.song.content = e.content;
                 }
-              })
-              return sheet
-            })
+              });
+              return sheet;
+            });
           }
 
-          setClean()
+          setClean();
         } else {
           // Clean the stored version if there's no lineup
           // This is necessary because the ui components depends on the stored version
-          orderedList.value = []
-          clean.value = null
-          localStorage.removeItem('qotes_ordered_lineup')
-          localStorage.removeItem('qotes_lineup')
+          orderedList.value = [];
+          clean.value = null;
+          localStorage.removeItem('qotes_ordered_lineup');
+          localStorage.removeItem('qotes_lineup');
         }
       })
       .catch((err) => {
         if (err.response.status == 401) {
-          router.push({ name: 'entry' })
+          router.push({ name: 'entry' });
         } else {
-          console.log(err)
+          console.log(err);
         }
       })
-      .finally(() => (isLoading.value = false))
-  }
+      .finally(() => (isLoading.value = false));
+  };
 
-  onFetch()
-})
+  onFetch();
+});
 
 onMounted(() => {
   //refresh when the sheet list is updated
   watch(
     () => useRefreshStore.toggle,
     () => {
-      isLoading.value = true
-      getLineups()
+      isLoading.value = true;
+      getLineups();
     },
     { immediate: true }
-  )
+  );
 
   watch(
     () => useGroupPreviewStore.state,
     () => {
       if (useGroupPreviewStore.state) {
-        isLoading.value = true
-        getLineups()
+        isLoading.value = true;
+        getLineups();
       }
 
-      editSheetArrangement.value = true
+      editSheetArrangement.value = true;
     },
     { immediate: true }
-  )
+  );
 
   watch(
     () => selectedSong.value,
     () => {
-      setClean()
+      setClean();
     }
-  )
-})
+  );
+});
 
 function navBetweenSheets(direction) {
   if (direction === 'left' && selectedSong.value > 0) {
-    selectedSong.value--
+    selectedSong.value--;
   } else if (direction === 'right' && selectedSong.value < orderedList.value.length - 1) {
-    selectedSong.value++
+    selectedSong.value++;
   }
 }
 
 function saveOrder() {
-  localStorage.setItem('qotes_ordered_lineup', JSON.stringify(orderedList.value))
-  setClean()
+  localStorage.setItem('qotes_ordered_lineup', JSON.stringify(orderedList.value));
+  setClean();
 }
 
 function setClean() {
-  clean.value = parseSheet(orderedList.value[selectedSong.value].song.content)
+  clean.value = parseSheet(orderedList.value[selectedSong.value].song.content);
 }
 </script>
 

@@ -1,23 +1,23 @@
 <script setup>
-import axios from 'axios'
-import { computed, ref, inject } from 'vue'
-import { useRouter } from 'vue-router'
+import axios from 'axios';
+import { computed, ref, inject } from 'vue';
+import { useRouter } from 'vue-router';
 
-const toastStore = inject('toastStore')
-const email = defineModel('email')
-const firstName = defineModel('firstName')
-const lastName = defineModel('lastName')
-const router = useRouter()
-const toggle = ref(false)
-const isLoading = ref(false)
+const toastStore = inject('toastStore');
+const email = defineModel('email');
+const firstName = defineModel('firstName');
+const lastName = defineModel('lastName');
+const router = useRouter();
+const toggle = ref(false);
+const isLoading = ref(false);
 
 const isTextboxFilled = computed(() => {
-  return email.value !== '' && firstName.value !== '' && lastName.value !== ''
-})
+  return email.value !== '' && firstName.value !== '' && lastName.value !== '';
+});
 
 async function updateDetails() {
-  isLoading.value = true
-  toggle.value = false
+  isLoading.value = true;
+  toggle.value = false;
   await axios({
     method: 'put',
     url: `${import.meta.env.VITE_API_DOMAIN}/user/${localStorage.getItem('qotes_userID')}`,
@@ -34,12 +34,12 @@ async function updateDetails() {
     .then(() => toastStore.addToast('User details updated', 3000))
     .catch((err) => {
       if (err.response.status == 401) {
-        router.push({ name: 'entry' })
+        router.push({ name: 'entry' });
       } else {
-        toastStore.addToast(err.response.data, 3000)
+        toastStore.addToast(err.response.data, 3000);
       }
     })
-    .finally(() => (isLoading.value = false))
+    .finally(() => (isLoading.value = false));
 }
 </script>
 

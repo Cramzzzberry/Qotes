@@ -18,7 +18,7 @@ const props = defineProps({
   },
   wide: Boolean,
   isLoading: Boolean
-})
+});
 
 const states = {
   default: 'text-deadgreen-700',
@@ -26,25 +26,25 @@ const states = {
   warning: 'text-amber-400',
   success: 'text-emerald-400',
   error: 'text-red-400'
-}
+};
 
 const btnSizes = {
   sm: 'h-[30px] max-h-[30px] gap-1 px-2 py-1 text-sm',
   base: 'h-[42px] max-h-[42px] gap-2 px-4 py-2 text-base',
   lg: 'h-[54px] max-h-[54px] gap-3 px-6 py-3 text-xl'
-}
+};
 
 const iconSizes = {
   sm: 'text-base leading-none',
   base: 'text-lg leading-none',
   lg: 'text-2xl leading-none'
-}
+};
 
 const loaderSizes = {
   sm: '16px',
   base: '20px',
   lg: '28px'
-}
+};
 </script>
 
 <template>

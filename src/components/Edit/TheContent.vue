@@ -1,14 +1,14 @@
 <script setup>
-import { computed } from 'vue'
-import parseSheet from '@/scripts/parse-sheet'
+import { computed } from 'vue';
+import parseSheet from '@/scripts/parse-sheet';
 
-const content = defineModel('content')
-const preview = defineModel('preview')
+const content = defineModel('content');
+const preview = defineModel('preview');
 
 const clean = computed(() => {
-  console.log(content.value)
-  return parseSheet(content.value)
-})
+  console.log(content.value);
+  return parseSheet(content.value);
+});
 </script>
 
 <template>

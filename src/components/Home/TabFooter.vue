@@ -1,23 +1,23 @@
 <script setup>
-import { useRouter } from 'vue-router'
-import axios from 'axios'
-import TheModalCreate from './TheModalCreate.vue'
-import { useRefreshStore } from '@/store'
-import { ref, inject } from 'vue'
+import { useRouter } from 'vue-router';
+import axios from 'axios';
+import TheModalCreate from './TheModalCreate.vue';
+import { useRefreshStore } from '@/store';
+import { ref, inject } from 'vue';
 
-const toastStore = inject('toastStore')
-const selectionStore = inject('selectionStore')
-const router = useRouter()
-const isLoading = ref(false)
+const toastStore = inject('toastStore');
+const selectionStore = inject('selectionStore');
+const router = useRouter();
+const isLoading = ref(false);
 
 function refreshSheets() {
-  useRefreshStore.refresh()
-  selectionStore.items.value = []
-  selectionStore.isToggled.value = false
+  useRefreshStore.refresh();
+  selectionStore.items.value = [];
+  selectionStore.isToggled.value = false;
 }
 
 async function addAsImportant() {
-  isLoading.value = true
+  isLoading.value = true;
   await axios({
     method: 'put',
     url: `${import.meta.env.VITE_API_DOMAIN}/sheets`,
@@ -35,19 +35,19 @@ async function addAsImportant() {
     .then((res) => toastStore.addToast(res.data, 3000))
     .catch((err) => {
       if (err.response.status == 401) {
-        router.push({ name: 'entry' })
+        router.push({ name: 'entry' });
       } else {
-        toastStore.addToast(err.response.data, 3000)
+        toastStore.addToast(err.response.data, 3000);
       }
     })
     .finally(() => {
-      isLoading.value = false
-      refreshSheets()
-    })
+      isLoading.value = false;
+      refreshSheets();
+    });
 }
 
 async function makeUnmportant() {
-  isLoading.value = true
+  isLoading.value = true;
   await axios({
     method: 'put',
     url: `${import.meta.env.VITE_API_DOMAIN}/sheets`,
@@ -65,19 +65,19 @@ async function makeUnmportant() {
     .then((res) => toastStore.addToast(res.data, 3000))
     .catch((err) => {
       if (err.response.status == 401) {
-        router.push({ name: 'entry' })
+        router.push({ name: 'entry' });
       } else {
-        toastStore.addToast(err.response.data, 3000)
+        toastStore.addToast(err.response.data, 3000);
       }
     })
     .finally(() => {
-      isLoading.value = false
-      refreshSheets()
-    })
+      isLoading.value = false;
+      refreshSheets();
+    });
 }
 
 async function pinToLineup() {
-  isLoading.value = true
+  isLoading.value = true;
   await axios({
     method: 'put',
     url: `${import.meta.env.VITE_API_DOMAIN}/sheets`,
@@ -95,19 +95,19 @@ async function pinToLineup() {
     .then((res) => toastStore.addToast(res.data, 3000))
     .catch((err) => {
       if (err.response.status == 401) {
-        router.push({ name: 'entry' })
+        router.push({ name: 'entry' });
       } else {
-        toastStore.addToast(err.response.data, 3000)
+        toastStore.addToast(err.response.data, 3000);
       }
     })
     .finally(() => {
-      isLoading.value = false
-      refreshSheets()
-    })
+      isLoading.value = false;
+      refreshSheets();
+    });
 }
 
 async function unpinToLineup() {
-  isLoading.value = true
+  isLoading.value = true;
   await axios({
     method: 'put',
     url: `${import.meta.env.VITE_API_DOMAIN}/sheets`,
@@ -125,15 +125,15 @@ async function unpinToLineup() {
     .then((res) => toastStore.addToast(res.data, 3000))
     .catch((err) => {
       if (err.response.status == 401) {
-        router.push({ name: 'entry' })
+        router.push({ name: 'entry' });
       } else {
-        toastStore.addToast(err.response.data, 3000)
+        toastStore.addToast(err.response.data, 3000);
       }
     })
     .finally(() => {
-      isLoading.value = false
-      refreshSheets()
-    })
+      isLoading.value = false;
+      refreshSheets();
+    });
 }
 </script>
 

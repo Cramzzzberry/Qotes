@@ -1,25 +1,25 @@
 <script setup>
-import { inject, ref } from 'vue'
-import { useRouter } from 'vue-router'
-import axios from 'axios'
-import SelectKeys from './SelectKeys.vue'
-import { useRefreshStore, useDrawerStore } from '@/store'
+import { inject, ref } from 'vue';
+import { useRouter } from 'vue-router';
+import axios from 'axios';
+import SelectKeys from './SelectKeys.vue';
+import { useRefreshStore, useDrawerStore } from '@/store';
 
-const toastStore = inject('toastStore')
-const selectionStore = inject('selectionStore')
-const search = defineModel('search', { required: true })
-const filter = defineModel('filter', { default: 'All Keys', required: true })
+const toastStore = inject('toastStore');
+const selectionStore = inject('selectionStore');
+const search = defineModel('search', { required: true });
+const filter = defineModel('filter', { default: 'All Keys', required: true });
 
 const props = defineProps({
   heading: String
-})
+});
 
-const router = useRouter()
-const toggle = ref(false)
-const isLoading = ref(false)
+const router = useRouter();
+const toggle = ref(false);
+const isLoading = ref(false);
 async function deleteSheets() {
-  isLoading.value = true
-  toggle.value = false
+  isLoading.value = true;
+  toggle.value = false;
   await axios({
     method: 'delete',
     url: `${import.meta.env.VITE_API_DOMAIN}/sheets`,
@@ -34,16 +34,16 @@ async function deleteSheets() {
     .then((res) => toastStore.addToast(res.data, 3000))
     .catch((err) => {
       if (err.response.status == 401) {
-        router.push({ name: 'entry' })
+        router.push({ name: 'entry' });
       } else {
-        toastStore.addToast(err.response.data, 3000)
+        toastStore.addToast(err.response.data, 3000);
       }
     })
     .finally(() => {
-      isLoading.value = false
-      selectionStore.isToggled.value = false
-      useRefreshStore.refresh()
-    })
+      isLoading.value = false;
+      selectionStore.isToggled.value = false;
+      useRefreshStore.refresh();
+    });
 }
 </script>
 

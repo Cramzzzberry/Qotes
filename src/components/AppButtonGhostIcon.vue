@@ -13,7 +13,7 @@ const props = defineProps({
     default: null
   },
   isLoading: Boolean
-})
+});
 
 const states = {
   default: 'text-deadgreen-700',
@@ -21,25 +21,25 @@ const states = {
   warning: 'text-amber-400',
   success: 'text-emerald-400',
   error: 'text-red-400'
-}
+};
 
 const btnSizes = {
   sm: 'before:-bottom-1 before:-left-1 before:-right-1 before:-top-1',
   base: 'before:-bottom-3 before:-left-3 before:-right-3 before:-top-3',
   lg: 'before:-bottom-5 before:-left-5 before:-right-5 before:-top-5'
-}
+};
 
 const iconSizes = {
   sm: 'text-base leading-none',
   base: 'text-2xl leading-none',
   lg: 'text-4xl leading-none'
-}
+};
 
 const loaderSizes = {
   sm: '16px',
   base: '24px',
   lg: '36px'
-}
+};
 </script>
 
 <template>

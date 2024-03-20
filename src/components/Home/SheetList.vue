@@ -1,25 +1,25 @@
 <script setup>
-import { usePreviewStore, useRefreshStore } from '@/store'
-import { onMounted, ref, watch, inject } from 'vue'
-import { useRouter } from 'vue-router'
-import axios from 'axios'
-import { debounce } from '@/scripts/debounce'
-import { useScrollStore } from '@/store'
+import { usePreviewStore, useRefreshStore } from '@/store';
+import { onMounted, ref, watch, inject } from 'vue';
+import { useRouter } from 'vue-router';
+import axios from 'axios';
+import { debounce } from '@/scripts/debounce';
+import { useScrollStore } from '@/store';
 
 const props = defineProps({
   category: String,
   search: String,
   sheetKey: String
-})
+});
 
-const toastStore = inject('toastStore')
-const selectionStore = inject('selectionStore')
-const router = useRouter()
-const list = ref([])
-const isLoading = ref(false)
-const cursor = ref(null)
-const showMoreLoading = ref(true)
-const showMoreLoadRef = ref(null)
+const toastStore = inject('toastStore');
+const selectionStore = inject('selectionStore');
+const router = useRouter();
+const list = ref([]);
+const isLoading = ref(false);
+const cursor = ref(null);
+const showMoreLoading = ref(true);
+const showMoreLoadRef = ref(null);
 
 const search = debounce(() => {
   const onFetch = async () => {
@@ -37,64 +37,64 @@ const search = debounce(() => {
       }
     })
       .then((res) => {
-        list.value.push(...res.data)
+        list.value.push(...res.data);
 
         if (res.data.length > 0) {
-          cursor.value = res.data[res.data.length - 1].id
+          cursor.value = res.data[res.data.length - 1].id;
         }
 
         if (res.data.length < 39) {
-          showMoreLoading.value = false
+          showMoreLoading.value = false;
         }
       })
       .catch((err) => {
         if (err.response.status == 401) {
-          router.push({ name: 'entry' })
+          router.push({ name: 'entry' });
         } else {
-          toastStore.addToast(err.response.data, 3000)
+          toastStore.addToast(err.response.data, 3000);
         }
       })
-      .finally(() => (isLoading.value = false))
-  }
+      .finally(() => (isLoading.value = false));
+  };
 
-  onFetch()
-})
+  onFetch();
+});
 
 onMounted(() => {
   watch(
     () => [props.search, props.sheetKey, useRefreshStore.toggle],
     () => {
-      list.value = []
-      isLoading.value = true
-      cursor.value = null
-      search()
+      list.value = [];
+      isLoading.value = true;
+      cursor.value = null;
+      search();
     },
     { immediate: true }
-  )
+  );
 
   //Scroll checking
-  let ticking = false
+  let ticking = false;
   useScrollStore.value.addEventListener('scroll', () => {
-    let vpHeight = window.innerHeight
+    let vpHeight = window.innerHeight;
     let showMoreLoadingRectY =
-      showMoreLoadRef.value.getBoundingClientRect().top + showMoreLoadRef.value.offsetHeight / 2
-    let isVisible = showMoreLoadingRectY < vpHeight
+      showMoreLoadRef.value.getBoundingClientRect().top + showMoreLoadRef.value.offsetHeight / 2;
+    let isVisible = showMoreLoadingRectY < vpHeight;
     if (isVisible && !ticking) {
       window.requestAnimationFrame(async () => {
-        search()
-        ticking = false
-      })
-      ticking = true
+        search();
+        ticking = false;
+      });
+      ticking = true;
     }
-  })
-})
+  });
+});
 
 function preview(id) {
-  usePreviewStore.open()
+  usePreviewStore.open();
 
   //did this to prevent refetch
   if (id !== usePreviewStore.sheetID) {
-    usePreviewStore.sheetID = id
+    usePreviewStore.sheetID = id;
   }
 }
 </script>

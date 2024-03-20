@@ -1,11 +1,11 @@
 <script setup>
-import { ref, inject } from 'vue'
-import { useRouter } from 'vue-router'
-import axios from 'axios'
+import { ref, inject } from 'vue';
+import { useRouter } from 'vue-router';
+import axios from 'axios';
 
-const toastStore = inject('toastStore')
-const router = useRouter()
-const isLogin = ref(true)
+const toastStore = inject('toastStore');
+const router = useRouter();
+const isLogin = ref(true);
 
 const loginForm = ref({
   email: '',
@@ -21,10 +21,10 @@ const loginForm = ref({
       message: null
     }
   }
-})
+});
 
 async function login() {
-  loginForm.value.loading = true
+  loginForm.value.loading = true;
   await axios({
     method: 'post',
     url: `${import.meta.env.VITE_API_DOMAIN}/user/login`,
@@ -34,30 +34,30 @@ async function login() {
     }
   })
     .then((res) => {
-      localStorage.setItem('qotes_userID', res.data.userID)
-      localStorage.setItem('qotes_token', res.data.token)
-      router.push({ name: 'home' })
-      toastStore.addToast('Successfully logged in', 3000)
+      localStorage.setItem('qotes_userID', res.data.userID);
+      localStorage.setItem('qotes_token', res.data.token);
+      router.push({ name: 'home' });
+      toastStore.addToast('Successfully logged in', 3000);
     })
     .catch((err) => {
       if (
         err.response.status === 400 ||
         (err.response.status === 401 && err.response.data === 'Account not yet approved')
       ) {
-        loginForm.value.error.email.toggle = true
-        loginForm.value.error.password.toggle = true
-        loginForm.value.error.email.message = err.response.data
-        loginForm.value.error.password.message = null
+        loginForm.value.error.email.toggle = true;
+        loginForm.value.error.password.toggle = true;
+        loginForm.value.error.email.message = err.response.data;
+        loginForm.value.error.password.message = null;
       } else if (err.response.status === 401 && err.response.data === 'Wrong password') {
-        loginForm.value.error.email.toggle = false
-        loginForm.value.error.password.toggle = true
-        loginForm.value.error.email.message = null
-        loginForm.value.error.password.message = err.response.data
+        loginForm.value.error.email.toggle = false;
+        loginForm.value.error.password.toggle = true;
+        loginForm.value.error.email.message = null;
+        loginForm.value.error.password.message = err.response.data;
       } else {
-        toastStore.addToast(err.response.data, 3000)
+        toastStore.addToast(err.response.data, 3000);
       }
     })
-    .finally(() => (loginForm.value.loading = false))
+    .finally(() => (loginForm.value.loading = false));
 }
 
 const signupForm = ref({
@@ -77,10 +77,10 @@ const signupForm = ref({
       message: null
     }
   }
-})
+});
 
 async function signUp() {
-  signupForm.value.loading = true
+  signupForm.value.loading = true;
   if (signupForm.value.password === signupForm.value.confirmPassword) {
     await axios({
       method: 'post',
@@ -93,26 +93,26 @@ async function signUp() {
       }
     })
       .then(() => {
-        isLogin.value = true
-        toastStore.addToast('Account Created', 3000)
-        setTimeout(() => toastStore.addToast('Please wait for your account approval', 3000), 1000)
+        isLogin.value = true;
+        toastStore.addToast('Account Created', 3000);
+        setTimeout(() => toastStore.addToast('Please wait for your account approval', 3000), 1000);
       })
       .catch((err) => {
         if (err.response.status === 409) {
-          signupForm.value.error.email.toggle = true
-          signupForm.value.error.passwords.toggle = false
-          signupForm.value.error.email.message = err.response.data
-          signupForm.value.error.passwords.message = null
+          signupForm.value.error.email.toggle = true;
+          signupForm.value.error.passwords.toggle = false;
+          signupForm.value.error.email.message = err.response.data;
+          signupForm.value.error.passwords.message = null;
         } else {
-          toastStore.addToast(err.response.data, 3000)
+          toastStore.addToast(err.response.data, 3000);
         }
       })
-      .finally(() => (signupForm.value.loading = false))
+      .finally(() => (signupForm.value.loading = false));
   } else {
-    signupForm.value.error.email.toggle = false
-    signupForm.value.error.passwords.toggle = true
-    signupForm.value.error.email.message = null
-    signupForm.value.error.passwords.message = "Passwords doesn't match"
+    signupForm.value.error.email.toggle = false;
+    signupForm.value.error.passwords.toggle = true;
+    signupForm.value.error.email.message = null;
+    signupForm.value.error.passwords.message = "Passwords doesn't match";
   }
 }
 </script>
