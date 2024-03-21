@@ -137,14 +137,14 @@ function setClean() {
 </script>
 
 <template>
-  <div class="relative h-full overflow-y-auto">
+  <div class="relative h-full">
     <div v-if="isLoading" class="flex h-full items-center justify-center">
       <AppLoader />
     </div>
 
     <template v-else-if="clean">
       <header
-        class="sticky h-[60px] max-h-[60px] top-0 z-10 flex flex-row items-center bg-doublemint-50 px-4 pb-2 pt-4"
+        class="sticky top-0 z-10 flex h-[60px] max-h-[60px] flex-row items-center bg-doublemint-50 px-4 pb-2 pt-4"
       >
         <div class="flex basis-1/3 justify-start">
           <AppButtonGhostIcon
@@ -154,12 +154,12 @@ function setClean() {
         </div>
 
         <!-- The Center of the header -->
-        <div class="min-w-0 flex grow flex-col text-center leading-none">
+        <div class="flex min-w-0 grow flex-col text-center leading-none">
           <template v-if="!editSheetArrangement">
             <p class="truncate">{{ orderedList[selectedSong].song.songTitle }}</p>
-            <p class="text-sm truncate">Song {{ selectedSong + 1 }}</p>
+            <p class="truncate text-sm">Song {{ selectedSong + 1 }}</p>
           </template>
-          <div v-else class="flex justify-center items-center">
+          <div v-else class="flex items-center justify-center">
             <p class="flex h-[34px] items-center font-normal lg:h-[38px]">Edit Order</p>
           </div>
         </div>
@@ -181,11 +181,12 @@ function setClean() {
         class="absolute bottom-0 right-0 z-10 h-[calc(100%-60px)] w-1/6"
       ></button>
 
+      <!-- Sheet content -->
       <Transition name="fade-down" mode="out-in">
         <div
           v-if="!editSheetArrangement"
           v-html="clean"
-          class="sheet-preview w-full overflow-auto whitespace-nowrap px-3 py-2 font-['Roboto_Mono'] lg:px-6"
+          class="sheet-preview h-[calc(100%-60px)] w-full overflow-auto whitespace-nowrap px-3 py-2 font-['Roboto_Mono'] lg:px-6"
         ></div>
         <draggable
           v-else
@@ -195,7 +196,7 @@ function setClean() {
           tag="ul"
           handle=".handle"
           item-key="order"
-          class="space-y-2 overflow-y-auto px-3 pb-3"
+          class="h-[calc(100%-60px)] space-y-2 overflow-y-auto px-3 pb-3"
         >
           <template #item="{ element }">
             <li
