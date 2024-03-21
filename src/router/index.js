@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import EntryView from '../views/EntryView.vue';
 import HomeView from '../views/HomeView.vue';
 import AccountSettingsView from '../views/AccountSettingsView.vue';
+import SettingsView from '@/views/SettingsView.vue';
 import EditView from '../views/EditView.vue';
 
 const router = createRouter({
@@ -31,6 +32,11 @@ const router = createRouter({
       path: '/edit/:id',
       name: 'edit',
       component: EditView
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: SettingsView
     }
   ]
 });
