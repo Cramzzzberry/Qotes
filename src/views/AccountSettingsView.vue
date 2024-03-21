@@ -1,8 +1,8 @@
 <script setup>
-import SectionDetails from '@/components/AccountSettings/SectionDetails.vue';
 import { ref, onMounted, inject } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
+import SectionDetails from '@/components/AccountSettings/SectionDetails.vue';
 import SectionDeleteAccount from '@/components/AccountSettings/SectionDeleteAccount.vue';
 
 const toastStore = inject('toastStore');

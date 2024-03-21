@@ -186,7 +186,7 @@ function setClean() {
         <div
           v-if="!editSheetArrangement"
           v-html="clean"
-          class="sheet-preview h-[calc(100%-60px)] w-full overflow-auto whitespace-nowrap px-3 py-2 font-['Roboto_Mono'] lg:px-6"
+          class="sheet-preview h-[calc(100%-60px)] w-full overflow-x-auto overflow-y-scroll whitespace-nowrap px-3 py-2 font-['Roboto_Mono'] lg:px-6"
         ></div>
         <draggable
           v-else
@@ -196,7 +196,7 @@ function setClean() {
           tag="ul"
           handle=".handle"
           item-key="order"
-          class="h-[calc(100%-60px)] space-y-2 overflow-y-auto px-3 pb-3"
+          class="h-[calc(100%-60px)] space-y-2 overflow-y-scroll px-3 pb-3"
         >
           <template #item="{ element }">
             <li
