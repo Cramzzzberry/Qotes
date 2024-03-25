@@ -2,6 +2,7 @@
 import { ref, onMounted, inject, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
+import parseSheet from '@/scripts/parse-sheet';
 import SectionDetails from '@/components/AccountSettings/SectionDetails.vue';
 import SectionDeleteAccount from '@/components/AccountSettings/SectionDeleteAccount.vue';
 
@@ -41,6 +42,8 @@ onMounted(async () => {
     });
 });
 
+const clean = parseSheet('>> Verse\nC D E F G A B\nSample Lyrics G#m CmM7');
+
 //save fontsize on each edit
 watch(fontSize, () => localStorage.setItem('qotes_font_size', fontSize.value));
 </script>
@@ -72,6 +75,11 @@ watch(fontSize, () => localStorage.setItem('qotes_font_size', fontSize.value));
                 type="number"
               />
             </div>
+
+            <div
+              v-html="clean"
+              class="sheet-preview h-[calc(100%-60px)] w-full rounded-xl border px-3 py-2 font-['Roboto_Mono'] lg:px-6"
+            ></div>
 
             <!-- dark mode -->
             <div class="flex w-full flex-row items-center justify-between md:max-w-[540px]">
@@ -109,3 +117,9 @@ watch(fontSize, () => localStorage.setItem('qotes_font_size', fontSize.value));
     </div>
   </div>
 </template>
+
+<style scoped>
+.sheet-preview {
+  font-size: v-bind("fontSize + 'px'");
+}
+</style>
