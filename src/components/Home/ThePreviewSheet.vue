@@ -1,26 +1,31 @@
 <script setup>
-import { computed, ref, watch } from 'vue'
-import { useRouter } from 'vue-router'
-import { usePreviewStore } from '@/store'
-import parseSheet from '@/scripts/parse-sheet'
-import axios from 'axios'
+import { computed, onMounted, ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
+import { usePreviewStore } from '@/store';
+import parseSheet from '@/scripts/parse-sheet';
+import axios from 'axios';
 
-const router = useRouter()
+const router = useRouter();
 
 const sheet = ref({
   songTitle: '',
   artist: '',
   songKey: '',
   content: ''
-})
+});
 
-const isLoading = ref(false)
+const fontSize = ref(null);
+const isLoading = ref(false);
+
+onMounted(() => {
+  fontSize.value = localStorage.getItem('qotes_font_size');
+});
 
 watch(
   () => usePreviewStore.state,
   () => {
     if (usePreviewStore.state) {
-      isLoading.value = true
+      isLoading.value = true;
       axios({
         method: 'get',
         url: `${import.meta.env.VITE_API_DOMAIN}/sheets/${usePreviewStore.sheetID}`,
@@ -30,22 +35,22 @@ watch(
         }
       })
         .then((res) => {
-          sheet.value = res.data
+          sheet.value = res.data;
         })
         .catch((err) => console.log(err))
-        .finally(() => (isLoading.value = false))
+        .finally(() => (isLoading.value = false));
     }
   }
-)
+);
 
 const clean = computed(() => {
-  return parseSheet(sheet.value.content)
-})
+  return parseSheet(sheet.value.content);
+});
 
 function goEdit() {
-  usePreviewStore.close()
-  router.push({ name: 'edit', params: { id: usePreviewStore.sheetID } })
-  usePreviewStore.sheetID = ''
+  usePreviewStore.close();
+  router.push({ name: 'edit', params: { id: usePreviewStore.sheetID } });
+  usePreviewStore.sheetID = '';
 }
 </script>
 
@@ -79,3 +84,9 @@ function goEdit() {
     ></div>
   </div>
 </template>
+
+<style scoped>
+.sheet-preview {
+  font-size: v-bind("fontSize + 'px'");
+}
+</style>

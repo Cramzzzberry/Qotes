@@ -1,14 +1,19 @@
 <script setup>
-import { computed } from 'vue'
-import parseSheet from '@/scripts/parse-sheet'
+import { computed, onMounted, ref } from 'vue';
+import parseSheet from '@/scripts/parse-sheet';
 
-const content = defineModel('content')
-const preview = defineModel('preview')
+const content = defineModel('content');
+const preview = defineModel('preview');
+
+const fontSize = ref(null);
+onMounted(() => {
+  fontSize.value = localStorage.getItem('qotes_font_size');
+});
 
 const clean = computed(() => {
-  console.log(content.value)
-  return parseSheet(content.value)
-})
+  console.log(content.value);
+  return parseSheet(content.value);
+});
 </script>
 
 <template>
@@ -26,3 +31,9 @@ const clean = computed(() => {
     class="sheet-preview w-full grow overflow-auto whitespace-nowrap px-3 pb-4 font-['Roboto_Mono'] font-normal lg:px-16"
   ></div>
 </template>
+
+<style scoped>
+.sheet-preview {
+  font-size: v-bind("fontSize + 'px'");
+}
+</style>

@@ -1,10 +1,10 @@
 <script setup>
-const selectedKey = defineModel('selectedKey')
-const toggle = defineModel('toggle')
-const songTitle = defineModel('songTitle')
-const artist = defineModel('artist')
+const selectedKey = defineModel('selectedKey');
+const toggle = defineModel('toggle');
+const songTitle = defineModel('songTitle');
+const artist = defineModel('artist');
 
-const keys = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'Bb', 'B']
+const keys = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'Bb', 'B'];
 </script>
 
 <template>

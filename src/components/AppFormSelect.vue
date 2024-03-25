@@ -1,5 +1,5 @@
 <script setup>
-const model = defineModel()
+const model = defineModel();
 const props = defineProps({
   label: String,
   subLabel: String,
@@ -12,7 +12,7 @@ const props = defineProps({
     type: String
   },
   wide: Boolean
-})
+});
 
 const states = {
   default: 'text-deadgreen-700 border-deadgreen-200 focus:border-deadgreen-700',
@@ -20,7 +20,7 @@ const states = {
   warning: 'text-amber-950 border-gray-300 focus:border-amber-400',
   success: 'text-emerald-950 border-gray-300 focus:border-emerald-400',
   error: 'text-red-950 border-red-400'
-}
+};
 </script>
 
 <template>

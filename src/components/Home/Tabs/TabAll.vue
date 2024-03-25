@@ -1,12 +1,12 @@
 <script setup>
-import TabHeader from '../TabHeader.vue'
-import TabFooter from '../TabFooter.vue'
-import SheetList from '../SheetList.vue'
-import { ref } from 'vue'
-import { useScrollStore } from '@/store'
+import TabHeader from '../TabHeader.vue';
+import TabFooter from '../TabFooter.vue';
+import SheetList from '../SheetList.vue';
+import { ref } from 'vue';
+import { useScrollStore } from '@/store';
 
-const search = ref('')
-const filter = ref('All Keys')
+const search = ref('');
+const filter = ref('All Keys');
 </script>
 
 <template>

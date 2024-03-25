@@ -1,6 +1,6 @@
 <script setup>
-const toggle = defineModel('toggle')
-defineEmits(['confirm'])
+const toggle = defineModel('toggle');
+defineEmits(['confirm']);
 const props = defineProps({
   title: String,
   description: String,
@@ -20,7 +20,7 @@ const props = defineProps({
     type: String,
     default: 'error'
   }
-})
+});
 </script>
 
 <template>

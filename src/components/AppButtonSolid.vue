@@ -18,7 +18,7 @@ const props = defineProps({
   },
   wide: Boolean,
   isLoading: Boolean
-})
+});
 
 const states = {
   default:
@@ -30,25 +30,25 @@ const states = {
     'border-transparent bg-emerald-400 text-emerald-950 hover:enabled:bg-emerald-500 active:enabled:bg-emerald-600',
   error:
     'border-transparent bg-red-400 text-red-950 hover:enabled:bg-red-500 active:enabled:bg-red-600'
-}
+};
 
 const btnSizes = {
   sm: ' gap-1 h-[30px] px-2 text-sm',
   base: ' gap-2 h-[42px] px-4 text-base',
   lg: ' gap-3 h-[54px] px-6 text-xl'
-}
+};
 
 const iconSizes = {
   sm: 'text-base leading-none',
   base: 'text-lg leading-none',
   lg: 'text-2xl leading-none'
-}
+};
 
 const loaderSizes = {
   sm: '16px',
   base: '20px',
   lg: '28px'
-}
+};
 </script>
 
 <template>

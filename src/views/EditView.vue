@@ -1,28 +1,28 @@
 <script setup>
-import TheHeader from '@/components/Edit/TheHeader.vue'
-import TheContent from '@/components/Edit/TheContent.vue'
-import { computed, inject, onMounted, ref, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import changeKey from '@/scripts/change-key'
-import axios from 'axios'
+import TheHeader from '@/components/Edit/TheHeader.vue';
+import TheContent from '@/components/Edit/TheContent.vue';
+import { computed, inject, onMounted, ref, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import changeKey from '@/scripts/change-key';
+import axios from 'axios';
 
-const toastStore = inject('toastStore')
-const route = useRoute()
-const router = useRouter()
-const preview = ref(false)
+const toastStore = inject('toastStore');
+const route = useRoute();
+const router = useRouter();
+const preview = ref(false);
 const sheet = ref({
   songTitle: '',
   artist: '',
   key: '',
   content: ''
-})
+});
 
-const contentLength = computed(() => sheet.value.content.length)
+const contentLength = computed(() => sheet.value.content.length);
 
 //fetch on mount
-const isLoading = ref(false)
+const isLoading = ref(false);
 onMounted(async () => {
-  isLoading.value = true
+  isLoading.value = true;
   await axios({
     method: 'get',
     url: `${import.meta.env.VITE_API_DOMAIN}/sheets/${route.params.id}`,
@@ -32,31 +32,31 @@ onMounted(async () => {
     }
   })
     .then((res) => {
-      sheet.value.songTitle = res.data.songTitle
-      sheet.value.artist = res.data.artist
-      sheet.value.content = res.data.content
-      sheet.value.key = res.data.songKey
+      sheet.value.songTitle = res.data.songTitle;
+      sheet.value.artist = res.data.artist;
+      sheet.value.content = res.data.content;
+      sheet.value.key = res.data.songKey;
 
       watch(
         () => sheet.value.key,
         (newKey, oldKey) => {
-          sheet.value.content = changeKey(sheet.value.content, newKey, oldKey)
+          sheet.value.content = changeKey(sheet.value.content, newKey, oldKey);
         }
-      )
+      );
     })
     .catch((err) => {
       if (err.response.status == 401) {
-        router.push({ name: 'entry' })
+        router.push({ name: 'entry' });
       } else {
-        toastStore.addToast(err.response.data, 3000)
+        toastStore.addToast(err.response.data, 3000);
       }
     })
-    .finally(() => (isLoading.value = false))
-})
+    .finally(() => (isLoading.value = false));
+});
 
-const isSaving = ref(false)
+const isSaving = ref(false);
 async function saveSheet() {
-  isSaving.value = true
+  isSaving.value = true;
   await axios({
     method: 'put',
     url: `${import.meta.env.VITE_API_DOMAIN}/sheets/${route.params.id}`,
@@ -74,12 +74,12 @@ async function saveSheet() {
     .then(() => toastStore.addToast('Sheet saved', 3000))
     .catch((err) => {
       if (err.response.status == 401) {
-        router.push({ name: 'entry' })
+        router.push({ name: 'entry' });
       } else {
-        toastStore.addToast(err.response.data, 3000)
+        toastStore.addToast(err.response.data, 3000);
       }
     })
-    .finally(() => (isSaving.value = false))
+    .finally(() => (isSaving.value = false));
 }
 </script>
 

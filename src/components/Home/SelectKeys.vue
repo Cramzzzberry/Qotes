@@ -1,6 +1,6 @@
 <script setup>
-const model = defineModel()
-const keys = ['All Keys', 'C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'Bb', 'B']
+const model = defineModel();
+const keys = ['All Keys', 'C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'Bb', 'B'];
 </script>
 
 <template>

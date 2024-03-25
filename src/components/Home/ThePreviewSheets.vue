@@ -1,28 +1,28 @@
 <script setup>
-//TODO: Store the lineups on a localStorage and update the localStorage accordingly
-import { useGroupPreviewStore, useRefreshStore } from '@/store'
-import axios from 'axios'
-import { onMounted, ref, watch } from 'vue'
-import { useRouter } from 'vue-router'
-import draggable from 'vuedraggable'
-import parseSheet from '@/scripts/parse-sheet'
-import { debounce } from '@/scripts/debounce'
+import { useGroupPreviewStore, useRefreshStore } from '@/store';
+import axios from 'axios';
+import { onMounted, ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
+import draggable from 'vuedraggable';
+import parseSheet from '@/scripts/parse-sheet';
+import { debounce } from '@/scripts/debounce';
 
-const router = useRouter()
+const router = useRouter();
 
 const transitionOptions = {
   animation: 150,
   group: 'description',
   disabled: false,
   ghostClass: 'ghost'
-}
+};
 
-const songNumbers = ref([])
-const orderedList = ref([])
-const selectedSong = ref(0)
-const isLoading = ref(false)
-const editSheetArrangement = ref(true)
-const clean = ref(null)
+const songNumbers = ref([]);
+const orderedList = ref([]);
+const selectedSong = ref(0);
+const isLoading = ref(false);
+const editSheetArrangement = ref(true);
+const clean = ref(null);
+const fontSize = ref(null);
 
 const getLineups = debounce(() => {
   const onFetch = async () => {
@@ -44,108 +44,110 @@ const getLineups = debounce(() => {
               return {
                 song,
                 order: index + 1
-              }
-            })
+              };
+            });
 
-            saveOrder()
-            localStorage.setItem('qotes_lineup', JSON.stringify(res.data))
+            saveOrder();
+            localStorage.setItem('qotes_lineup', JSON.stringify(res.data));
           } else {
             //Get the order from the stored version
-            let list = JSON.parse(localStorage.getItem('qotes_ordered_lineup'))
+            let list = JSON.parse(localStorage.getItem('qotes_ordered_lineup'));
 
-            songNumbers.value = list.map((e, index) => `Song ${index + 1}`)
+            songNumbers.value = list.map((e, index) => `Song ${index + 1}`);
             orderedList.value = list.map((sheet) => {
               res.data.forEach((e) => {
                 if (e.id === sheet.song.id) {
-                  sheet.song.content = e.content
+                  sheet.song.content = e.content;
                 }
-              })
-              return sheet
-            })
+              });
+              return sheet;
+            });
           }
 
-          setClean()
+          setClean();
         } else {
           // Clean the stored version if there's no lineup
           // This is necessary because the ui components depends on the stored version
-          orderedList.value = []
-          clean.value = null
-          localStorage.removeItem('qotes_ordered_lineup')
-          localStorage.removeItem('qotes_lineup')
+          orderedList.value = [];
+          clean.value = null;
+          localStorage.removeItem('qotes_ordered_lineup');
+          localStorage.removeItem('qotes_lineup');
         }
       })
       .catch((err) => {
         if (err.response.status == 401) {
-          router.push({ name: 'entry' })
+          router.push({ name: 'entry' });
         } else {
-          console.log(err)
+          console.log(err);
         }
       })
-      .finally(() => (isLoading.value = false))
-  }
+      .finally(() => (isLoading.value = false));
+  };
 
-  onFetch()
-})
+  onFetch();
+});
 
 onMounted(() => {
   //refresh when the sheet list is updated
   watch(
     () => useRefreshStore.toggle,
     () => {
-      isLoading.value = true
-      getLineups()
+      isLoading.value = true;
+      getLineups();
     },
     { immediate: true }
-  )
+  );
+
+  fontSize.value = localStorage.getItem('qotes_font_size');
 
   watch(
     () => useGroupPreviewStore.state,
     () => {
       if (useGroupPreviewStore.state) {
-        isLoading.value = true
-        getLineups()
+        isLoading.value = true;
+        getLineups();
       }
 
-      editSheetArrangement.value = true
+      editSheetArrangement.value = true;
     },
     { immediate: true }
-  )
+  );
 
   watch(
     () => selectedSong.value,
     () => {
-      setClean()
+      setClean();
     }
-  )
-})
+  );
+});
 
 function navBetweenSheets(direction) {
   if (direction === 'left' && selectedSong.value > 0) {
-    selectedSong.value--
+    selectedSong.value--;
   } else if (direction === 'right' && selectedSong.value < orderedList.value.length - 1) {
-    selectedSong.value++
+    selectedSong.value++;
   }
 }
 
 function saveOrder() {
-  localStorage.setItem('qotes_ordered_lineup', JSON.stringify(orderedList.value))
-  setClean()
+  localStorage.setItem('qotes_ordered_lineup', JSON.stringify(orderedList.value));
+  setClean();
 }
 
 function setClean() {
-  clean.value = parseSheet(orderedList.value[selectedSong.value].song.content)
+  clean.value = parseSheet(orderedList.value[selectedSong.value].song.content);
 }
 </script>
 
 <template>
-  <div class="relative h-full overflow-y-auto">
+  <div class="relative h-full">
     <div v-if="isLoading" class="flex h-full items-center justify-center">
       <AppLoader />
     </div>
 
     <template v-else-if="clean">
       <header
-        class="sticky h-[60px] max-h-[60px] top-0 z-10 flex flex-row items-center bg-doublemint-50 px-4 pb-2 pt-4"
+        class="sticky top-0 z-10 flex h-[60px] max-h-[60px] flex-row items-center bg-doublemint-50 px-4 pb-2 pt-4"
       >
         <div class="flex basis-1/3 justify-start">
           <AppButtonGhostIcon
@@ -155,12 +157,12 @@ function setClean() {
         </div>
 
         <!-- The Center of the header -->
-        <div class="min-w-0 flex grow flex-col text-center leading-none">
+        <div class="flex min-w-0 grow flex-col text-center leading-none">
           <template v-if="!editSheetArrangement">
             <p class="truncate">{{ orderedList[selectedSong].song.songTitle }}</p>
-            <p class="text-sm truncate">Song {{ selectedSong + 1 }}</p>
+            <p class="truncate text-sm">Song {{ selectedSong + 1 }}</p>
           </template>
-          <div v-else class="flex justify-center items-center">
+          <div v-else class="flex items-center justify-center">
             <p class="flex h-[34px] items-center font-normal lg:h-[38px]">Edit Order</p>
           </div>
         </div>
@@ -182,11 +184,12 @@ function setClean() {
         class="absolute bottom-0 right-0 z-10 h-[calc(100%-60px)] w-1/6"
       ></button>
 
+      <!-- Sheet content -->
       <Transition name="fade-down" mode="out-in">
         <div
           v-if="!editSheetArrangement"
           v-html="clean"
-          class="sheet-preview w-full overflow-auto whitespace-nowrap px-3 py-2 font-['Roboto_Mono'] lg:px-6"
+          class="sheet-preview h-[calc(100%-60px)] w-full overflow-x-auto overflow-y-scroll whitespace-nowrap px-3 py-2 font-['Roboto_Mono'] lg:px-6"
         ></div>
         <draggable
           v-else
@@ -196,7 +199,7 @@ function setClean() {
           tag="ul"
           handle=".handle"
           item-key="order"
-          class="space-y-2 overflow-y-auto px-3"
+          class="h-[calc(100%-60px)] space-y-2 overflow-y-scroll px-3 pb-3"
         >
           <template #item="{ element }">
             <li
@@ -219,5 +222,9 @@ function setClean() {
 <style scoped>
 .ghost {
   @apply border-doublemint-100 bg-doublemint-100 text-doublemint-100;
+}
+
+.sheet-preview {
+  font-size: v-bind("fontSize + 'px'");
 }
 </style>

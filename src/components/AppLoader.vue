@@ -12,7 +12,7 @@ const props = defineProps({
     type: String,
     default: 'default'
   }
-})
+});
 
 const states = {
   default: 'border-t-gray-950',
@@ -20,7 +20,7 @@ const states = {
   warning: 'border-t-amber-400',
   success: 'border-t-emerald-400',
   error: 'border-t-red-400'
-}
+};
 
 const thicknesses = {
   sm: 'border-b-[2px] border-x-[2px] border-t-[2px]',
@@ -29,7 +29,7 @@ const thicknesses = {
   xl: 'border-b-[16px border-x-[16px] border-t-[16px]',
   '2xl': 'border-b-[32px border-x-[32px] border-t-[32px]',
   '3xl': 'border-b-[48px border-x-[48px] border-t-[48px]'
-}
+};
 </script>
 
 <template>
