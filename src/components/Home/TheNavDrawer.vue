@@ -39,7 +39,7 @@ function changeTab(index) {
 
 function goToSettings() {
   useDrawerStore.close();
-  router.push({ name: 'account settings' });
+  router.push({ name: 'settings' });
   usePreviewStore.sheetID = '';
 }
 </script>
@@ -113,7 +113,7 @@ function goToSettings() {
             class="relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-3 transition-colors group-hover:bg-deadgreen-400/15 group-active:bg-deadgreen-400/25"
           >
             <span class="material-icons-round"> settings </span>
-            <p v-if="!isLoading">{{ fullName }}</p>
+            <p>Settings</p>
           </div>
         </button>
       </nav>
