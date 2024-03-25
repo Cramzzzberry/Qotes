@@ -22,6 +22,7 @@ const selectedSong = ref(0);
 const isLoading = ref(false);
 const editSheetArrangement = ref(true);
 const clean = ref(null);
+const fontSize = ref(null);
 
 const getLineups = debounce(() => {
   const onFetch = async () => {
@@ -96,6 +97,8 @@ onMounted(() => {
     },
     { immediate: true }
   );
+
+  fontSize.value = localStorage.getItem('qotes_font_size');
 
   watch(
     () => useGroupPreviewStore.state,
@@ -219,5 +222,9 @@ function setClean() {
 <style scoped>
 .ghost {
   @apply border-doublemint-100 bg-doublemint-100 text-doublemint-100;
+}
+
+.sheet-preview {
+  font-size: v-bind("fontSize + 'px'");
 }
 </style>

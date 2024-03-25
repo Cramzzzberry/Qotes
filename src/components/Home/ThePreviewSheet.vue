@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { usePreviewStore } from '@/store';
 import parseSheet from '@/scripts/parse-sheet';
@@ -14,7 +14,12 @@ const sheet = ref({
   content: ''
 });
 
+const fontSize = ref(null);
 const isLoading = ref(false);
+
+onMounted(() => {
+  fontSize.value = localStorage.getItem('qotes_font_size');
+});
 
 watch(
   () => usePreviewStore.state,
@@ -79,3 +84,9 @@ function goEdit() {
     ></div>
   </div>
 </template>
+
+<style scoped>
+.sheet-preview {
+  font-size: v-bind("fontSize + 'px'");
+}
+</style>

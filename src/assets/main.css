@@ -59,8 +59,12 @@
 }
 
 @layer utilities {
-  .sheet-preview {
+  /* .sheet-preview {
     @apply text-lg leading-[1.5];
+  } */
+
+  .sheet-preview {
+    @apply leading-[1.5];
   }
 
   .sheet-preview > hr {

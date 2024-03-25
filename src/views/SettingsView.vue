@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, inject } from 'vue';
+import { ref, onMounted, inject, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 import SectionDetails from '@/components/AccountSettings/SectionDetails.vue';
@@ -14,7 +14,11 @@ const currentAcc = ref({
   lastName: ''
 });
 
+const fontSize = ref(null);
+
 onMounted(async () => {
+  fontSize.value = localStorage.getItem('qotes_font_size');
+
   await axios({
     method: 'get',
     url: `${import.meta.env.VITE_API_DOMAIN}/user/${localStorage.getItem('qotes_userID')}`,
@@ -36,6 +40,9 @@ onMounted(async () => {
       }
     });
 });
+
+//save fontsize on each edit
+watch(fontSize, () => localStorage.setItem('qotes_font_size', fontSize.value));
 </script>
 
 <template>
@@ -60,15 +67,15 @@ onMounted(async () => {
             <div class="flex w-full flex-row items-center justify-between md:max-w-[540px]">
               <p>Preview sheet font size (px)</p>
               <input
+                v-model="fontSize"
                 class="w-16 rounded-xl border border-deadgreen-200 bg-transparent px-2 py-1 text-deadgreen-700 outline-none transition-colors hover:border-deadgreen-300 focus:border-deadgreen-700"
-                value="18"
                 type="number"
               />
             </div>
 
             <!-- dark mode -->
             <div class="flex w-full flex-row items-center justify-between md:max-w-[540px]">
-              <p>Enable dark mode (soon)</p>
+              <p class="opacity-50">Enable dark mode (soon)</p>
               <div class="flex w-16 items-center justify-center">
                 <input
                   class="accent-inlay-500 disabled:cursor-not-allowed"
