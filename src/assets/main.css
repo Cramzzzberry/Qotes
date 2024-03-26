@@ -37,7 +37,7 @@
   }
 
   html {
-    @apply bg-doublemint-50 font-['Outfit'] font-light text-deadgreen-700;
+    @apply bg-doublemint-50 font-['Outfit'] font-light text-deadgreen-700 dark:bg-doublemint-950;
   }
 
   button {

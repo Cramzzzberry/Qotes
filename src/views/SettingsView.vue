@@ -16,6 +16,7 @@ const currentAcc = ref({
 });
 
 const fontSize = ref(null);
+const darkMode = ref(false);
 
 onMounted(async () => {
   fontSize.value = localStorage.getItem('qotes_font_size');
@@ -46,6 +47,17 @@ const clean = parseSheet('>> Verse\nC D E F G A B\nSample Lyrics G#m CmM7');
 
 //save fontsize on each edit
 watch(fontSize, () => localStorage.setItem('qotes_font_size', fontSize.value));
+
+//save dark mode state on each edit
+watch(darkMode, () => {
+  if (darkMode.value) {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
+
+  // localStorage.setItem('qotes_dark_mode', fontSize.value);
+});
 </script>
 
 <template>
@@ -83,11 +95,11 @@ watch(fontSize, () => localStorage.setItem('qotes_font_size', fontSize.value));
 
             <!-- dark mode -->
             <div class="flex w-full flex-row items-center justify-between md:max-w-[540px]">
-              <p class="opacity-50">Enable dark mode (soon)</p>
+              <p>Enable dark mode (soon)</p>
               <div class="flex w-16 items-center justify-center">
                 <input
+                  v-model="darkMode"
                   class="accent-inlay-500 disabled:cursor-not-allowed"
-                  disabled
                   type="checkbox"
                 />
               </div>
