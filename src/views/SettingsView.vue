@@ -82,11 +82,8 @@ watch(darkMode, () => {
             <!-- Preview sheet font size -->
             <div class="flex w-full flex-row items-center justify-between md:max-w-[540px]">
               <p>Preview sheet font size (px)</p>
-              <input
-                v-model="fontSize"
-                class="w-16 rounded-xl border border-deadgreen-200 bg-transparent px-2 py-1 text-deadgreen-700 outline-none transition-colors hover:border-deadgreen-300 focus:border-deadgreen-700"
-                type="number"
-              />
+
+              <AppFormTextbox v-model="fontSize" type="number" class="w-20" />
             </div>
 
             <div
@@ -97,7 +94,7 @@ watch(darkMode, () => {
             <!-- dark mode -->
             <div class="flex w-full flex-row items-center justify-between md:max-w-[540px]">
               <p>Enable dark mode (soon)</p>
-              <div class="flex w-16 items-center justify-center">
+              <div class="flex w-20 items-center justify-center">
                 <input
                   v-model="darkMode"
                   class="accent-inlay-500 disabled:cursor-not-allowed"
