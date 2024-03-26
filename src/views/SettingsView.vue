@@ -93,7 +93,7 @@ watch(darkMode, () => {
 
             <!-- dark mode -->
             <div class="flex w-full flex-row items-center justify-between md:max-w-[540px]">
-              <p>Enable dark mode (soon)</p>
+              <p>Enable dark mode (beta)</p>
               <div class="flex w-20 items-center justify-center">
                 <input
                   v-model="darkMode"
