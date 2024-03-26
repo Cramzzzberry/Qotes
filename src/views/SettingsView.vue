@@ -64,7 +64,7 @@ watch(darkMode, () => {
 <template>
   <div class="flex h-full flex-col">
     <div class="w-full grow overflow-y-auto">
-      <header class="sticky top-0 bg-doublemint-50 pb-2 lg:px-14">
+      <header class="sticky top-0 bg-doublemint-50 pb-2 lg:px-14 dark:bg-neutral-900">
         <div class="place-self-start px-2 pb-2 pt-10">
           <AppButtonGhostIcon @click="$router.go(-1)" icon="arrow_back" />
         </div>
@@ -88,7 +88,7 @@ watch(darkMode, () => {
 
             <div
               v-html="clean"
-              class="sheet-preview h-[calc(100%-60px)] w-full rounded-xl border border-deadgreen-200 px-3 py-2 font-['Roboto_Mono'] lg:px-6"
+              class="sheet-preview h-[calc(100%-60px)] w-full rounded-xl border border-deadgreen-200 px-3 py-2 font-['Roboto_Mono'] lg:px-6 dark:border-slate-500"
             ></div>
 
             <!-- dark mode -->
@@ -105,7 +105,7 @@ watch(darkMode, () => {
           </div>
         </div>
 
-        <hr class="mx-2 my-4 border-deadgreen-200" />
+        <hr class="mx-2 my-4 border-gray-300 dark:border-stone-500" />
 
         <div class="px-3">
           <p class="text-lg font-semibold">Account</p>
@@ -117,7 +117,7 @@ watch(darkMode, () => {
               v-model:last-name="currentAcc.lastName"
             />
 
-            <hr class="m-4 border-gray-300" />
+            <hr class="m-4 border-gray-300 dark:border-stone-500" />
 
             <!-- delete account -->
             <SectionDeleteAccount />

@@ -37,7 +37,7 @@
   }
 
   html {
-    @apply bg-doublemint-50 font-['Outfit'] font-light text-deadgreen-700 dark:bg-neutral-900 dark:text-neutral-200;
+    @apply bg-doublemint-50 font-['Outfit'] font-light text-deadgreen-700 dark:bg-neutral-900 dark:text-deadgreen-300;
   }
 
   button,
@@ -77,11 +77,11 @@
   }
 
   .sheet-preview .chord {
-    @apply relative font-medium text-deadgreen-950;
+    @apply relative font-medium text-deadgreen-950 dark:text-deadgreen-50;
   }
 
   .sheet-preview .chord::before {
-    @apply absolute bottom-0 left-[-0.24rem] right-[-0.24rem] top-0 z-[-1] rounded-[4px] bg-deadgreen-200 content-null;
+    @apply absolute bottom-0 left-[-0.24rem] right-[-0.24rem] top-0 z-[-1] rounded-[4px] bg-deadgreen-200 content-null dark:bg-neutral-600;
   }
 
   .sheet-preview > .lyrics {
@@ -89,6 +89,6 @@
   }
 
   .sheet-preview > .song-section {
-    @apply font-medium text-inlay-500;
+    @apply font-medium text-inlay-500 dark:text-inlay-400;
   }
 }

@@ -147,7 +147,7 @@ function setClean() {
 
     <template v-else-if="clean">
       <header
-        class="sticky top-0 z-10 flex h-[60px] max-h-[60px] flex-row items-center bg-doublemint-50 px-4 pb-2 pt-4"
+        class="sticky top-0 z-10 flex h-[60px] max-h-[60px] flex-row items-center bg-doublemint-50 px-4 pb-2 pt-4 dark:bg-neutral-900"
       >
         <div class="flex basis-1/3 justify-start">
           <AppButtonGhostIcon
@@ -203,7 +203,7 @@ function setClean() {
         >
           <template #item="{ element }">
             <li
-              class="flex flex-row items-center gap-4 rounded-lg border border-inlay-200 bg-inlay-50 p-4"
+              class="flex flex-row items-center gap-4 rounded-lg border border-inlay-200 bg-inlay-50 p-4 dark:border-inlay-800 dark:bg-inlay-950"
             >
               <span class="material-icons-round handle cursor-move"> drag_handle </span>
               {{ element.song.songTitle }}
@@ -221,7 +221,7 @@ function setClean() {
 
 <style scoped>
 .ghost {
-  @apply border-doublemint-100 bg-doublemint-100 text-doublemint-100;
+  @apply border-doublemint-100/50 bg-doublemint-100/50 text-doublemint-100/50;
 }
 
 .sheet-preview {
