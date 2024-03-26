@@ -20,6 +20,7 @@ const darkMode = ref(false);
 
 onMounted(async () => {
   fontSize.value = localStorage.getItem('qotes_font_size');
+  darkMode.value = JSON.parse(localStorage.getItem('qotes_dark_mode'));
 
   await axios({
     method: 'get',
@@ -56,7 +57,7 @@ watch(darkMode, () => {
     document.documentElement.classList.remove('dark');
   }
 
-  // localStorage.setItem('qotes_dark_mode', fontSize.value);
+  localStorage.setItem('qotes_dark_mode', darkMode.value);
 });
 </script>
 
@@ -90,7 +91,7 @@ watch(darkMode, () => {
 
             <div
               v-html="clean"
-              class="sheet-preview h-[calc(100%-60px)] w-full rounded-xl border px-3 py-2 font-['Roboto_Mono'] lg:px-6"
+              class="sheet-preview h-[calc(100%-60px)] w-full rounded-xl border border-deadgreen-200 px-3 py-2 font-['Roboto_Mono'] lg:px-6"
             ></div>
 
             <!-- dark mode -->
@@ -107,7 +108,7 @@ watch(darkMode, () => {
           </div>
         </div>
 
-        <hr class="mx-2 my-4 border-gray-300" />
+        <hr class="mx-2 my-4 border-deadgreen-200" />
 
         <div class="px-3">
           <p class="text-lg font-semibold">Account</p>

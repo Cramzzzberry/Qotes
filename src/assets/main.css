@@ -37,10 +37,11 @@
   }
 
   html {
-    @apply bg-doublemint-50 font-['Outfit'] font-light text-deadgreen-700 dark:bg-doublemint-950;
+    @apply bg-doublemint-50 font-['Outfit'] font-light text-deadgreen-700 dark:bg-neutral-900 dark:text-neutral-200;
   }
 
-  button {
+  button,
+  input[type='checkbox'] {
     @apply cursor-pointer;
   }
 
