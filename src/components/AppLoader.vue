@@ -15,7 +15,7 @@ const props = defineProps({
 });
 
 const states = {
-  default: 'border-t-gray-950',
+  default: 'border-t-gray-950 dark:border-t-gray-50',
   info: 'border-t-blue-400',
   warning: 'border-t-amber-400',
   success: 'border-t-emerald-400',
@@ -35,7 +35,7 @@ const thicknesses = {
 <template>
   <span
     :class="[states[props.state], thicknesses[props.thickness]]"
-    class="size animate-spin rounded-full border-solid border-x-gray-950/20 border-b-gray-950/20"
+    class="size animate-spin rounded-full border-solid border-x-gray-950/20 border-b-gray-950/20 dark:border-x-gray-50/20 dark:border-b-gray-50/20"
   ></span>
 </template>
 

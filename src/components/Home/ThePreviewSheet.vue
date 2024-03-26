@@ -56,7 +56,9 @@ function goEdit() {
 
 <template>
   <div class="h-full overflow-y-auto">
-    <header class="sticky top-0 z-10 flex flex-row items-center bg-doublemint-50 px-4 pb-2 pt-4">
+    <header
+      class="sticky top-0 z-10 flex flex-row items-center bg-doublemint-50 px-4 pb-2 pt-4 dark:bg-neutral-900"
+    >
       <div class="flex basis-1/3 justify-start">
         <AppButtonGhostIcon @click="goEdit()" icon="edit_note" />
       </div>

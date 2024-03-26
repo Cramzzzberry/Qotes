@@ -16,9 +16,11 @@ const currentAcc = ref({
 });
 
 const fontSize = ref(null);
+const darkMode = ref(false);
 
 onMounted(async () => {
   fontSize.value = localStorage.getItem('qotes_font_size');
+  darkMode.value = JSON.parse(localStorage.getItem('qotes_dark_mode'));
 
   await axios({
     method: 'get',
@@ -46,12 +48,23 @@ const clean = parseSheet('>> Verse\nC D E F G A B\nSample Lyrics G#m CmM7');
 
 //save fontsize on each edit
 watch(fontSize, () => localStorage.setItem('qotes_font_size', fontSize.value));
+
+//save dark mode state on each edit
+watch(darkMode, () => {
+  if (darkMode.value) {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
+
+  localStorage.setItem('qotes_dark_mode', darkMode.value);
+});
 </script>
 
 <template>
   <div class="flex h-full flex-col">
     <div class="w-full grow overflow-y-auto">
-      <header class="sticky top-0 bg-doublemint-50 pb-2 lg:px-14">
+      <header class="sticky top-0 bg-doublemint-50 pb-2 lg:px-14 dark:bg-neutral-900">
         <div class="place-self-start px-2 pb-2 pt-10">
           <AppButtonGhostIcon @click="$router.go(-1)" icon="arrow_back" />
         </div>
@@ -69,25 +82,22 @@ watch(fontSize, () => localStorage.setItem('qotes_font_size', fontSize.value));
             <!-- Preview sheet font size -->
             <div class="flex w-full flex-row items-center justify-between md:max-w-[540px]">
               <p>Preview sheet font size (px)</p>
-              <input
-                v-model="fontSize"
-                class="w-16 rounded-xl border border-deadgreen-200 bg-transparent px-2 py-1 text-deadgreen-700 outline-none transition-colors hover:border-deadgreen-300 focus:border-deadgreen-700"
-                type="number"
-              />
+
+              <AppFormTextbox v-model="fontSize" type="number" class="w-20" />
             </div>
 
             <div
               v-html="clean"
-              class="sheet-preview h-[calc(100%-60px)] w-full rounded-xl border px-3 py-2 font-['Roboto_Mono'] lg:px-6"
+              class="sheet-preview h-[calc(100%-60px)] w-full rounded-xl border border-deadgreen-200 px-3 py-2 font-['Roboto_Mono'] lg:px-6 dark:border-slate-500"
             ></div>
 
             <!-- dark mode -->
             <div class="flex w-full flex-row items-center justify-between md:max-w-[540px]">
-              <p class="opacity-50">Enable dark mode (soon)</p>
-              <div class="flex w-16 items-center justify-center">
+              <p>Enable dark mode (beta)</p>
+              <div class="flex w-20 items-center justify-center">
                 <input
+                  v-model="darkMode"
                   class="accent-inlay-500 disabled:cursor-not-allowed"
-                  disabled
                   type="checkbox"
                 />
               </div>
@@ -95,7 +105,7 @@ watch(fontSize, () => localStorage.setItem('qotes_font_size', fontSize.value));
           </div>
         </div>
 
-        <hr class="mx-2 my-4 border-gray-300" />
+        <hr class="mx-2 my-4 border-gray-300 dark:border-stone-500" />
 
         <div class="px-3">
           <p class="text-lg font-semibold">Account</p>
@@ -107,7 +117,7 @@ watch(fontSize, () => localStorage.setItem('qotes_font_size', fontSize.value));
               v-model:last-name="currentAcc.lastName"
             />
 
-            <hr class="m-4 border-gray-300" />
+            <hr class="m-4 border-gray-300 dark:border-stone-500" />
 
             <!-- delete account -->
             <SectionDeleteAccount />

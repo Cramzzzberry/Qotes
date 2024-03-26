@@ -46,7 +46,7 @@ function goToSettings() {
 
 <template>
   <!-- main content -->
-  <div class="h-svh overflow-hidden bg-doublemint-50">
+  <div class="h-svh overflow-hidden">
     <slot />
   </div>
 
