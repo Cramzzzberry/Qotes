@@ -31,7 +31,11 @@ const states = {
   >
     <span
       v-if="props.label"
-      :class="props.state === 'error' ? 'text-red-400' : 'text-gray-500'"
+      :class="
+        props.state === 'error'
+          ? 'text-red-400'
+          : 'text-gray-500   dark:text-stone-400 dark:group-focus-within:text-stone-200'
+      "
       class="px-1 font-light transition-colors group-focus-within:text-gray-950"
     >
       {{ props.label }}
