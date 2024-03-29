@@ -3,8 +3,8 @@ import { ref, onMounted, inject, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 import parseSheet from '@/scripts/parse-sheet';
-import SectionDetails from '@/components/AccountSettings/SectionDetails.vue';
-import SectionDeleteAccount from '@/components/AccountSettings/SectionDeleteAccount.vue';
+import SectionDetails from '@/components/Settings/SectionDetails.vue';
+import SectionDeleteAccount from '@/components/Settings/SectionDeleteAccount.vue';
 
 const toastStore = inject('toastStore');
 const router = useRouter();
@@ -59,6 +59,35 @@ watch(darkMode, () => {
 
   localStorage.setItem('qotes_dark_mode', darkMode.value);
 });
+
+const isLoggingOut = ref(false);
+async function logout() {
+  isLoggingOut.value = true;
+  await axios({
+    method: 'delete',
+    url: `${import.meta.env.VITE_API_DOMAIN}/user`,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('qotes_token')}`
+    }
+  })
+    .then(() => toastStore.addToast('Successfully logged out', 3000))
+    .catch((err) => {
+      if (err.response.status == 401) {
+        router.push({ name: 'entry' });
+      } else {
+        toastStore.addToast(err.response.data, 3000);
+      }
+    })
+    .finally(() => {
+      isLoggingOut.value = false;
+      Object.keys(localStorage).forEach(function (key) {
+        if (/^qotes_/.test(key) && key !== 'qotes_dark_mode' && key !== 'qotes_font_size') {
+          localStorage.removeItem(key);
+        }
+      });
+      router.push({ name: 'entry' });
+    });
+}
 </script>
 
 <template>
@@ -122,6 +151,14 @@ watch(darkMode, () => {
             <!-- delete account -->
             <SectionDeleteAccount />
           </div>
+        </div>
+
+        <hr class="mx-2 my-4 border-gray-300 dark:border-stone-500" />
+
+        <div class="px-3">
+          <AppButtonSolid @click="logout()" state="warning" :is-loading="isLoggingOut" wide>
+            Logout
+          </AppButtonSolid>
         </div>
       </div>
     </div>

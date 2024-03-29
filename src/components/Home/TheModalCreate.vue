@@ -85,7 +85,7 @@ async function submit() {
       <!-- panel -->
       <div
         :class="modal.toggle ? 'scale-100 opacity-100' : 'scale-95 opacity-0'"
-        class="max-h-[calc(100svh-32px)] w-full max-w-[720px] space-y-2 overflow-hidden rounded-3xl bg-doublemint-50 p-3 transition-all"
+        class="max-h-[calc(100svh-32px)] w-full max-w-[720px] space-y-2 overflow-hidden rounded-3xl bg-doublemint-50 p-3 transition-all dark:bg-neutral-800"
       >
         <header class="flex flex-row items-center justify-between p-1">
           <p class="text-xl font-medium leading-none">Create Sheet</p>

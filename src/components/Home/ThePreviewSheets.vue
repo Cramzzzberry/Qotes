@@ -147,7 +147,7 @@ function setClean() {
 
     <template v-else-if="clean">
       <header
-        class="sticky top-0 z-10 flex h-[60px] max-h-[60px] flex-row items-center bg-doublemint-50 px-4 pb-2 pt-4 dark:bg-neutral-900"
+        class="sticky top-0 z-10 flex h-[60px] max-h-[60px] flex-row items-center bg-doublemint-50 px-4 pb-2 pt-4 dark:bg-neutral-800"
       >
         <div class="flex basis-1/3 justify-start">
           <AppButtonGhostIcon
