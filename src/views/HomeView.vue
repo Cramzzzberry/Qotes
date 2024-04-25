@@ -1,8 +1,7 @@
 <script setup>
-import { useHomeTabStore, usePreviewStore, useGroupPreviewStore } from '@/store';
+import { useHomeTabStore, useGroupPreviewStore } from '@/store';
 import TheNavDrawer from '@/components/Home/TheNavDrawer.vue';
 import TheBottomPanel from '@/components/Home/TheBottomPanel.vue';
-import ThePreviewSheet from '@/components/Home/ThePreviewSheet.vue';
 import ThePreviewSheets from '@/components/Home/ThePreviewSheets.vue';
 import TabAll from '@/components/Home/Tabs/TabAll.vue';
 import TabLineup from '@/components/Home/Tabs/TabLineup.vue';
@@ -19,10 +18,6 @@ const tabs = [TabLineup, TabImportant, TabAll];
       </KeepAlive>
     </Transition>
   </TheNavDrawer>
-
-  <TheBottomPanel v-model="usePreviewStore.state">
-    <ThePreviewSheet />
-  </TheBottomPanel>
 
   <TheBottomPanel v-model="useGroupPreviewStore.state">
     <ThePreviewSheets />

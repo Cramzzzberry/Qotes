@@ -1,7 +1,7 @@
 <script setup>
 import { useRouter } from 'vue-router';
 import { ref, onMounted, inject } from 'vue';
-import { useHomeTabStore, useDrawerStore, usePreviewStore } from '@/store';
+import { useHomeTabStore, useDrawerStore } from '@/store';
 import axios from 'axios';
 
 const toastStore = inject('toastStore');
@@ -40,7 +40,6 @@ function changeTab(index) {
 function goToSettings() {
   useDrawerStore.close();
   router.push({ name: 'settings' });
-  usePreviewStore.sheetID = '';
 }
 </script>
 
