@@ -38,7 +38,7 @@ const props = defineProps({
       <!-- panel -->
       <div
         :class="toggle ? 'scale-100 opacity-100' : 'scale-95 opacity-0'"
-        class="max-h-[calc(100svh-32px)] w-full max-w-[620px] space-y-2 overflow-hidden rounded-3xl bg-doublemint-50 px-4 pb-3 pt-5 transition-all dark:bg-neutral-800"
+        class="max-h-[calc(100svh-32px)] w-full max-w-[620px] space-y-2 overflow-hidden rounded-3xl bg-neutral-50 px-4 pb-3 pt-5 transition-all dark:bg-neutral-800"
       >
         <header class="flex flex-row items-center justify-between">
           <p class="text-xl font-medium leading-none">{{ props.title }}</p>
@@ -48,11 +48,21 @@ const props = defineProps({
           {{ props.description }}
         </p>
 
-        <div class="flex flex-col gap-1">
-          <AppButtonGhost @click="$emit('confirm')" :state="props.confirmState" size="sm" wide>
+        <div class="flex flex-col gap-1 lg:flex-row-reverse">
+          <AppButtonGhost
+            @click="$emit('confirm')"
+            :state="props.confirmState"
+            size="sm"
+            class="w-full lg:w-fit lg:px-4"
+          >
             {{ props.confirmLabel }}
           </AppButtonGhost>
-          <AppButtonGhost @click="toggle = false" :state="props.cancelState" size="sm" wide>
+          <AppButtonGhost
+            @click="toggle = false"
+            :state="props.cancelState"
+            size="sm"
+            class="w-full lg:w-fit lg:px-4"
+          >
             {{ props.cancelLabel }}
           </AppButtonGhost>
         </div>

@@ -85,7 +85,7 @@ async function submit() {
       <!-- panel -->
       <div
         :class="modal.toggle ? 'scale-100 opacity-100' : 'scale-95 opacity-0'"
-        class="max-h-[calc(100svh-32px)] w-full max-w-[720px] space-y-2 overflow-hidden rounded-3xl bg-doublemint-50 p-3 transition-all dark:bg-neutral-800"
+        class="max-h-[calc(100svh-32px)] w-full max-w-[720px] space-y-2 overflow-hidden rounded-3xl bg-neutral-50 p-3 transition-all dark:bg-neutral-800"
       >
         <header class="flex flex-row items-center justify-between p-1">
           <p class="text-xl font-medium leading-none">Create Sheet</p>
@@ -118,7 +118,7 @@ async function submit() {
                 <input
                   v-model="createSheet.lineup"
                   type="checkbox"
-                  class="cursor-pointer accent-doublemint-200"
+                  class="cursor-pointer accent-emerald-400"
                 />
                 <p class="pointer-events-none pb-[2px]">Lineup</p>
               </label>
@@ -128,7 +128,7 @@ async function submit() {
                 <input
                   v-model="createSheet.important"
                   type="checkbox"
-                  class="cursor-pointer accent-doublemint-200"
+                  class="cursor-pointer accent-emerald-400"
                 />
                 <p class="pointer-events-none pb-[2px]">Important</p>
               </label>

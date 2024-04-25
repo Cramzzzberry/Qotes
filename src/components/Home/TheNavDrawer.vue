@@ -64,18 +64,18 @@ function goToSettings() {
     <!-- panel -->
     <div
       :class="useDrawerStore.state ? 'translate-x-0' : '-translate-x-full'"
-      class="absolute left-0 top-0 h-full w-5/6 max-w-[420px] overflow-hidden rounded-r-3xl border-y-8 border-r-8 border-inlay-100 bg-doublemint-200 p-2 transition-transform duration-500"
+      class="absolute left-0 top-0 h-full w-5/6 max-w-[420px] overflow-hidden rounded-r-3xl bg-neutral-50 p-2 transition-transform duration-500"
     >
-      <nav class="flex h-full w-full flex-col justify-between font-normal text-deadgreen-400">
+      <nav class="flex h-full w-full flex-col justify-between font-normal text-neutral-500">
         <div class="grid auto-rows-auto gap-1 pt-12">
           <span class="px-2 text-sm text-deadgreen-500"> Categories </span>
           <button
             @click="changeTab(0)"
-            :class="useHomeTabStore.index === 0 ? 'text-deadgreen-600' : ''"
+            :class="useHomeTabStore.index === 0 ? 'text-neutral-700' : ''"
             class="group transition-colors"
           >
             <div
-              class="relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-3 transition-colors group-hover:bg-deadgreen-400/15 group-active:bg-deadgreen-400/25"
+              class="relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-3 transition-colors group-hover:bg-stone-400/15 group-active:bg-deadgreen-400/25"
             >
               <span class="material-icons-round"> push_pin </span>
               <p>Lineup</p>
@@ -83,11 +83,11 @@ function goToSettings() {
           </button>
           <button
             @click="changeTab(1)"
-            :class="useHomeTabStore.index === 1 ? 'text-deadgreen-600' : ''"
+            :class="useHomeTabStore.index === 1 ? 'text-neutral-700' : ''"
             class="group transition-colors"
           >
             <div
-              class="relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-3 transition-colors group-hover:bg-deadgreen-400/15 group-active:bg-deadgreen-400/25"
+              class="relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-3 transition-colors group-hover:bg-stone-400/15 group-active:bg-deadgreen-400/25"
             >
               <span class="material-icons-round"> emoji_objects </span>
               <p>Important</p>
@@ -95,11 +95,11 @@ function goToSettings() {
           </button>
           <button
             @click="changeTab(2)"
-            :class="useHomeTabStore.index === 2 ? 'text-deadgreen-600' : ''"
+            :class="useHomeTabStore.index === 2 ? 'text-neutral-700' : ''"
             class="group transition-colors"
           >
             <div
-              class="relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-3 transition-colors group-hover:bg-deadgreen-400/15 group-active:bg-deadgreen-400/25"
+              class="relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-3 transition-colors group-hover:bg-stone-400/15 group-active:bg-deadgreen-400/25"
             >
               <span class="material-icons-round"> view_stream </span>
               <p>All</p>
@@ -109,7 +109,7 @@ function goToSettings() {
 
         <button @click="goToSettings()" class="group transition-colors">
           <div
-            class="relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-3 transition-colors group-hover:bg-deadgreen-400/15 group-active:bg-deadgreen-400/25"
+            class="relative flex w-full flex-row items-center gap-2 rounded-2xl px-2 py-3 transition-colors group-hover:bg-stone-400/15 group-active:bg-deadgreen-400/25"
           >
             <span class="material-icons-round"> settings </span>
             <p>Settings</p>

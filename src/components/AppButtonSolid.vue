@@ -22,7 +22,7 @@ const props = defineProps({
 
 const states = {
   default:
-    'border-transparent bg-doublemint-200 text-deadgreen-700 hover:enabled:bg-doublemint-300 active:enabled:bg-doublemint-400',
+    'border-transparent bg-emerald-400 text-emerald-950 hover:enabled:bg-emerald-500 active:enabled:bg-emerald-600',
   info: 'border-transparent bg-blue-400 text-blue-950 hover:enabled:bg-blue-500 active:enabled:bg-blue-600',
   warning:
     'border-transparent bg-amber-400 text-amber-950 hover:enabled:bg-amber-500 active:enabled:bg-amber-600',

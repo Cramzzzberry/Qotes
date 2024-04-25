@@ -21,7 +21,7 @@ const props = defineProps({
 });
 
 const states = {
-  default: 'text-deadgreen-700',
+  default: 'text-neutral-700',
   info: 'text-blue-400',
   warning: 'text-amber-400',
   success: 'text-emerald-400',

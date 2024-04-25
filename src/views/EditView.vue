@@ -98,7 +98,7 @@ async function saveSheet() {
     <TheContent v-model:content="sheet.content" v-model:preview="preview" />
 
     <!-- the footer -->
-    <div class="w-full shrink-0 bg-doublemint-100 px-4 py-3 lg:px-16 dark:bg-neutral-800">
+    <div class="w-full shrink-0 bg-neutral-100 px-4 py-3 lg:px-16 dark:bg-neutral-800">
       <div class="flex flex-row items-center justify-end">
         <div class="invisible h-6 w-6">Create</div>
         <p class="grow text-center text-sm font-normal">{{ contentLength }} of 5000</p>
