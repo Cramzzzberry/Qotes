@@ -1,7 +1,7 @@
 <script setup>
 import { useHomeTabStore, usePreviewStore, useGroupPreviewStore } from '@/store';
 import TheNavDrawer from '@/components/Home/TheNavDrawer.vue';
-import TheSlidingPanel from '@/components/Home/TheSlidingPanel.vue';
+import TheBottomPanel from '@/components/Home/TheBottomPanel.vue';
 import ThePreviewSheet from '@/components/Home/ThePreviewSheet.vue';
 import ThePreviewSheets from '@/components/Home/ThePreviewSheets.vue';
 import TabAll from '@/components/Home/Tabs/TabAll.vue';
@@ -20,11 +20,11 @@ const tabs = [TabLineup, TabImportant, TabAll];
     </Transition>
   </TheNavDrawer>
 
-  <TheSlidingPanel v-model="usePreviewStore.state">
+  <TheBottomPanel v-model="usePreviewStore.state">
     <ThePreviewSheet />
-  </TheSlidingPanel>
+  </TheBottomPanel>
 
-  <TheSlidingPanel v-model="useGroupPreviewStore.state">
+  <TheBottomPanel v-model="useGroupPreviewStore.state">
     <ThePreviewSheets />
-  </TheSlidingPanel>
+  </TheBottomPanel>
 </template>
