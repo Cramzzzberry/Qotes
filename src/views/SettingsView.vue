@@ -103,7 +103,7 @@ async function logout() {
         </div>
       </header>
 
-      <div class="flex flex-col gap-1 pb-4 lg:px-14">
+      <div class="flex flex-col gap-1 pb-4 lg:max-w-[1024px] lg:px-14">
         <div class="px-3">
           <p class="text-lg font-semibold">General</p>
 
