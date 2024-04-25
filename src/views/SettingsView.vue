@@ -93,7 +93,7 @@ async function logout() {
 <template>
   <div class="flex h-full flex-col">
     <div class="w-full grow overflow-y-auto">
-      <header class="sticky top-0 bg-doublemint-50 pb-2 lg:px-14 dark:bg-neutral-900">
+      <header class="sticky top-0 bg-neutral-50 pb-2 lg:px-14 dark:bg-neutral-900">
         <div class="place-self-start px-2 pb-2 pt-10">
           <AppButtonGhostIcon @click="$router.go(-1)" icon="arrow_back" />
         </div>
@@ -103,7 +103,7 @@ async function logout() {
         </div>
       </header>
 
-      <div class="flex flex-col gap-1 pb-4 lg:px-14">
+      <div class="flex flex-col gap-1 pb-4 lg:max-w-[1024px] lg:px-14">
         <div class="px-3">
           <p class="text-lg font-semibold">General</p>
 
@@ -117,7 +117,7 @@ async function logout() {
 
             <div
               v-html="clean"
-              class="sheet-preview h-[calc(100%-60px)] w-full rounded-xl border border-deadgreen-200 px-3 py-2 font-['Roboto_Mono'] lg:px-6 dark:border-slate-500"
+              class="sheet-preview h-[calc(100%-60px)] w-full rounded-xl border border-stone-300 px-3 py-2 font-['Roboto_Mono'] lg:px-6 dark:border-slate-500"
             ></div>
 
             <!-- dark mode -->

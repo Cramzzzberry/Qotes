@@ -1,5 +1,5 @@
 <script setup>
-import { usePreviewStore, useRefreshStore } from '@/store';
+import { useRefreshStore } from '@/store';
 import { onMounted, ref, watch, inject } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
@@ -88,15 +88,6 @@ onMounted(() => {
     }
   });
 });
-
-function preview(id) {
-  usePreviewStore.open();
-
-  //did this to prevent refetch
-  if (id !== usePreviewStore.sheetID) {
-    usePreviewStore.sheetID = id;
-  }
-}
 </script>
 
 <template>
@@ -105,15 +96,15 @@ function preview(id) {
       <li
         v-for="sheet in list"
         :key="sheet.id"
-        class="flex max-h-20 flex-row overflow-hidden rounded-2xl bg-inlay-300/10 hover:bg-inlay-300/25 border border-transparent transition-colors duration-75"
+        class="flex max-h-20 flex-row overflow-hidden rounded-2xl border border-transparent bg-stone-400/10 transition-colors duration-75 hover:bg-stone-400/25"
       >
         <!-- main button -->
         <button
-          @click="preview(sheet.id)"
-          class="flex min-w-0 grow flex-row items-center active:bg-inlay-300/30 text-start"
+          @click="$router.push({ name: 'edit', params: { id: sheet.id } })"
+          class="flex min-w-0 grow flex-row items-center text-start active:bg-neutral-300/30"
         >
           <span
-            class="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-doublemint-200 text-deadgreen-600 text-3xl font-['Varela_Round'] font-bold"
+            class="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-neutral-800 font-['Varela_Round'] text-3xl font-bold text-neutral-50"
           >
             {{ sheet.songKey }}
           </span>
@@ -143,7 +134,7 @@ function preview(id) {
             v-model="selectionStore.items.value"
             :value="`${sheet.id}---${sheet.important}---${sheet.lineup}`"
             type="checkbox"
-            class="relative cursor-pointer rounded-full accent-inlay-500 before:absolute before:-bottom-5 before:-left-5 before:-right-5 before:-top-5 before:rounded-full before:content-null hover:enabled:before:bg-deadgreen-400/15 active:enabled:before:bg-deadgreen-400/25 disabled:cursor-not-allowed disabled:opacity-50"
+            class="relative cursor-pointer rounded-full accent-stone-500 before:absolute before:-bottom-5 before:-left-5 before:-right-5 before:-top-5 before:rounded-full before:content-null hover:enabled:before:bg-deadgreen-400/15 active:enabled:before:bg-deadgreen-400/25 disabled:cursor-not-allowed disabled:opacity-50"
           />
         </label>
       </li>
@@ -151,7 +142,7 @@ function preview(id) {
 
     <div
       v-if="showMoreLoading"
-      class="flex w-full py-4 items-center justify-center"
+      class="flex w-full items-center justify-center py-4"
       ref="showMoreLoadRef"
     >
       <AppLoader />

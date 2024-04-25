@@ -138,7 +138,7 @@ async function unpinToLineup() {
 </script>
 
 <template>
-  <div class="w-full shrink-0 bg-doublemint-100 px-4 py-3 lg:px-16 dark:bg-neutral-800">
+  <div class="w-full shrink-0 bg-neutral-100 px-4 py-3 lg:px-16 dark:bg-neutral-800">
     <Transition name="fade-up" mode="out-in">
       <div v-if="!selectionStore.isToggled.value" class="flex flex-row items-center">
         <slot name="left-button">

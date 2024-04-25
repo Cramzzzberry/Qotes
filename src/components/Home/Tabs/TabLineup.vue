@@ -16,9 +16,9 @@ const lineup = ref(false);
       <TabHeader v-model:search="search" v-model:filter="filter" heading="Lineup" />
 
       <div
-        class="mx-2 mb-2 rounded-2xl bg-deadgreen-400 px-12 py-6 text-center font-normal text-inlay-50 lg:mx-16"
+        class="mx-2 mb-2 rounded-2xl bg-emerald-400 px-12 py-6 text-center font-normal text-emerald-950 lg:mx-16"
       >
-        <p>Where you pin all sheets that's considered as part of the current lineup</p>
+        <p>Where you pin all sheets that are part of the current lineup</p>
       </div>
 
       <!-- sheet list -->
