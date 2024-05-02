@@ -18,7 +18,7 @@ const model = defineModel();
       <!-- panel -->
       <div
         :class="model ? 'translate-y-0 md:translate-y-8' : 'translate-y-full'"
-        class="absolute left-0 top-0 h-[calc(100vh-32px)] w-full overflow-hidden bg-neutral-50 transition-transform duration-500 md:left-1/2 md:w-3/4 md:-translate-x-1/2 md:rounded-t-3xl dark:bg-neutral-800"
+        class="absolute left-0 top-0 h-full w-full overflow-hidden bg-neutral-50 transition-transform duration-500 md:left-1/2 md:h-[calc(100vh-32px)] md:w-3/4 md:-translate-x-1/2 md:rounded-t-3xl dark:bg-neutral-800"
       >
         <slot />
       </div>
