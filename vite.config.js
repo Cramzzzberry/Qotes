@@ -17,7 +17,7 @@ export default defineConfig({
         short_name: 'Qotes',
         start_url: '/qotes/',
         display: 'standalone',
-        background_color: '#f7f8ed',
+        background_color: '#fafafa',
         lang: 'en',
         scope: '/qotes/',
         icons: [
