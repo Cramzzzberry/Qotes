@@ -63,5 +63,5 @@ function isSongSection(str) {
 }
 
 function isInfo(str) {
-  return /\*.*\*/.test(str);
+  return /\*.+\*/.test(str);
 }
