@@ -93,7 +93,7 @@ async function logout() {
 <template>
   <div class="flex h-full flex-col">
     <div class="w-full grow overflow-y-auto">
-      <header class="sticky top-0 bg-neutral-50 pb-2 lg:px-14 dark:bg-neutral-900">
+      <header class="sticky top-0 z-10 bg-neutral-50 pb-2 lg:px-14 dark:bg-neutral-900">
         <div class="place-self-start px-2 pb-2 pt-10">
           <AppButtonGhostIcon @click="$router.go(-1)" icon="arrow_back" />
         </div>
