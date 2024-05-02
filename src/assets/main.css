@@ -92,7 +92,7 @@
     @apply font-medium text-blue-400 dark:text-inlay-400;
   }
 
-  .sheet-preview > .info {
+  .sheet-preview .info {
     @apply font-medium text-red-400 dark:text-inlay-400;
   }
 }
