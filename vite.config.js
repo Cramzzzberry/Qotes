@@ -1,8 +1,8 @@
-import { fileURLToPath, URL } from 'node:url'
+import { fileURLToPath, URL } from 'node:url';
 
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import { VitePWA } from 'vite-plugin-pwa'
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,6 +10,8 @@ export default defineConfig({
   plugins: [
     vue(),
     VitePWA({
+      registerType: 'prompt',
+      includeAssets: ['**/*'],
       manifest: {
         name: 'Qotes',
         short_name: 'Qotes',
@@ -55,4 +57,4 @@ export default defineConfig({
   build: {
     outDir: 'docs'
   }
-})
+});
