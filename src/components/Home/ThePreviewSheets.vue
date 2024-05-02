@@ -213,9 +213,19 @@ function setClean() {
       </Transition>
     </template>
 
-    <div v-else class="flex h-full items-center justify-center">
-      Create or Pin a sheet on lineup to preview
-    </div>
+    <template v-else>
+      <header
+        class="sticky top-0 flex h-[60px] max-h-[60px] flex-row items-center justify-end px-4 pb-2 pt-4"
+      >
+        <div class="flex basis-1/3 justify-end">
+          <AppButtonGhostIcon @click="useGroupPreviewStore.close()" icon="close" />
+        </div>
+      </header>
+
+      <div class="flex h-[calc(100%-60px)] items-center justify-center">
+        Create or Pin a sheet on lineup to preview
+      </div>
+    </template>
   </div>
 </template>
 
