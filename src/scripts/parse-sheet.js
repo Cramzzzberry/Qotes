@@ -24,8 +24,7 @@ export default function parseSheet(input) {
       //if it is an info
       parsedStr = str.replace(/\[/, '<span class="info">');
       parsedStr = parsedStr.replace(/\]/, '</span>');
-      console.log(parsedStr);
-      parsedLineOfStrs.push(parsedStr);
+      parsedLineOfStrs.push(`<div>${parsedStr}</div>`);
     } else {
       //if there is no prefix or one liner syntax like --- for hr
       let parsedPhrases = [];
