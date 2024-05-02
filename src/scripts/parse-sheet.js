@@ -20,6 +20,12 @@ export default function parseSheet(input) {
     } else if (isSongSection(str)) {
       parsedStr = str.replace(/>> /, '');
       parsedLineOfStrs.push(`<div class="song-section">${parsedStr}</div>`);
+    } else if (isInfo(str)) {
+      //if it is an info
+      parsedStr = str.replace(/\[/, '<span class="info">');
+      parsedStr = parsedStr.replace(/\]/, '</span>');
+      console.log(parsedStr);
+      parsedLineOfStrs.push(parsedStr);
     } else {
       //if there is no prefix or one liner syntax like --- for hr
       let parsedPhrases = [];
@@ -29,10 +35,6 @@ export default function parseSheet(input) {
         if (isChord(songEntity)) {
           //if it is a chord
           parsedPhrases.push(`<span class="chord">${songEntity}</span>`);
-        } else if (isInfo(songEntity)) {
-          //if it is an info
-          let parsedSongEntity = songEntity.replace(/\*/g, '');
-          parsedPhrases.push(`<span class="info">${parsedSongEntity}</span>`);
         } else {
           //if it is a lyrics
           parsedPhrases.push(songEntity);
@@ -63,5 +65,5 @@ function isSongSection(str) {
 }
 
 function isInfo(str) {
-  return /\*.+\*/.test(str);
+  return /\[.+\]/.test(str);
 }
