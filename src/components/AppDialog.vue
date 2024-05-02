@@ -53,7 +53,7 @@ const props = defineProps({
             @click="$emit('confirm')"
             :state="props.confirmState"
             size="sm"
-            class="w-full lg:w-fit lg:px-4"
+            class="w-full justify-center lg:w-fit lg:px-4"
           >
             {{ props.confirmLabel }}
           </AppButtonGhost>
@@ -61,7 +61,7 @@ const props = defineProps({
             @click="toggle = false"
             :state="props.cancelState"
             size="sm"
-            class="w-full lg:w-fit lg:px-4"
+            class="w-full justify-center lg:w-fit lg:px-4"
           >
             {{ props.cancelLabel }}
           </AppButtonGhost>

@@ -74,12 +74,26 @@ onDeactivated(() => (visibleHeading.value = false));
     <div class="flex shrink-0 flex-row items-center gap-1 place-self-start px-2">
       <AppButtonGhostIcon @click="useDrawerStore.open()" icon="menu" />
 
-      <p
-        :class="visibleHeading ? 'translate-x-0 opacity-100' : '-translate-x-1 opacity-0'"
-        class="text-2xl font-medium leading-none transition-all ease-in-out"
-      >
-        {{ props.heading }}
-      </p>
+      <Transition name="fade-down" mode="out-in" v-show="visibleHeading">
+        <p v-if="!selectionStore.isToggled.value" class="text-2xl font-medium leading-none">
+          {{ props.heading }}
+        </p>
+
+        <div v-else class="flex grow flex-row items-center justify-between pr-1">
+          <p class="text-xl font-medium leading-none">Selected {{ selectionStore.getLength }}</p>
+
+          <div class="flex flex-row items-center gap-1">
+            <AppButtonGhostIcon
+              @click="toggle = true"
+              state="error"
+              icon="delete"
+              :is-loading="isLoading"
+              :disabled="!selectionStore.hasItems.value || isLoading"
+            />
+            <AppButtonGhostIcon @click="selectionStore.isToggled.value = false" icon="clear" />
+          </div>
+        </div>
+      </Transition>
     </div>
 
     <AppDialog
@@ -97,19 +111,20 @@ onDeactivated(() => (visibleHeading.value = false));
       <p v-if="!selectionStore.isToggled.value" class="px-3 text-3xl font-medium leading-none">
         {{ props.heading }}
       </p>
-      <div v-else class="flex flex-row items-center justify-between pl-2 pr-3">
-        <div class="flex flex-row items-center gap-1">
-          <AppButtonGhostIcon @click="selectionStore.isToggled.value = false" icon="clear" />
-          <p class="text-3xl font-medium leading-none">Selected {{ selectionStore.getLength }}</p>
-        </div>
 
-        <AppButtonGhostIcon
-          @click="toggle = true"
-          state="error"
-          icon="delete"
-          :is-loading="isLoading"
-          :disabled="!selectionStore.hasItems.value || isLoading"
-        />
+      <div v-else class="flex flex-row items-center justify-between pl-2 pr-3">
+        <p class="text-3xl font-medium leading-none">Selected {{ selectionStore.getLength }}</p>
+
+        <div class="flex flex-row items-center gap-1">
+          <AppButtonGhostIcon
+            @click="toggle = true"
+            state="error"
+            icon="delete"
+            :is-loading="isLoading"
+            :disabled="!selectionStore.hasItems.value || isLoading"
+          />
+          <AppButtonGhostIcon @click="selectionStore.isToggled.value = false" icon="clear" />
+        </div>
       </div>
     </Transition>
 
