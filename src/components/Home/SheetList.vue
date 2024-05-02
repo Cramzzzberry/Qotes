@@ -96,7 +96,7 @@ onMounted(() => {
       <li
         v-for="sheet in list"
         :key="sheet.id"
-        class="flex max-h-20 flex-row overflow-hidden rounded-2xl border border-transparent bg-stone-400/10 transition-colors duration-75 hover:bg-stone-400/25"
+        class="flex max-h-20 flex-row overflow-hidden rounded-2xl bg-stone-400/10 transition-colors duration-75 hover:bg-stone-400/25"
       >
         <!-- main button -->
         <button
@@ -141,7 +141,7 @@ onMounted(() => {
     </ul>
 
     <div
-      v-if="showMoreLoading"
+      v-show="showMoreLoading"
       class="flex w-full items-center justify-center py-4"
       ref="showMoreLoadRef"
     >
