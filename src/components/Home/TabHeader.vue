@@ -112,7 +112,7 @@ onDeactivated(() => (visibleHeading.value = false));
         {{ props.heading }}
       </p>
 
-      <div v-else class="flex flex-row items-center justify-between pl-2 pr-3">
+      <div v-else class="flex flex-row items-center justify-between px-3">
         <p class="text-3xl font-medium leading-none">Selected {{ selectionStore.getLength }}</p>
 
         <div class="flex flex-row items-center gap-1">
