@@ -4,6 +4,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 import { useSelectionStore, useToastStore } from './store';
+import { registerSW } from 'virtual:pwa-register';
 
 //common components
 import AppButtonSolid from '@/components/AppButtonSolid.vue';
@@ -33,3 +34,5 @@ app
   .component('AppFormTextbox', AppFormTextbox)
   .component('AppLoader', AppLoader)
   .component('AppDialog', AppDialog);
+
+registerSW({ immediate: true });
