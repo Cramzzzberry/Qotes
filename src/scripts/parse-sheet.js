@@ -23,12 +23,16 @@ export default function parseSheet(input) {
     } else {
       //if there is no prefix or one liner syntax like --- for hr
       let parsedPhrases = [];
-      let phrases = str.replace(/ /g, '|&nbsp|').split('|'); //named as song segment because string is redundant
+      let phrases = str.replace(/ /g, '|&nbsp|').split('|');
 
       phrases.forEach((songEntity) => {
         if (isChord(songEntity)) {
           //if it is a chord
           parsedPhrases.push(`<span class="chord">${songEntity}</span>`);
+        } else if (isInfo(songEntity)) {
+          //if it is an info
+          let parsedSongEntity = songEntity.replace(/\*/g, '');
+          parsedPhrases.push(`<span class="info">${parsedSongEntity}</span>`);
         } else {
           //if it is a lyrics
           parsedPhrases.push(songEntity);
@@ -48,7 +52,6 @@ function isChord(str) {
   return /(?<=\s|^)([A-G])([#b]?)(?=((m|maj|aug|dim|sus|add)?(M)?([0-9])?(?!(\w|#))$)|((\/[A-G])([#b]?)(?!(\w|#))$))/.test(
     str
   );
-  // return /(?<=\s|^)([A-G])([#b]?)((m|maj|aug|dim|sus|add)?(M)?([0-9])?(?!(\w|#))$)/.test(str)
 }
 
 function isHr(str) {
@@ -57,4 +60,8 @@ function isHr(str) {
 
 function isSongSection(str) {
   return /^>> /.test(str);
+}
+
+function isInfo(str) {
+  return /\*.*\*/.test(str);
 }

@@ -11,7 +11,6 @@ onMounted(() => {
 });
 
 const clean = computed(() => {
-  console.log(content.value);
   return parseSheet(content.value);
 });
 </script>
