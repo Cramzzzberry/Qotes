@@ -15,7 +15,6 @@
   "dependencies": {
     "axios": "^1.6.7",
     "material-icons": "^1.13.12",
-    "pwa-asset-generator": "^6.3.1",
     "sanitize-html": "^2.11.0",
     "vue": "^3.3.11",
     "vue-router": "^4.2.5",
